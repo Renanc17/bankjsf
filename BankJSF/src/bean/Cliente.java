@@ -1,10 +1,11 @@
 package bean;
 
+
 public class Cliente {
 	
 	private Integer id;
 	private String nome;
-	private Integer cpf;
+	private Long cpf;
 	private Integer agencia;
 	private String senha;
 	private ContaCorrente contac;
@@ -35,10 +36,10 @@ public class Cliente {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public Integer getCpf() {
+	public Long getCpf() {
 		return cpf;
 	}
-	public void setCpf(Integer cpf) {
+	public void setCpf(Long cpf) {
 		this.cpf = cpf;
 	}
 	public Integer getAgencia() {
