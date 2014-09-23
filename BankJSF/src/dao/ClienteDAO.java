@@ -39,4 +39,35 @@ public class ClienteDAO {
 		return c;
 		
 	}
+	
+public Cliente login(Cliente c) throws SQLException{
+		
+		Connection conn = ConnectionFactory.getConnection();
+		
+		String sql = "SELECT * from clientes WHERE cpf "";
+		
+		try{
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			
+			ResultSet rs = stmt.executeQuery();
+
+			
+			while(rs.next()){
+				c.setCpf(rs.getLong("cpf"));
+				c.setSenha(rs.getString("senha"));
+				
+			}
+			
+		}
+		catch(SQLException ex){ 
+			ex.printStackTrace();
+		}
+		finally{
+			
+		}
+		
+		return c;
+		
+	}
+	
 }

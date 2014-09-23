@@ -8,9 +8,9 @@ public class Cliente {
 	private Long cpf;
 	private Integer agencia;
 	private String senha;
-	private String tipoConta;
-	private ContaCorrente contac;
-	private ContaPoupanca contap;
+	private String tipoCliente;
+	private HashMap ContaCorrente;  //conta e saldo
+	private HashMap ContaPoupanca;	//conta e saldo
 	private Calendar data;
 	
 	
