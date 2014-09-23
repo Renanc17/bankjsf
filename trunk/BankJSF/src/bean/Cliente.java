@@ -8,8 +8,10 @@ public class Cliente {
 	private Long cpf;
 	private Integer agencia;
 	private String senha;
+	private String tipoConta;
 	private ContaCorrente contac;
 	private ContaPoupanca contap;
+	private Calendar data;
 	
 	
 	public ContaCorrente getContac() {
