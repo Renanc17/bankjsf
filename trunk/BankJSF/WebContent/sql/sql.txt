@@ -1,0 +1,27 @@
+CREATE SCHEMA bankjsf ;
+
+CREATE TABLE bankjsf.cliente (
+  id INT NOT NULL AUTO_INCREMENT,
+  nome VARCHAR(45) NOT NULL,
+  cpf INT NOT NULL,
+  agencia INT NOT NULL,
+  senha VARCHAR(45) NOT NULL,
+  contac INT NOT NULL,
+  contap INT NOT NULL,
+  PRIMARY KEY (id));
+
+CREATE TABLE bankjsf.contac (
+  contacid INT NOT NULL,
+  saldo DOUBLE NULL,
+  PRIMARY KEY (contacid));
+
+CREATE TABLE bankjsf.contap (
+  contapid INT NOT NULL,
+  saldo DOUBLE NULL,
+  PRIMARY KEY (contapid));
+
+insert into bankjsf.cliente (nome, cpf, agencia, senha, contac, contap) values('renan',11144477735,10,'1234',9876,6789);
+insert into bankjsf.contac (contacid, saldo) values(9876, 2500);
+insert into bankjsf.contap (contapid, saldo) values(6789, 3600);
+
+// select * from bankjsf.cliente join bankjsf.contac on cliente.contac=contac.contacid join bankjsf.contap on cliente.contap=contap.contapid

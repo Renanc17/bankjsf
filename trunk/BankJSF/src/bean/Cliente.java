@@ -1,5 +1,8 @@
 package bean;
 
+import java.util.Calendar;
+import java.util.HashMap;
+
 
 public class Cliente {
 	
@@ -14,45 +17,58 @@ public class Cliente {
 	private Calendar data;
 	
 	
-	public ContaCorrente getContac() {
-		return contac;
+	public String getTipoCliente() {
+		return tipoCliente;
 	}
-	public void setContac(ContaCorrente contac) {
-		this.contac = contac;
+
+	public void setTipoCliente(String tipoCliente) {
+		this.tipoCliente = tipoCliente;
 	}
-	public ContaPoupanca getContap() {
-		return contap;
+
+	public Calendar getData() {
+		return data;
 	}
-	public void setContap(ContaPoupanca contap) {
-		this.contap = contap;
+
+	public void setData(Calendar data) {
+		this.data = data;
 	}
+
 	public Integer getId() {
 		return id;
 	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
 	public String getNome() {
 		return nome;
 	}
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
 	public Long getCpf() {
 		return cpf;
 	}
+
 	public void setCpf(Long cpf) {
 		this.cpf = cpf;
 	}
+
 	public Integer getAgencia() {
 		return agencia;
 	}
+
 	public void setAgencia(Integer agencia) {
 		this.agencia = agencia;
 	}
+
 	public String getSenha() {
 		return senha;
 	}
+
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
