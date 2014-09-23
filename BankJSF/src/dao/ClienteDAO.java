@@ -10,41 +10,33 @@ import factory.ConnectionFactory;
 
 public class ClienteDAO {
 	
-	public Cliente login(Cliente c) throws SQLException{
+	/*public Boolean login(Cliente c) throws SQLException{
+		
+		Boolean resultado = false;
 		
 		Connection conn = ConnectionFactory.getConnection();
 		
-		String sql = "SELECT cpf, senha FROM cliente";
+		String sql = "SELECT cpf, senha FROM cliente where cpf=? senha='?'";
 		
-		try{
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			
+			stmt.setLong(1, c.getCpf());
+			stmt.setString(2, c.getSenha());
+			
 			ResultSet rs = stmt.executeQuery();
-
 			
-			while(rs.next()){
-				c.setCpf(rs.getLong("cpf"));
-				c.setSenha(rs.getString("senha"));
-				
-			}
+			if(rs.next())
+				resultado = true;
 			
-		}
-		catch(SQLException ex){ 
-			ex.printStackTrace();
-		}
-		finally{
-			
-		}
+		return resultado;
 		
-		return c;
-		
-	}
+	}*/ 	//TESTE DE LOGIN
 	
 public Cliente login(Cliente c) throws SQLException{
 		
 		Connection conn = ConnectionFactory.getConnection();
 		
-		String sql = "SELECT * from clientes WHERE cpf "";
+		String sql = "SELECT * from clientes WHERE cpf ";
 		
 		try{
 			PreparedStatement stmt = conn.prepareStatement(sql);
