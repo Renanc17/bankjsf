@@ -24,4 +24,44 @@ insert into bankjsf.cliente (nome, cpf, agencia, senha, contac, contap) values('
 insert into bankjsf.contac (contacid, saldo) values(9876, 2500);
 insert into bankjsf.contap (contapid, saldo) values(6789, 3600);
 
+
+Para criar tabelas é CREATE TABLE OPS$RM67031.tabela (
+// select nvl(max(id),0)+1
 // select * from bankjsf.cliente join bankjsf.contac on cliente.contac=contac.contacid join bankjsf.contap on cliente.contap=contap.contapid
+
+
+Conexão no Oracle SQL Developer
+
+	Host: oracle.fiap.com.br
+	Porta: 1521
+	SID: ORCL
+	Usuário: OPS$RM67031
+	​Senha: 160394
+
+Como eu criei no Oracle:
+
+CREATE TABLE OPS$RM67031.cliente (
+  id INT NOT NULL,
+  nome VARCHAR(45) NOT NULL,
+  cpf INT NOT NULL,
+  agencia INT NOT NULL,
+  senha VARCHAR(45) NOT NULL,
+  contac INT NOT NULL,
+  contap INT NOT NULL,
+  PRIMARY KEY (id));
+
+
+CREATE TABLE OPS$RM67031.contac (
+  contacid INT NOT NULL,
+  saldo DOUBLE PRECISION NULL,
+  PRIMARY KEY (contacid));
+
+CREATE TABLE OPS$RM67031.contap (
+  contapid INT NOT NULL,
+  saldo DOUBLE PRECISION NULL,
+  PRIMARY KEY (contapid));
+
+
+insert into OPS$RM67031.cliente (id, nome, cpf, agencia, senha, contac, contap) values(1, 'renan',11144477735,10,'1234',9876,6789);
+insert into OPS$RM67031.contac (contacid, saldo) values(9876, 2500);
+insert into OPS$RM67031.contap (contapid, saldo) values(6789, 3600);
