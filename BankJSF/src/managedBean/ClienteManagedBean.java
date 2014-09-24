@@ -19,7 +19,7 @@ public class ClienteManagedBean {
 		this.cliente = cliente;
 	}
 
-	/*public String logar() {
+	public String logar() {
 		String resultado = "";
 
 		ClienteDAO dao = new ClienteDAO();
@@ -36,6 +36,6 @@ public class ClienteManagedBean {
 		}
 
 		return resultado;
-	}*/ 	//TESTE DE LOGIN
+	}
 
 }

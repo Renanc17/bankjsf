@@ -10,29 +10,37 @@ import factory.ConnectionFactory;
 
 public class ClienteDAO {
 	
-	/*public Boolean login(Cliente c) throws SQLException{
+	public Boolean login(Cliente c) throws SQLException{
 		
 		Boolean resultado = false;
 		
 		Connection conn = ConnectionFactory.getConnection();
 		
-		String sql = "SELECT cpf, senha FROM cliente where cpf=? senha='?'";
 		
+		String sql = "SELECT * FROM cliente where cpf=? and senha=? and agencia=?";
+		for(int i = 0; i < 2; i++){
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			
 			stmt.setLong(1, c.getCpf());
 			stmt.setString(2, c.getSenha());
+			stmt.setInt(3, c.getAgencia());
 			
 			ResultSet rs = stmt.executeQuery();
 			
 			if(rs.next())
 				resultado = true;
 			
+			if(resultado == false){
+				sql = "SELECT * FROM cliente where contac=? and senha=? and agencia=?";
+			}
+			
+		}
+			
 		return resultado;
 		
-	}*/ 	//TESTE DE LOGIN
+	}
 	
-public Cliente login(Cliente c) throws SQLException{
+/*public Cliente login(Cliente c) throws SQLException{
 		
 		Connection conn = ConnectionFactory.getConnection();
 		
@@ -60,6 +68,6 @@ public Cliente login(Cliente c) throws SQLException{
 		
 		return c;
 		
-	}
+	}*/
 	
 }

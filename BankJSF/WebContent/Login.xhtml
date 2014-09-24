@@ -10,10 +10,10 @@ xmlns:h="http://java.sun.com/jsf/html">
 
 <h:body>
 	<h:form>
-		Agencia: <h:inputText value="" /><br/>
-		CPF/CC: <h:inputText value="" /><br/>
-		Password: <h:inputText type="password" value="" /><br/>
-		<h:commandButton value="Entrar" action="#{clienteManagedBean.verificarCliente}" />
+		Agencia: <h:inputText value="#{clienteManagedBean.cliente.agencia}" /><br/>
+		CPF/CC: <h:inputText value="#{clienteManagedBean.cliente.cpf}" /><br/>
+		Password: <h:inputText type="password" value="#{clienteManagedBean.cliente.senha}" /><br/>
+		<h:commandButton value="Entrar" action="#{clienteManagedBean.logar}" />
 	</h:form>
 		
 </h:body>
