@@ -28,8 +28,17 @@ public class ClienteDAO {
 			ResultSet rs = stmt.executeQuery();
 			
 			if(rs.next())
+			{
+				Cliente cl = new Cliente();
+				cl.setId(rs.getInt("id"));
+				cl.setNome(rs.getString("nome"));
+				cl.setCpf(rs.getLong("cpf"));
+				cl.setAgencia(rs.getInt("agencia"));
+				cl.setSenha(rs.getString("senha"));
+				//modificar tabela e bean cliente
+				
 				resultado = true;
-			
+			}
 			if(resultado == false){
 				sql = "SELECT * FROM cliente where contac=? and senha=? and agencia=?";
 			}
