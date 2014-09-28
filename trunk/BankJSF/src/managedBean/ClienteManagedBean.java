@@ -1,11 +1,16 @@
 package managedBean;
 
 import java.sql.SQLException;
+
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+/*import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;*/
 
 import dao.ClienteDAO;
 import bean.Cliente;
 
+@SessionScoped
 @ManagedBean
 public class ClienteManagedBean {
 
@@ -23,11 +28,20 @@ public class ClienteManagedBean {
 		String resultado = "";
 
 		ClienteDAO dao = new ClienteDAO();
+		Cliente user = new Cliente();
 
 		try {
-
-			if (dao.login(cliente))
+			user = dao.login(cliente);
+			if (user != null){
 				resultado = "logado";
+				
+				/*
+				 * COMO MONTAR UMA SESSION EM JSF ???
+				 * FacesContext context = FacesContext.getCurrentInstance();
+			     * HttpSession session = (HttpSession) context.getExternalContext().getSession(true);
+			     */
+
+			}
 			else
 				resultado = "erro";
 

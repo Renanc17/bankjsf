@@ -1,7 +1,6 @@
 package bean;
 
 import java.util.Calendar;
-import java.util.HashMap;
 
 
 public class Cliente {
@@ -12,11 +11,27 @@ public class Cliente {
 	private Integer agencia;
 	private String senha;
 	private String tipoCliente;
-	private HashMap ContaCorrente;  //conta e saldo
-	private HashMap ContaPoupanca;	//conta e saldo
+	private ContaCorrente ContaCorrente = new ContaCorrente(); 
+	private ContaPoupanca ContaPoupanca = new ContaPoupanca();	
 	private Calendar data;
 	
 	
+	public ContaCorrente getContaCorrente() {
+		return ContaCorrente;
+	}
+
+	public void setContaCorrente(ContaCorrente contaCorrente) {
+		ContaCorrente = contaCorrente;
+	}
+
+	public ContaPoupanca getContaPoupanca() {
+		return ContaPoupanca;
+	}
+
+	public void setContaPoupanca(ContaPoupanca contaPoupanca) {
+		ContaPoupanca = contaPoupanca;
+	}
+
 	public String getTipoCliente() {
 		return tipoCliente;
 	}
