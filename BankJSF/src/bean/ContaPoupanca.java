@@ -3,7 +3,7 @@ package bean;
 public class ContaPoupanca {
 	
 	private Integer conta;
-	private Integer saldo;
+	private Double saldo;
 	
 	
 	public Integer getConta() {
@@ -12,10 +12,10 @@ public class ContaPoupanca {
 	public void setConta(Integer conta) {
 		this.conta = conta;
 	}
-	public Integer getSaldo() {
+	public Double getSaldo() {
 		return saldo;
 	}
-	public void setSaldo(Integer saldo) {
+	public void setSaldo(Double saldo) {
 		this.saldo = saldo;
 	}
 	

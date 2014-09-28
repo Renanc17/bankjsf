@@ -7,22 +7,14 @@ CREATE TABLE bankjsf.cliente (
   agencia INT NOT NULL,
   senha VARCHAR(45) NOT NULL,
   contac INT NOT NULL,
+  saldoc DOUBLE NULL,
   contap INT NOT NULL,
+  saldop DOUBLE NULL,
   PRIMARY KEY (id));
 
-CREATE TABLE bankjsf.contac (
-  contacid INT NOT NULL,
-  saldo DOUBLE NULL,
-  PRIMARY KEY (contacid));
 
-CREATE TABLE bankjsf.contap (
-  contapid INT NOT NULL,
-  saldo DOUBLE NULL,
-  PRIMARY KEY (contapid));
+insert into bankjsf.cliente (nome, cpf, agencia, senha, contac, saldoc, contap, saldop) values('renan',11144477735,10,'1234',9876,2500,6789,3600);
 
-insert into bankjsf.cliente (nome, cpf, agencia, senha, contac, contap) values('renan',11144477735,10,'1234',9876,6789);
-insert into bankjsf.contac (contacid, saldo) values(9876, 2500);
-insert into bankjsf.contap (contapid, saldo) values(6789, 3600);
 
 
 Para criar tabelas é CREATE TABLE OPS$RM67031.tabela (
