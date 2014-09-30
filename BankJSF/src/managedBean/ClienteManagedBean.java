@@ -41,7 +41,7 @@ public class ClienteManagedBean {
 			user = dao.login(cliente);
 			if (user != null){
 				cliente = user;
-				resultado = "logado";
+				resultado = "Home";
 			}
 			else{
 				resultado = "erro";
@@ -54,6 +54,21 @@ public class ClienteManagedBean {
 		}
 
 		return resultado;
+	}
+	
+	public String simulaLogin(){
+		
+		cliente.setId(1);
+		cliente.setNome("Renan");
+		cliente.setCpf((long)123456789);
+		cliente.setAgencia(10);
+		cliente.setSenha("1234");
+		cliente.getContaCorrente().setConta(9876);
+		cliente.getContaCorrente().setSaldo(2500.0);
+		cliente.getContaPoupanca().setConta(6789);
+		cliente.getContaPoupanca().setSaldo(3600.0);
+		
+		return "Home";
 	}
 
 }
