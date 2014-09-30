@@ -28,29 +28,54 @@
 	  			<h:outputText value="Transferencias"/>
 			</h:commandLink>
 		</p>
-	
-		<p>Saldo   -   Pagamentos   -   Transferencias </p>
-		<p>Comprovantes   -   Agendamentos   -  Extrato </p>
+		
+		<p>
+			<h:commandLink id="link" action="">
+	  			<h:outputText value="Comprovantes"/>
+			</h:commandLink>
+			   -   
+			<h:commandLink id="link" action="">
+	  			<h:outputText value="Agendamentos"/>
+			</h:commandLink>
+			   -   
+			<h:commandLink id="link" action="">
+	  			<h:outputText value="Extrato"/>
+			</h:commandLink>
+		</p>
 	</center>
 </h:head>
 
 <h:body>
-	<h:table>
-	<h:th>
-		<h:td>
-			Saldo em Conta Corrente: #{}
-		</h:td>
-	</h:th>
-	<h:th>
-		<h:td>
-			Saldo em Conta Poupança: #{}
-		</h:td>
-	</h:th>
-	<h:th>
-		<h:td>
-			Saldo Total  : #{} + #{}
-		</h:td>
-	</h:th>
-	</h:table>
+	<table>
+	
+	<tr>
+		<th>
+			Tipo de Conta
+		</th>
+		<th>
+			Valor líquido
+		</th>	
+	</tr>
+	<tr>
+		<td>
+			Saldo em Conta Corrente: 
+		</td>
+		<td><!--  #{} --></td>
+	</tr>
+	<tr>
+		<td>
+			Saldo em Conta Poupança: 
+		</td>
+		<td><!--  #{} --></td>
+	</tr>
+	<tr>
+		<td>
+			Saldo em Total em conta: 
+		</td>
+		<td><!--  #{} --></td>
+	</tr>
+	
+	
+	</table>
 </h:body>
 </html>
