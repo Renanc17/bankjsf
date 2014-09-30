@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html">
+	  
+<h:head>
+<script type="text/javascript" src="/scripts/jquery-2.1.1.min.js"></script>
+<script type="text/javascript">
+
+
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Home</title>
+	
+	Bem vindo(a) <!-- #{} -->,
+	<center>
+		<p>
+			<h:commandLink id="link" action="">
+	  			<h:outputText value="Saldo"/>
+			</h:commandLink>
+			   -   
+			<h:commandLink id="link" action="">
+	  			<h:outputText value="Pagamentos"/>
+			</h:commandLink>
+			   -   
+			<h:commandLink id="link" action="">
+	  			<h:outputText value="Transferencias"/>
+			</h:commandLink>
+		</p>
+	
+		<p>Saldo   -   Pagamentos   -   Transferencias </p>
+		<p>Comprovantes   -   Agendamentos   -  Extrato </p>
+	</center>
+</h:head>
+
+<h:body>
+	<h:table>
+	<h:th>
+		<h:td>
+			Saldo em Conta Corrente: #{}
+		</h:td>
+	</h:th>
+	<h:th>
+		<h:td>
+			Saldo em Conta Poupança: #{}
+		</h:td>
+	</h:th>
+	<h:th>
+		<h:td>
+			Saldo Total  : #{} + #{}
+		</h:td>
+	</h:th>
+	</h:table>
+</h:body>
+</html>
