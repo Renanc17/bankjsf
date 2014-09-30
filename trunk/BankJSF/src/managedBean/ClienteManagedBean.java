@@ -4,8 +4,6 @@ import java.sql.SQLException;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-/*import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpSession;*/
 
 import dao.ClienteDAO;
 import bean.Cliente;
@@ -15,6 +13,15 @@ import bean.Cliente;
 public class ClienteManagedBean {
 
 	private Cliente cliente = new Cliente();
+	private String msg = "";
+
+	public String getMsg() {
+		return msg;
+	}
+
+	public void setMsg(String msg) {
+		this.msg = msg;
+	}
 
 	public Cliente getCliente() {
 		return cliente;
@@ -33,20 +40,17 @@ public class ClienteManagedBean {
 		try {
 			user = dao.login(cliente);
 			if (user != null){
+				cliente = user;
 				resultado = "logado";
-				
-				/*
-				 * COMO MONTAR UMA SESSION EM JSF ???
-				 * FacesContext context = FacesContext.getCurrentInstance();
-			     * HttpSession session = (HttpSession) context.getExternalContext().getSession(true);
-			     */
-
 			}
-			else
+			else{
 				resultado = "erro";
+				msg += " Usuario inexistente.";
+			}
 
 		} catch (SQLException e) {
 			resultado = "erro";
+			msg += " Erro de Banco de dados.";
 		}
 
 		return resultado;

@@ -8,7 +8,12 @@
 </head>
 <h:body>
 
-Você está logado. 
+
+Você está logado #{clienteManagedBean.cliente.nome}.<br/><br/>
+CC:#{clienteManagedBean.cliente.contaCorrente.conta}<br/>
+Saldo:R$ #{clienteManagedBean.cliente.contaCorrente.saldo}<br/><br/>
+CP:#{clienteManagedBean.cliente.contaPoupanca.conta}<br/>
+Saldo:R$ #{clienteManagedBean.cliente.contaPoupanca.saldo}
 
 </h:body>
 </html>
