@@ -13,32 +13,32 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>Home</title>
 	
-	Bem vindo(a) <!-- #{} -->,
+	Bem vindo(a) #{clienteManagedBean.cliente.nome},
 	<center>
 		<p>
-			<h:commandLink id="link" action="">
+			<h:commandLink id="link" action="erro">
 	  			<h:outputText value="Saldo"/>
 			</h:commandLink>
 			   -   
-			<h:commandLink id="link" action="">
+			<h:commandLink id="link" action="erro">
 	  			<h:outputText value="Pagamentos"/>
 			</h:commandLink>
 			   -   
-			<h:commandLink id="link" action="">
+			<h:commandLink id="link" action="erro">
 	  			<h:outputText value="Transferencias"/>
 			</h:commandLink>
 		</p>
 		
 		<p>
-			<h:commandLink id="link" action="">
+			<h:commandLink id="link" action="erro">
 	  			<h:outputText value="Comprovantes"/>
 			</h:commandLink>
 			   -   
-			<h:commandLink id="link" action="">
+			<h:commandLink id="link" action="erro">
 	  			<h:outputText value="Agendamentos"/>
 			</h:commandLink>
 			   -   
-			<h:commandLink id="link" action="">
+			<h:commandLink id="link" action="erro">
 	  			<h:outputText value="Extrato"/>
 			</h:commandLink>
 		</p>
@@ -60,19 +60,19 @@
 		<td>
 			Saldo em Conta Corrente: 
 		</td>
-		<td><!--  #{} --></td>
+		<td>R$ #{clienteManagedBean.cliente.contaCorrente.saldo}</td>
 	</tr>
 	<tr>
 		<td>
 			Saldo em Conta Poupança: 
 		</td>
-		<td><!--  #{} --></td>
+		<td>R$ #{clienteManagedBean.cliente.contaPoupanca.saldo}</td>
 	</tr>
 	<tr>
 		<td>
 			Saldo em Total em conta: 
 		</td>
-		<td><!--  #{} --></td>
+		<td> ? </td>
 	</tr>
 	
 	
