@@ -14,15 +14,15 @@ public class ClienteManagedBean {
 
 	private Cliente cliente = new Cliente();
 	private Double saldoTotal;
+	private String msg = "";
+
 	public Double getSaldoTotal() {
 		return saldoTotal;
 	}
-
+	
 	public void setSaldoTotal(Double saldoTotal) {
 		this.saldoTotal = saldoTotal;
 	}
-
-	private String msg = "";
 
 	public String getMsg() {
 		return msg;
