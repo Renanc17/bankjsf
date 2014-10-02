@@ -15,33 +15,35 @@
 	
 	Bem vindo(a) #{clienteManagedBean.cliente.nome},
 	<center>
+		<h:form>
 		<p>
-			<h:commandLink id="link" action="erro">
+			<h:commandLink id="saldo" action="Saldo">
 	  			<h:outputText value="Saldo"/>
 			</h:commandLink>
 			   -   
-			<h:commandLink id="link" action="erro">
+			<h:commandLink id="pagamentos" action="Pagamentos">
 	  			<h:outputText value="Pagamentos"/>
 			</h:commandLink>
 			   -   
-			<h:commandLink id="link" action="erro">
+			<h:commandLink id="transferencias" action="Transferencias">
 	  			<h:outputText value="Transferencias"/>
 			</h:commandLink>
 		</p>
 		
 		<p>
-			<h:commandLink id="link" action="erro">
+			<h:commandLink id="comprovantes" action="Comprovantes">
 	  			<h:outputText value="Comprovantes"/>
 			</h:commandLink>
 			   -   
-			<h:commandLink id="link" action="erro">
+			<h:commandLink id="agendamentos" action="Agendamentos">
 	  			<h:outputText value="Agendamentos"/>
 			</h:commandLink>
 			   -   
-			<h:commandLink id="link" action="erro">
+			<h:commandLink id="extrato" action="Extrato">
 	  			<h:outputText value="Extrato"/>
 			</h:commandLink>
 		</p>
+		</h:form>
 	</center>
 </h:head>
 
@@ -72,7 +74,7 @@
 		<td>
 			Saldo em Total em conta: 
 		</td>
-		<td> ? </td>
+		<td> R$ #{clienteManagedBean.saldoTotal} </td>
 	</tr>
 	
 	
