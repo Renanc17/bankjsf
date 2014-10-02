@@ -12,8 +12,19 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>Home</title>
+	<table width="100%">
 	
-	Bem vindo(a) #{clienteManagedBean.cliente.nome},
+	<tr>
+		<th width="80%" align="left">
+			Bem vindo(a) #{clienteManagedBean.cliente.nome},
+		</th>
+		<th>
+			Sair...
+		</th>	
+	</tr>
+	</table>
+
+	
 	<center>
 		<h:form>
 		<p>
@@ -48,6 +59,8 @@
 </h:head>
 
 <h:body>
+	
+	<center>
 	<table>
 	
 	<tr>
@@ -79,5 +92,6 @@
 	
 	
 	</table>
+	</center>
 </h:body>
 </html>
