@@ -13,6 +13,15 @@ import bean.Cliente;
 public class ClienteManagedBean {
 
 	private Cliente cliente = new Cliente();
+	private Double saldoTotal;
+	public Double getSaldoTotal() {
+		return saldoTotal;
+	}
+
+	public void setSaldoTotal(Double saldoTotal) {
+		this.saldoTotal = saldoTotal;
+	}
+
 	private String msg = "";
 
 	public String getMsg() {
@@ -41,6 +50,7 @@ public class ClienteManagedBean {
 			user = dao.login(cliente);
 			if (user != null){
 				cliente = user;
+				saldoTotal = saldoTotal();
 				resultado = "Home";
 			}
 			else{
@@ -67,8 +77,13 @@ public class ClienteManagedBean {
 		cliente.getContaCorrente().setSaldo(2500.0);
 		cliente.getContaPoupanca().setConta(6789);
 		cliente.getContaPoupanca().setSaldo(3600.0);
+		saldoTotal = saldoTotal();
 		
 		return "Home";
+	}
+	
+	public Double saldoTotal(){
+		return cliente.getContaCorrente().getSaldo()+cliente.getContaPoupanca().getSaldo();
 	}
 
 }
