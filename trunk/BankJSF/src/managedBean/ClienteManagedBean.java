@@ -2,8 +2,10 @@ package managedBean;
 
 import java.sql.SQLException;
 
+import javax.servlet.http.HttpSession;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import dao.ClienteDAO;
 import bean.Cliente;
@@ -45,12 +47,15 @@ public class ClienteManagedBean {
 
 		ClienteDAO dao = new ClienteDAO();
 		Cliente user = new Cliente();
+		FacesContext facesContext = FacesContext.getCurrentInstance();
 
 		try {
 			user = dao.login(cliente);
 			if (user != null){
 				cliente = user;
 				saldoTotal = saldoTotal();
+				HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
+				session.setAttribute("cliente", cliente);
 				resultado = "Home";
 			}
 			else{
@@ -79,11 +84,27 @@ public class ClienteManagedBean {
 		cliente.getContaPoupanca().setSaldo(3600.0);
 		saldoTotal = saldoTotal();
 		
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
+		session.setAttribute("cliente", cliente);
+		
 		return "Home";
 	}
+
 	
 	public Double saldoTotal(){
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
+		session.setAttribute("saldototal", cliente.getContaCorrente().getSaldo()+cliente.getContaPoupanca().getSaldo());
 		return cliente.getContaCorrente().getSaldo()+cliente.getContaPoupanca().getSaldo();
 	}
+	
+	public String logout(){
+		String pagina = "Login";
+		cliente = null;
+		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+		return pagina;
+	}
+
 
 }
