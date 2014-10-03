@@ -16,10 +16,14 @@
 	
 	<tr>
 		<th width="80%" align="left">
-			Bem vindo(a) #{clienteManagedBean.cliente.nome},
+			Bem vindo(a) #{cliente.nome},
 		</th>
 		<th>
-			Sair...
+			<h:form>
+			<h:commandLink id="logout" action="#{clienteManagedBean.logout}">
+	  			<h:outputText value="Sair"/>
+			</h:commandLink>
+			</h:form>
 		</th>	
 	</tr>
 	</table>
@@ -75,19 +79,20 @@
 		<td>
 			Saldo em Conta Corrente: 
 		</td>
-		<td>R$ #{clienteManagedBean.cliente.contaCorrente.saldo}</td>
+		<td>R$ #{cliente.contaCorrente.saldo}</td>
 	</tr>
 	<tr>
 		<td>
 			Saldo em Conta Poupança: 
 		</td>
-		<td>R$ #{clienteManagedBean.cliente.contaPoupanca.saldo}</td>
+		<td>R$ #{cliente.contaPoupanca.saldo}</td>
 	</tr>
 	<tr>
 		<td>
 			Saldo em Total em conta: 
 		</td>
-		<td> R$ #{clienteManagedBean.saldoTotal} </td>
+
+		<td> R$ #{saldototal} </td>
 	</tr>
 	
 	
