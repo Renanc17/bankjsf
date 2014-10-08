@@ -22,7 +22,7 @@
 			Preencha as informações de seu destinatário: <br/>
 			Ag: <h:inputText value="#{transacaoManagedBean.transacao.agenciaD}" /><br/>
 			Cc: <h:inputText value="#{transacaoManagedBean.transacao.contaD}" /><br/>
-			Valor: <h:inputText value="#{clienteManagedBean.cliente.contaCorrente.conta}" /><br/>
+			Valor: <h:inputText value="#{transacaoManagedBean.transacao.valor}" /><br/>
 		<h:commandButton value="Transferir" action="#{transacaoManagedBean.transferir}" />
 	<br/><br/><br/>
 	</h:form>		

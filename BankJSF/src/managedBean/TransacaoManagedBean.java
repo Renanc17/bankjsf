@@ -4,6 +4,9 @@ import java.sql.SQLException;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
+
 import bean.Cliente;
 import bean.Transacao;
 
@@ -11,7 +14,7 @@ import bean.Transacao;
 @ManagedBean
 public class TransacaoManagedBean {
 	
-	private Transacao transacao;
+	private Transacao transacao = new Transacao();
 	private Cliente remetente;
 	
 	public Transacao getTransacao() {
@@ -30,11 +33,17 @@ public class TransacaoManagedBean {
 	public String transferir(){
 		String pagina = "";
 		
-		/*
-		 * Metodo de tranferencia.
-		 * Criar transacaoDAO.
-		 * Criar tabela transacao.
-		 */
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
+		remetente = (Cliente) session.getAttribute("cliente");
+		
+		remetente.getContaCorrente().setSaldo(remetente.getContaCorrente().getSaldo() - transacao.getValor());
+		remetente.getContaPoupanca().setSaldo(remetente.getContaPoupanca().getSaldo() + transacao.getValor());
+		
+		session.setAttribute("cliente", remetente);
+		
+		pagina = "Home";
+		
 		
 		return pagina;
 	}
