@@ -16,15 +16,17 @@
 </h:head>
 
 <h:body>		
-	
+	<p></p><p></p>
+	<center>
 	<h:form>
-			Nome: <h:inputText value="#{clienteManagedBean.cliente.nome}" /><br/>
-			Cpf: <h:inputText value="#{clienteManagedBean.cliente.cpf}" /><br/>
-			Ag: <h:inputText value="#{clienteManagedBean.cliente.agencia}" /><br/>
-			Cc: <h:inputText value="#{clienteManagedBean.cliente.cc}" /><br/>
+			Preencha as informações de seu destinatário: <br/>
+			Ag: <h:inputText value="#{transacaoManagedBean.transacao.agenciaD}" /><br/>
+			Cc: <h:inputText value="#{transacaoManagedBean.transacao.contaD}" /><br/>
+			Valor: <h:inputText value="#{clienteManagedBean.cliente.contaCorrente.conta}" /><br/>
 		<h:commandButton value="Transferir" action="#{transacaoManagedBean.transferir}" />
 	<br/><br/><br/>
 	</h:form>		
-
+	</center>
+	
 </h:body>
 </html>
