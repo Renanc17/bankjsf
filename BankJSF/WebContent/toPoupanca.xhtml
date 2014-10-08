@@ -10,24 +10,134 @@
 
 </script>
 
+
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<title>Transferencia de Conta Corrente para Poupança</title>
+<title>Transferências</title>
+<table width="100%">
+	
+	<tr>
+		<th width="80%" align="left">
+			Bem vindo(a) #{cliente.nome},
+		</th>
+		<th>
+			<h:form>
+			<h:commandLink id="logout" action="#{clienteManagedBean.logout}">
+	  			<h:outputText value="Sair"/>
+			</h:commandLink>
+			</h:form>
+		</th>	
+	</tr>
+	</table>
+
+	
+	<center>
+		<h:form>
+		<p>
+			<h:commandLink id="saldo" action="Saldo">
+	  			<h:outputText value="Saldo"/>
+			</h:commandLink>
+			   -   
+			<h:commandLink id="pagamentos" action="Pagamentos">
+	  			<h:outputText value="Pagamentos"/>
+			</h:commandLink>
+			   -   
+			<h:commandLink id="transferencias" action="Transferencias">
+	  			<h:outputText value="Transferencias"/>
+			</h:commandLink>
+		</p>
+		
+		<p>
+			<h:commandLink id="comprovantes" action="Comprovantes">
+	  			<h:outputText value="Comprovantes"/>
+			</h:commandLink>
+			   -   
+			<h:commandLink id="agendamentos" action="Agendamentos">
+	  			<h:outputText value="Agendamentos"/>
+			</h:commandLink>
+			   -   
+			<h:commandLink id="extrato" action="Extrato">
+	  			<h:outputText value="Extrato"/>
+			</h:commandLink>
+		</p>
+		</h:form>
+	</center>
 </h:head>
 
-<h:body>		
+<h:body>
+
+	<h:form>
+		<p>
+			<h:commandLink id="cadastrarFavoritos" action="cadastrarFavoritos">
+	  			<h:outputText value="Cadastrar novas contas favoritas"/>
+			</h:commandLink>
+			   -   
+			<h:commandLink id="consultarFavoritos" action="consultarFavoritos">
+	  			<h:outputText value="Listar contas já cadastradas"/>
+			</h:commandLink>
+			   -   
+		
+		
+		
+		
+				
+			<h:commandLink id="transferenciaTerceiro" action="transferenciaTerceiro">
+	  			<h:outputText value="Transferencia para outra titularidade"/>
+			</h:commandLink>
+			   -   
+			<h:commandLink id="toPoupanca" action="toPoupanca">
+	  			<h:outputText value="Investir da Conta Corrente na Poupança"/>
+			</h:commandLink>
+			   -   
+			<h:commandLink id="toCc" action="toCC">
+	  			<h:outputText value="Resgatar da Poupança para Conta Corrente"/>
+			</h:commandLink>
+		</p>
+	</h:form>	
+
+
+
+	
 	<p></p><p></p>
 	<center>
 	<h:form>
-			Preencha com o valor desejado: <br/>
-			Saldo em Conta Corrente: #{cliente.contaCorrente.saldo}<br/>
-			Saldo em Poupança: #{cliente.contaPoupanca.saldo}<br/>
-			
-			Valor: <h:inputText value="#{transacaoManagedBean.transacao.valor}" /><br/>
-		<h:commandButton value="Transferir" action="#{transacaoManagedBean.transferir}" />
+			Preencha com o valor desejado<br/>
+			 
+			 
+		
 	<br/><br/><br/>
 	</h:form>		
 	</center>
 	
-</h:body>
+	
+	<center>
+	<table>
+	
 
+	<tr>
+		<td>
+			Saldo em Conta Corrente: 
+		</td>
+		<td>R$ #{cliente.contaCorrente.saldo}</td>
+	</tr>
+	<tr>
+		<td>
+			Saldo em Conta Poupança: 
+		</td>
+		<td>R$ #{cliente.contaPoupanca.saldo}</td>
+	</tr>
+	<tr>
+		<td>
+			Valor a ser transferido:
+		</td>
+		<td>
+		R$ <h:inputText value="#{transacaoManagedBean.transacao.valor}" size="7" />
+		</td>
+	</tr>
+	</table>
+	<p></p>
+	<h:commandButton value="Transferir" action="#{transacaoManagedBean.transferir}" />
+	
+	</center>
+	
+</h:body>
 </html>
