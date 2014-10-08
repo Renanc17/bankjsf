@@ -4,8 +4,30 @@
 	  xmlns:h="http://java.sun.com/jsf/html">
 	  
 <h:head>
-<script type="text/javascript" src="/scripts/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script type="text/javascript">
+
+$(document).ready(function () {
+
+    jQuery.validator.addMethod("dollarsscents", function(value, element) {
+        return this.optional(element) || /^\d{0,4}(\.\d{0,2})?$/i.test(value);
+    }, "You must include two decimal places");
+
+    $('#submit').validate({ // initialize the plugin
+        rules: {
+            order_id: {
+                required: true
+            },
+            price: {
+                required: true,
+                number: true,
+                dollarsscents: true
+            }
+        },
+        // other options, etc.
+    });
+
+});
 
 
 </script>
@@ -99,7 +121,7 @@
 	
 			Preencha com o valor desejado<br/>
 	<br/><br/><br/>
-	<h:form>
+	<h:form id="submit">
 	<table>
 	<tr>
 		<td>
@@ -118,7 +140,7 @@
 			Valor a ser transferido:
 		</td>
 		<td>
-		R$ <h:inputText value="#{transacaoManagedBean.transacao.valor}" size="7" />
+			R$ <h:inputText value="#{transacaoManagedBean.transacao.valor}" size="7" />
 		</td>
 	</tr>
 	</table>
