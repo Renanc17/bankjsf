@@ -53,9 +53,9 @@ public class ClienteManagedBean {
 			user = dao.login(cliente);
 			if (user != null){
 				cliente = user;
-				saldoTotal = saldoTotal();
 				HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
 				session.setAttribute("cliente", cliente);
+				saldoTotal();
 				resultado = "Home";
 			}
 			else{
@@ -82,21 +82,24 @@ public class ClienteManagedBean {
 		cliente.getContaCorrente().setSaldo(2500.0);
 		cliente.getContaPoupanca().setConta(6789);
 		cliente.getContaPoupanca().setSaldo(3600.0);
-		saldoTotal = saldoTotal();
 		
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
 		session.setAttribute("cliente", cliente);
+		saldoTotal();
 		
 		return "Home";
 	}
 
 	
-	public Double saldoTotal(){
+	public void saldoTotal(){
+		
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
-		session.setAttribute("saldototal", cliente.getContaCorrente().getSaldo()+cliente.getContaPoupanca().getSaldo());
-		return cliente.getContaCorrente().getSaldo()+cliente.getContaPoupanca().getSaldo();
+		
+		Cliente clienteAtualizado = (Cliente) session.getAttribute("cliente");
+		
+		session.setAttribute("saldototal", clienteAtualizado.getContaCorrente().getSaldo()+clienteAtualizado.getContaPoupanca().getSaldo());
 	}
 	
 	public String logout(){
