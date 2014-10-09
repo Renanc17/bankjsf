@@ -13,7 +13,7 @@
 </script>
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<title>Home</title>
+<title>#{msg.home}</title>
 
 
 	<table width="100%">
@@ -28,12 +28,11 @@
 		</th>
 		<th width="30%" align="right">
 			<h:form>
-			<h:commandLink id="logout" action="#{clienteManagedBean.logout}" value="Sair"></h:commandLink>
+			<h:commandLink id="logout" action="#{clienteManagedBean.logout}" value="#{msg.sair}"></h:commandLink>
 			</h:form>
 		</th>	
 	</tr>
 	</table>
-
 	
 	<center>
 		<h:form>
