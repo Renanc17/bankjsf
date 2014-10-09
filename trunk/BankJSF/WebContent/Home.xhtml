@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:h="http://java.sun.com/jsf/html">
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core">
 	  
 <h:head>
-<script type="text/javascript" src="/scripts/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script type="text/javascript">
 
 
@@ -12,13 +13,22 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>Home</title>
+
+
 	<table width="100%">
 	
 	<tr>
-		<th width="80%" align="left">
-			Bem vindo(a) #{cliente.nome},
+		<th width="40%" align="left">
+			#{language['greetings']} #{cliente.nome},
 		</th>
-		<th>
+		<th width="30%" align="center">
+			<f:view locale="#{switcher.locale}">
+		    	<h:commandLink value="Português" action="#{switcher.switchLocale('pt_br')}" />
+		    	<h:commandLink value="English" action="#{switcher.switchLocale('en_us')}" />
+			</f:view>
+		
+		</th>
+		<th width="30%" align="center">
 			<h:form>
 			<h:commandLink id="logout" action="#{clienteManagedBean.logout}">
 	  			<h:outputText value="Sair"/>
@@ -69,7 +79,7 @@
 	
 	<tr>
 		<th>
-			Tipo de Conta
+			<h:outputLabel value="#{language['label.type.description']}" for="" />
 		</th>
 		<th>
 			Valor líquido

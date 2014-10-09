@@ -32,5 +32,5 @@
   </listener>
   <session-config>
   <session-timeout>3</session-timeout>
-  </session-config>
+  </session-config>  
 </web-app>
