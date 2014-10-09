@@ -1,21 +1,27 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:h="http://java.sun.com/jsf/html">
-
-<head>
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core">
+	  
+<f:view locale="pt_BR">
+<h:head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>Login</title>
-</head>
+</h:head>
 
 <h:body>
+	<p></p>
+	<center>
 	<h:form>
-			Agencia: <h:inputText value="#{clienteManagedBean.cliente.agencia}" size="3" /> 
-			CPF/CC: <h:inputText value="#{clienteManagedBean.cliente.cpf}" /> 
-			Password: <h:inputText type="password" value="#{clienteManagedBean.cliente.senha}" /> 
-			<h:commandButton value="Entrar" action="#{clienteManagedBean.logar}" />
+			#{msg.agencia}: <h:inputText value="#{clienteManagedBean.cliente.agencia}" size="3" /> 
+			#{msg.cpfCC}: <h:inputText value="#{clienteManagedBean.cliente.cpf}" /> 
+			#{msg.senha}: <h:inputText type="password" value="#{clienteManagedBean.cliente.senha}" /> 
+			<h:commandButton value="#{msg.entrar}" action="#{clienteManagedBean.logar}" />
 	<br/><br/><br/>
-	Simula Login sem Banco de Dados. <h:commandButton value="Simular Login" action="#{clienteManagedBean.simulaLogin}" />
-	</h:form>		
+		Simula Login sem Banco de Dados. <h:commandButton value="Simular Login" action="#{clienteManagedBean.simulaLogin}" />
+	</h:form>
+	</center>		
 </h:body>
+</f:view>
 </html>
