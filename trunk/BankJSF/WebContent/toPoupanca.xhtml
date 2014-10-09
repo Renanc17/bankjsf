@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	  xmlns:h="http://java.sun.com/jsf/html"
-	  xmlns:f="http://java.sun.com/jsf/core">
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:ui="http://java.sun.com/jsf/facelets">
 	  
 <f:view locale="#{switcher.locale}">
 <h:head>
@@ -11,25 +12,7 @@
 
 $(document).ready(function () {
 
-	alert("jQuery Ok!");
-
-    jQuery.validator.addMethod("dollarsscents", function(value, element) {
-        return this.optional(element) || /^\d{0,4}(\.\d{0,2})?$/i.test(value);
-    }, "You must include two decimal places");
-
-    $('#submit').validate({ // initialize the plugin
-        rules: {
-            order_id: {
-                required: true
-            },
-            price: {
-                required: true,
-                number: true,
-                dollarsscents: true
-            }
-        },
-        // other options, etc.
-    });
+	alert("jQuery Ok!");    
 
 });
 
@@ -38,87 +21,13 @@ $(document).ready(function () {
 
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<title>Transferências</title>
-<table width="100%">
-	
-	<tr>
-		<th width="80%" align="left">
-			#{msg.greetings} #{cliente.nome},
-		</th>
-		<th>
-			<h:form>
-			<h:commandLink id="logout" action="#{clienteManagedBean.logout}">
-	  			<h:outputText value="#{msg.sair}"/>
-			</h:commandLink>
-			</h:form>
-		</th>	
-	</tr>
-	</table>
+<title>#{msg.toPoupanca}</title>
 
-	
-	<center>
-		<h:form>
-		<p>
-			<h:commandLink id="saldo" action="Saldo">
-	  			<h:outputText value="Saldo"/>
-			</h:commandLink>
-			   -   
-			<h:commandLink id="pagamentos" action="Pagamentos">
-	  			<h:outputText value="Pagamentos"/>
-			</h:commandLink>
-			   -   
-			<h:commandLink id="transferencias" action="Transferencias">
-	  			<h:outputText value="Transferencias"/>
-			</h:commandLink>
-		</p>
-		
-		<p>
-			<h:commandLink id="comprovantes" action="Comprovantes">
-	  			<h:outputText value="Comprovantes"/>
-			</h:commandLink>
-			   -   
-			<h:commandLink id="agendamentos" action="Agendamentos">
-	  			<h:outputText value="Agendamentos"/>
-			</h:commandLink>
-			   -   
-			<h:commandLink id="extrato" action="Extrato">
-	  			<h:outputText value="Extrato"/>
-			</h:commandLink>
-		</p>
-		</h:form>
-	</center>
+	<ui:include src="/layout/Header.xhtml" />
 </h:head>
 
 <h:body>
-
-	<h:form>
-		<p>
-			<h:commandLink id="cadastrarFavoritos" action="cadastrarFavoritos">
-	  			<h:outputText value="Cadastrar novas contas favoritas"/>
-			</h:commandLink>
-			   -   
-			<h:commandLink id="consultarFavoritos" action="consultarFavoritos">
-	  			<h:outputText value="Listar contas já cadastradas"/>
-			</h:commandLink>
-			   -   
-		
-		
-		
-		
-				
-			<h:commandLink id="transferenciaTerceiro" action="transferenciaTerceiro">
-	  			<h:outputText value="Transferencia para outra titularidade"/>
-			</h:commandLink>
-			   -   
-			<h:commandLink id="toPoupanca" action="toPoupanca">
-	  			<h:outputText value="Investir da Conta Corrente na Poupança"/>
-			</h:commandLink>
-			   -   
-			<h:commandLink id="toCc" action="toCC">
-	  			<h:outputText value="Resgatar da Poupança para Conta Corrente"/>
-			</h:commandLink>
-		</p>
-	</h:form>	
+	<ui:include src="/layout/SubMenu_Transferencias.xhtml" />
 
 	<p></p><p></p>
 	<center>
