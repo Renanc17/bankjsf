@@ -20,5 +20,12 @@ public class LanguageSwitcher {
         return FacesContext.getCurrentInstance().getViewRoot().getViewId() +
             "?faces-redirect=true";
     }
-    //getLocale() etc. omitted for brevity
+
+	public Locale getLocale() {
+		return locale;
+	}
+
+	public void setLocale(Locale locale) {
+		this.locale = locale;
+	}
 }
