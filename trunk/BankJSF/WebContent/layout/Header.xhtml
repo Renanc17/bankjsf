@@ -16,12 +16,11 @@
 			#{msg.greetings} #{cliente.nome},
 		</th>
 		<th width="30%" align="center">			
-		    	Português   -   English
-		    	<!-- 
-		    	<h:commandLink value="Português" action='#{switcher.switchLocale("pt_BR")}' />
+		    	<h:form>
+		    	<h:commandLink value="Português" action="#{switcher.portugueseLocale}" update="@all"/>
 		    	   -   
-		    	<h:commandLink value="English" action='#{switcher.switchLocale("en_US")}' />
-				-->
+		    	<h:commandLink value="English" action="#{switcher.englishLocale}" />
+				</h:form>
 		</th>
 		<th width="30%" align="right">
 			<h:form>

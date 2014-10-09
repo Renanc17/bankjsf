@@ -43,7 +43,32 @@ public class TransacaoManagedBean {
 		
 		TransacaoDAO dao = new TransacaoDAO();
 		try {
-			remetente = dao.ccToPoup(remetente);
+			remetente = dao.transfToPoupanca(remetente);
+		} catch (SQLException e) {
+			pagina = "erro";
+		}
+		
+		session.setAttribute("cliente", remetente);
+		
+		pagina = "Home";
+		
+		
+		return pagina;
+	}
+	
+	public String transfToCc(){
+		String pagina = "";
+		
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
+		remetente = (Cliente) session.getAttribute("cliente");
+		
+		remetente.getContaCorrente().setSaldo(remetente.getContaCorrente().getSaldo() + transacao.getValor());
+		remetente.getContaPoupanca().setSaldo(remetente.getContaPoupanca().getSaldo() - transacao.getValor());
+		
+		TransacaoDAO dao = new TransacaoDAO();
+		try {
+			remetente = dao.transfToCc(remetente);
 		} catch (SQLException e) {
 			pagina = "erro";
 		}
