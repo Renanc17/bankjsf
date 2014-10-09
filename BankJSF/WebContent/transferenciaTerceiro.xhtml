@@ -14,7 +14,7 @@
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 
-<title>#{msg.home}</title>
+<title>#{msg.transfTerceiro}</title>
 
 	<ui:include src="/layout/Header.xhtml" />
 </h:head>
@@ -22,6 +22,47 @@
 <h:body>
 	<ui:include src="/layout/SubMenu_Transferencias.xhtml" />
 	
+	<h:form id="submit">
+	<center>
+	
+	<table>
+	<tr>
+		<td>
+			#{msg.saldoDisp}:
+		</td>
+		<td>R$ #{cliente.contaCorrente.saldo}</td>
+	</tr>
+	<tr></tr>
+	<tr>
+		<td>
+			#{msg.agencia}
+		</td>
+		<td>
+			<h:inputText value="#{transacaoManagedBean.transacao.agencia}" size="7" />
+		</td>
+	</tr>
+	<tr>
+		<td>
+			#{msg.cc}	
+		</td>
+		<td>
+			<h:inputText value="#{transacaoManagedBean.transacao.cc}" size="7" />
+		</td>
+	</tr>
+	<tr>
+		<td>
+			#{msg.valorToTransf}:
+		</td>
+		<td>
+			R$ <h:inputText value="#{transacaoManagedBean.transacao.valor}" size="7" />
+		</td>
+	</tr>
+	</table>
+	
+	<p></p>
+	<h:commandButton id="transferir" value="#{msg.transferir}" action="#{transacaoManagedBean.transfToCc}" />
+	</center>
+	</h:form>
 </h:body>
 </f:view>
 </html>

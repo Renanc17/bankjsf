@@ -10,9 +10,21 @@
 <title>#{msg.banco}</title>
 </h:head>
 
-<h:body>
-	<p></p>
+<h:body>	
+	<table width="100%">	
+	<tr>
+		<th width="90%" align="center">			
+		    	<h:form>
+		    	<h:commandLink value="Português" action="#{switcher.portugueseLocale}" update="@all"/>
+		    	   -   
+		    	<h:commandLink value="English" action="#{switcher.englishLocale}" update="@all"/>
+				</h:form>
+		</th>
+	</tr>
+	</table>
+	
 	<center>
+	<p></p>
 	<h:form>
 			#{msg.agencia}: <h:inputText value="#{clienteManagedBean.cliente.agencia}" size="3" /> 
 			#{msg.cpfCC}: <h:inputText value="#{clienteManagedBean.cliente.cpf}" /> 
