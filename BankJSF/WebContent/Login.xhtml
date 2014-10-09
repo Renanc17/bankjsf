@@ -10,10 +10,10 @@
 
 <h:body>
 	<h:form>
-			Agencia: <h:inputText value="#{clienteManagedBean.cliente.agencia}" size="3" /><br/>
-			CPF/CC: <h:inputText value="#{clienteManagedBean.cliente.cpf}" /><br/>
-			Password: <h:inputText type="password" value="#{clienteManagedBean.cliente.senha}" /><br/>
-		<h:commandButton value="Entrar" action="#{clienteManagedBean.logar}" />
+			Agencia: <h:inputText value="#{clienteManagedBean.cliente.agencia}" size="3" /> 
+			CPF/CC: <h:inputText value="#{clienteManagedBean.cliente.cpf}" /> 
+			Password: <h:inputText type="password" value="#{clienteManagedBean.cliente.senha}" /> 
+			<h:commandButton value="Entrar" action="#{clienteManagedBean.logar}" />
 	<br/><br/><br/>
 	Simula Login sem Banco de Dados. <h:commandButton value="Simular Login" action="#{clienteManagedBean.simulaLogin}" />
 	</h:form>		

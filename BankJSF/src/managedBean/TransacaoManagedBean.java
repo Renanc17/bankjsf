@@ -7,6 +7,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
+import dao.TransacaoDAO;
 import bean.Cliente;
 import bean.Transacao;
 
@@ -30,7 +31,7 @@ public class TransacaoManagedBean {
 		this.remetente = remetente;
 	}
 	
-	public String transferir(){
+	public String ccToPoup(){
 		String pagina = "";
 		
 		FacesContext facesContext = FacesContext.getCurrentInstance();
@@ -39,6 +40,13 @@ public class TransacaoManagedBean {
 		
 		remetente.getContaCorrente().setSaldo(remetente.getContaCorrente().getSaldo() - transacao.getValor());
 		remetente.getContaPoupanca().setSaldo(remetente.getContaPoupanca().getSaldo() + transacao.getValor());
+		
+		TransacaoDAO dao = new TransacaoDAO();
+		try {
+			remetente = dao.ccToPoup(remetente);
+		} catch (SQLException e) {
+			pagina = "erro";
+		}
 		
 		session.setAttribute("cliente", remetente);
 		
