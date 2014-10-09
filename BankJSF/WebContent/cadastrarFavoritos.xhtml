@@ -21,11 +21,11 @@
 
 <h:body>
 	<h:form>
-			Nome: <h:inputText value="#{clienteManagedBean.cliente.nome}" /><br/>
-			Cpf: <h:inputText value="#{clienteManagedBean.cliente.cpf}" /><br/>
-			Ag: <h:inputText value="#{clienteManagedBean.cliente.agencia}" /><br/>
-			Cc: <h:inputText value="#{clienteManagedBean.cliente.cc}" /><br/>
-		<h:commandButton value="Entrar" action="#{clienteManagedBean.cadastrarFavorito}" />
+			#{msg.nome}: <h:inputText value="#{clienteManagedBean.cliente.nome}" /><br/>
+			#{msg.cpf}: <h:inputText value="#{clienteManagedBean.cliente.cpf}" /><br/>
+			#{msg.ag}: <h:inputText value="#{clienteManagedBean.cliente.agencia}" /><br/>
+			#{msg.cc}: <h:inputText value="#{clienteManagedBean.cliente.cc}" /><br/>
+		<h:commandButton value="#{msg.cadastrar}" action="#{clienteManagedBean.cadastrarFavorito}" />
 	<br/><br/><br/>
 	</h:form>		
 </h:body>
