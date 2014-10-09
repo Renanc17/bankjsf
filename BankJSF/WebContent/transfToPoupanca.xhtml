@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:ui="http://java.sun.com/jsf/facelets">
+	  
+<f:view locale="#{switcher.locale}">
+<h:head>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function () {
+
+	alert("jQuery Ok!");    
+
+});
+
+
+</script>
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>#{msg.transfToPoupanca}</title>
+
+	<ui:include src="/layout/Header.xhtml" />
+</h:head>
+
+<h:body>
+	<ui:include src="/layout/SubMenu_Transferencias.xhtml" />
+
+	<p></p><p></p>
+	<center>
+	
+			#{msg.preenchaValor}<br/>
+	<br/><br/><br/>
+	<h:form id="submit">
+	<table>
+	<tr>
+		<td>
+			#{msg.saldoEmCC}:
+		</td>
+		<td>R$ #{cliente.contaCorrente.saldo}</td>
+	</tr>
+	<tr>
+		<td>
+			#{msg.saldoEmCP}:
+		</td>
+		<td>R$ #{cliente.contaPoupanca.saldo}</td>
+	</tr>
+	<tr>
+		<td>
+			#{msg.valorToTransf}:
+		</td>
+		<td>
+			R$ <h:inputText value="#{transacaoManagedBean.transacao.valor}" size="7" />
+		</td>
+	</tr>
+	</table>
+	
+	<p></p>
+	<h:commandButton value="Transferir" action="#{transacaoManagedBean.transfToPoupanca}" />
+	</h:form>
+	</center>
+	
+</h:body>
+</f:view>
+</html>

@@ -21,7 +21,7 @@ $(document).ready(function () {
 
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<title>#{msg.toPoupanca}</title>
+<title>#{msg.transfToCc}</title>
 
 	<ui:include src="/layout/Header.xhtml" />
 </h:head>
@@ -32,25 +32,25 @@ $(document).ready(function () {
 	<p></p><p></p>
 	<center>
 	
-			Preencha com o valor desejado<br/>
+			#{msg.preenchaValor}<br/>
 	<br/><br/><br/>
 	<h:form id="submit">
 	<table>
 	<tr>
 		<td>
-			Saldo em Conta Corrente: 
+			#{msg.saldoEmCC}:
 		</td>
 		<td>R$ #{cliente.contaCorrente.saldo}</td>
 	</tr>
 	<tr>
 		<td>
-			Saldo em Conta Poupança: 
+			#{msg.saldoEmCP}:
 		</td>
 		<td>R$ #{cliente.contaPoupanca.saldo}</td>
 	</tr>
 	<tr>
 		<td>
-			Valor a ser transferido:
+			#{msg.valorToTransf}:
 		</td>
 		<td>
 			R$ <h:inputText value="#{transacaoManagedBean.transacao.valor}" size="7" />
