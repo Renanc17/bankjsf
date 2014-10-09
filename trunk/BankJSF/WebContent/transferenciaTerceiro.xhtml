@@ -1,31 +1,32 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:h="http://java.sun.com/jsf/html"
-	  xmlns:ui ="http:/java.sun.com/jsf/facelets">
+	  xmlns:h="http://java.sun.com/jsf/html">
 	  
 <h:head>
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript" src="/scripts/jquery-2.1.1.min.js"></script>
 <script type="text/javascript">
-$document.ready(function(){
-	alert("haha!");
-});
+
 
 </script>
 
+
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<title>Transferencias para Terceiros</title>
-<table width="100%">
+<title>Transferência para Terceiro</title>
+
+	<table width="100%">
 	
 	<tr>
-		<th width="80%" align="left">
-			Bem vindo(a) #{cliente.nome},
+		<th width="30%" align="left">
+			#{msg.greetings} #{cliente.nome},
 		</th>
-		<th>
+		<th width="30%" align="center">			
+		    	<h:commandLink value="Português" action='#{switcher.switchLocale("pt_BR")}' />
+		    	<h:commandLink value="English" action='#{switcher.switchLocale("en_US")}' />	
+		</th>
+		<th width="30%" align="right">
 			<h:form>
-			<h:commandLink id="logout" action="#{clienteManagedBean.logout}">
-	  			<h:outputText value="Sair"/>
-			</h:commandLink>
+			<h:commandLink id="logout" action="#{clienteManagedBean.logout}" value="Sair"></h:commandLink>
 			</h:form>
 		</th>	
 	</tr>
@@ -35,31 +36,18 @@ $document.ready(function(){
 	<center>
 		<h:form>
 		<p>
-			<h:commandLink id="saldo" action="Saldo">
-	  			<h:outputText value="Saldo"/>
-			</h:commandLink>
+			<h:commandLink id="saldo" action="Saldo" value="#{msg.saldo}"/>
 			   -   
-			<h:commandLink id="pagamentos" action="Pagamentos">
-	  			<h:outputText value="Pagamentos"/>
-			</h:commandLink>
+			<h:commandLink id="pagamentos" action="Pagamentos" value="#{msg.pagamentos}"/>
 			   -   
-			<h:commandLink id="transferencias" action="Transferencias">
-	  			<h:outputText value="Transferencias"/>
-			</h:commandLink>
+			<h:commandLink id="transferencias" action="Transferencias" value="#{msg.transferencias}"/>
 		</p>
-		
 		<p>
-			<h:commandLink id="comprovantes" action="Comprovantes">
-	  			<h:outputText value="Comprovantes"/>
-			</h:commandLink>
+			<h:commandLink id="comprovantes" action="Comprovantes" value="#{msg.comprovantes}"/>
 			   -   
-			<h:commandLink id="agendamentos" action="Agendamentos">
-	  			<h:outputText value="Agendamentos"/>
-			</h:commandLink>
+			<h:commandLink id="agendamentos" action="Agendamentos" value="#{msg.agendamentos}"/>
 			   -   
-			<h:commandLink id="extrato" action="Extrato">
-	  			<h:outputText value="Extrato"/>
-			</h:commandLink>
+			<h:commandLink id="extrato" action="Extrato" value="#{msg.extrato}"/>
 		</p>
 		</h:form>
 	</center>

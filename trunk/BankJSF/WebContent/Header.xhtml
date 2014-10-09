@@ -1,19 +1,16 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:h="http://java.sun.com/jsf/html">
-	  
-<h:head>
-<script type="text/javascript" src="/scripts/jquery-2.1.1.min.js"></script>
-<script type="text/javascript">
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core" >
 
-
-</script>
-
-
+<head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<title>Transferências</title>
+<title>Insert title here</title>
+</head>
 
+<body>
 	<table width="100%">
 	
 	<tr>
@@ -26,12 +23,11 @@
 		</th>
 		<th width="30%" align="right">
 			<h:form>
-			<h:commandLink id="logout" action="#{clienteManagedBean.logout}" value="Sair"></h:commandLink>
+			<h:commandLink id="logout" action="#{clienteManagedBean.logout}" value="#{msg.sair}"></h:commandLink>
 			</h:form>
 		</th>	
 	</tr>
 	</table>
-
 	
 	<center>
 		<h:form>
@@ -42,6 +38,7 @@
 			   -   
 			<h:commandLink id="transferencias" action="Transferencias" value="#{msg.transferencias}"/>
 		</p>
+		
 		<p>
 			<h:commandLink id="comprovantes" action="Comprovantes" value="#{msg.comprovantes}"/>
 			   -   
@@ -51,24 +48,6 @@
 		</p>
 		</h:form>
 	</center>
-</h:head>
 
-<h:body>
-		<h:form>
-		<p>
-			<h:commandLink id="cadastrarFavoritos" action="cadastrarFavoritos" value="#{msg.cadastrarFavorito}"/>
-			   -   
-			<h:commandLink id="consultarFavoritos" action="consultarFavoritos" value="#{msg.listarFavoritos}"/>
-			   -   
-		
-			<h:commandLink id="transferenciaTerceiro" action="transferenciaTerceiro" value="#{msg.transfOutraTit}"/>
-			   -   
-			<h:commandLink id="toPoupanca" action="toPoupanca" value="#{msg.toPoupanca}"/>
-			   -   
-			<h:commandLink id="toCc" action="toCC" value="#{msg.toCC}"/>
-		</p>
-		</h:form>	
-		
-		<p></p><p></p><center>#{msg.selectAbove}</center>
-</h:body>
+</body>
 </html>
