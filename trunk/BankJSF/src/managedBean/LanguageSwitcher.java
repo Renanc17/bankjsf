@@ -35,7 +35,7 @@ public class LanguageSwitcher implements Serializable{
     
     
     Locale locale = FacesContext.getCurrentInstance().getViewRoot().getLocale();
-    
+
     public String switchLocale(String lang) {
         locale = new Locale(lang);
 

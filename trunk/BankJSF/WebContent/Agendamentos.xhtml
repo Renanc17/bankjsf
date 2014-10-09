@@ -4,49 +4,14 @@
 	  xmlns:h="http://java.sun.com/jsf/html"
 	  xmlns:f="http://java.sun.com/jsf/core">
 	  
-<f:view locale="#{switcher.locale}">	  
+<f:view locale="#{switcher.currentLocale}">	  
 <h:head>
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>Agendamentos</title>
 
 
-	<table width="100%">	
-	<tr>
-		<th width="30%" align="left">
-			#{msg.greetings} #{cliente.nome},
-		</th>
-		<th width="30%" align="center">			
-		    	<h:commandLink value="Português" action='#{switcher.switchLocale("pt_BR")}' />
-		    	<h:commandLink value="English" action='#{switcher.switchLocale("en_US")}' />	
-		</th>
-		<th width="30%" align="right">
-			<h:form>
-			<h:commandLink id="logout" action="#{clienteManagedBean.logout}" value="Sair"></h:commandLink>
-			</h:form>
-		</th>	
-	</tr>
-	</table>
-	
-	<center>
-		<h:form>
-		<p>
-			<h:commandLink id="saldo" action="Saldo" value="#{msg.saldo}"/>
-			   -   
-			<h:commandLink id="pagamentos" action="Pagamentos" value="#{msg.pagamentos}"/>
-			   -   
-			<h:commandLink id="transferencias" action="Transferencias" value="#{msg.transferencias"/>
-		</p>
-		
-		<p>
-			<h:commandLink id="comprovantes" action="Comprovantes" value="#{msg.comprovantes}"/>
-			   -   
-			<h:commandLink id="agendamentos" action="Agendamentos" value="#{msg.agendamentos}"/>
-			   -   
-			<h:commandLink id="extrato" action="Extrato" value="#{msg.extrato}"/>
-		</p>
-		</h:form>
-	</center>
+	<ui:include src="/layout/Header.xhtml" />
 </h:head>
 <body>
 
