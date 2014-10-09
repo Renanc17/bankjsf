@@ -10,15 +10,18 @@
 </head>
 <body>
 
-<table width="100%">
-	
+<table width="100%">	
 	<tr>
 		<th width="30%" align="left">
 			#{msg.greetings} #{cliente.nome},
 		</th>
 		<th width="30%" align="center">			
+		    	Português   -   English
+		    	<!-- 
 		    	<h:commandLink value="Português" action='#{switcher.switchLocale("pt_BR")}' />
-		    	<h:commandLink value="English" action='#{switcher.switchLocale("en_US")}' />	
+		    	   -   
+		    	<h:commandLink value="English" action='#{switcher.switchLocale("en_US")}' />
+				-->
 		</th>
 		<th width="30%" align="right">
 			<h:form>
@@ -36,8 +39,7 @@
 			<h:commandLink id="pagamentos" action="Pagamentos" value="#{msg.pagamentos}"/>
 			   -   
 			<h:commandLink id="transferencias" action="Transferencias" value="#{msg.transferencias}"/>
-		</p>
-		
+		</p>		
 		<p>
 			<h:commandLink id="comprovantes" action="Comprovantes" value="#{msg.comprovantes}"/>
 			   -   
@@ -47,7 +49,5 @@
 		</p>
 		</h:form>
 	</center>
-
-
 </body>
 </html>
