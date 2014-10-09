@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:h="http://java.sun.com/jsf/html">
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core">
 	  
+<f:view locale="#{switcher.locale}">
 <h:head>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script type="text/javascript">
 
 $(document).ready(function () {
+
+	alert("jQuery Ok!");
 
     jQuery.validator.addMethod("dollarsscents", function(value, element) {
         return this.optional(element) || /^\d{0,4}(\.\d{0,2})?$/i.test(value);
@@ -39,12 +43,12 @@ $(document).ready(function () {
 	
 	<tr>
 		<th width="80%" align="left">
-			Bem vindo(a) #{cliente.nome},
+			#{msg.greetings} #{cliente.nome},
 		</th>
 		<th>
 			<h:form>
 			<h:commandLink id="logout" action="#{clienteManagedBean.logout}">
-	  			<h:outputText value="Sair"/>
+	  			<h:outputText value="{msg.sair}"/>
 			</h:commandLink>
 			</h:form>
 		</th>	
@@ -151,4 +155,5 @@ $(document).ready(function () {
 	</center>
 	
 </h:body>
+</f:view>
 </html>

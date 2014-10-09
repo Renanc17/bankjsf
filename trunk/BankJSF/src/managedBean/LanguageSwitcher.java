@@ -8,8 +8,6 @@ import javax.faces.context.FacesContext;
 
 @ManagedBean(name = "switcher")
 @SessionScoped
-
-
 public class LanguageSwitcher {
     
 	Locale locale = FacesContext.getCurrentInstance().getViewRoot().getLocale();

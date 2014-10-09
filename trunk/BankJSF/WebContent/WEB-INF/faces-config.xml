@@ -5,16 +5,21 @@
     xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
     version="2.2">
 
-<application>
-<locale-config>
-   <default-locale>pt_BR</default-locale>
-   <supported-locale>pt_BR</supported-locale>
-   <supported-locale>en_US</supported-locale>
-  </locale-config>
-
+<application>   
   <resource-bundle>
-       <base-name>resources.languages</base-name>
-       <var>msg</var>
+     <base-name>language</base-name>
+     <var>msg</var>
   </resource-bundle>
-</application>
+  
+  <locale-config>
+         <default-locale>pt_BR</default-locale>
+         <supported-locale>pt_BR</supported-locale>
+         <supported-locale>en_US</supported-locale>
+  </locale-config>
+  
+  <message-bundle>
+       language
+  </message-bundle>      
+ </application>
+
 </faces-config>

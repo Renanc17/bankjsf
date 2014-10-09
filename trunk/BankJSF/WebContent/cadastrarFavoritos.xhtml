@@ -1,11 +1,61 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:h="http://java.sun.com/jsf/html">
-<head>
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core">
+	  
+<f:view locale="#{switcher.locale}">	  
+<h:head>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+
+</script>
+
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<title>Cadastro de Favoritos para transferências</title>
-</head>
+<title>Home</title>
+
+
+	<table width="100%">
+	
+	<tr>
+		<th width="30%" align="left">
+			#{msg.greetings} #{cliente.nome},
+		</th>
+		<th width="30%" align="center">			
+		    	<h:commandLink value="Português" action='#{switcher.switchLocale("pt_BR")}' />
+		    	<h:commandLink value="English" action='#{switcher.switchLocale("en_US")}' />	
+		</th>
+		<th width="30%" align="right">
+			<h:form>
+			<h:commandLink id="logout" action="#{clienteManagedBean.logout}" value="Sair"></h:commandLink>
+			</h:form>
+		</th>	
+	</tr>
+	</table>
+
+	
+	<center>
+		<h:form>
+		<p>
+			<h:commandLink id="saldo" action="Saldo" value="#{msg.saldo}"/>
+			   -   
+			<h:commandLink id="pagamentos" action="Pagamentos" value="#{msg.pagamentos}"/>
+			   -   
+			<h:commandLink id="transferencias" action="Transferencias" value="#{msg.transferencias"/>
+		</p>
+		
+		<p>
+			<h:commandLink id="comprovantes" action="Comprovantes" value="#{msg.comprovantes}"/>
+			   -   
+			<h:commandLink id="agendamentos" action="Agendamentos" value="#{msg.agendamentos}"/>
+			   -   
+			<h:commandLink id="extrato" action="Extrato" value="#{msg.extrato}"/>
+		</p>
+		</h:form>
+	</center>
+</h:head>
+
 <h:body>
 	<h:form>
 			Nome: <h:inputText value="#{clienteManagedBean.cliente.nome}" /><br/>
@@ -16,4 +66,5 @@
 	<br/><br/><br/>
 	</h:form>		
 </h:body>
+</f:view>
 </html>

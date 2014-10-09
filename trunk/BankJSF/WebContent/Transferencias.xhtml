@@ -13,8 +13,8 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>Transferências</title>
+
 <table width="100%">
-	
 	<tr>
 		<th width="80%" align="left">
 			Bem vindo(a) #{cliente.nome},
@@ -28,7 +28,6 @@
 		</th>	
 	</tr>
 	</table>
-
 	
 	<center>
 		<h:form>
@@ -66,13 +65,9 @@
 <h:body>
 		<h:form>
 		<p>
-			<h:commandLink id="cadastrarFavoritos" action="cadastrarFavoritos">
-	  			<h:outputText value="Cadastrar novas contas favoritas"/>
-			</h:commandLink>
+			<h:commandLink id="cadastrarFavoritos" action="cadastrarFavoritos" value="#{msg.cadastrarFavorito}"/>
 			   -   
-			<h:commandLink id="consultarFavoritos" action="consultarFavoritos">
-	  			<h:outputText value="Listar contas já cadastradas"/>
-			</h:commandLink>
+			<h:commandLink id="consultarFavoritos" action="consultarFavoritos" value="#{msg.listarFavoritos}"/>
 			   -   
 		
 		
@@ -93,6 +88,6 @@
 		</p>
 		</h:form>	
 		
-		<p></p><p><center>Selecione acima a opção dessejada!</center></p>
+		<p></p><p><center>#{msg.selectAbove}</center></p>
 </h:body>
 </html>

@@ -4,6 +4,7 @@
 	  xmlns:h="http://java.sun.com/jsf/html"
 	  xmlns:f="http://java.sun.com/jsf/core">
 	  
+<f:view locale="#{switcher.locale}">	  
 <h:head>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script type="text/javascript">
@@ -18,21 +19,16 @@
 	<table width="100%">
 	
 	<tr>
-		<th width="40%" align="left">
-			#{language['greetings']} #{cliente.nome},
+		<th width="30%" align="left">
+			#{msg.greetings} #{cliente.nome},
 		</th>
-		<th width="30%" align="center">
-			<f:view locale="#{switcher.locale}">
-		    	<h:commandLink value="Português" action="#{switcher.switchLocale('pt_br')}" />
-		    	<h:commandLink value="English" action="#{switcher.switchLocale('en_us')}" />
-			</f:view>
-		
+		<th width="30%" align="center">			
+		    	<h:commandLink value="Português" action='#{switcher.switchLocale("pt_BR")}' />
+		    	<h:commandLink value="English" action='#{switcher.switchLocale("en_US")}' />	
 		</th>
-		<th width="30%" align="center">
+		<th width="30%" align="right">
 			<h:form>
-			<h:commandLink id="logout" action="#{clienteManagedBean.logout}">
-	  			<h:outputText value="Sair"/>
-			</h:commandLink>
+			<h:commandLink id="logout" action="#{clienteManagedBean.logout}" value="Sair"></h:commandLink>
 			</h:form>
 		</th>	
 	</tr>
@@ -42,71 +38,56 @@
 	<center>
 		<h:form>
 		<p>
-			<h:commandLink id="saldo" action="Saldo">
-	  			<h:outputText value="Saldo"/>
-			</h:commandLink>
+			<h:commandLink id="saldo" action="Saldo" value="#{msg.saldo}"/>
 			   -   
-			<h:commandLink id="pagamentos" action="Pagamentos">
-	  			<h:outputText value="Pagamentos"/>
-			</h:commandLink>
+			<h:commandLink id="pagamentos" action="Pagamentos" value="#{msg.pagamentos}"/>
 			   -   
-			<h:commandLink id="transferencias" action="Transferencias">
-	  			<h:outputText value="Transferencias"/>
-			</h:commandLink>
+			<h:commandLink id="transferencias" action="Transferencias" value="#{msg.transferencias}"/>
 		</p>
 		
 		<p>
-			<h:commandLink id="comprovantes" action="Comprovantes">
-	  			<h:outputText value="Comprovantes"/>
-			</h:commandLink>
+			<h:commandLink id="comprovantes" action="Comprovantes" value="#{msg.comprovantes}"/>
 			   -   
-			<h:commandLink id="agendamentos" action="Agendamentos">
-	  			<h:outputText value="Agendamentos"/>
-			</h:commandLink>
+			<h:commandLink id="agendamentos" action="Agendamentos" value="#{msg.agendamentos}"/>
 			   -   
-			<h:commandLink id="extrato" action="Extrato">
-	  			<h:outputText value="Extrato"/>
-			</h:commandLink>
+			<h:commandLink id="extrato" action="Extrato" value="#{msg.extrato}"/>
 		</p>
 		</h:form>
 	</center>
 </h:head>
 
-<h:body>
-	
+<h:body>	
 	<center>
-	<table>
-	
+	<table>	
 	<tr>
 		<th>
-			<h:outputLabel value="#{language['label.type.description']}" for="" />
+			#{msg.tipoSaldo}
 		</th>
 		<th>
-			Valor líquido
+			#{msg.valorLiquido}
 		</th>	
 	</tr>
 	<tr>
 		<td>
-			Saldo em Conta Corrente: 
+			#{msg.saldoEmCC}:
 		</td>
 		<td>R$ #{cliente.contaCorrente.saldo}</td>
 	</tr>
 	<tr>
 		<td>
-			Saldo em Conta Poupança: 
+			#{msg.saldoEmCP}:
 		</td>
 		<td>R$ #{cliente.contaPoupanca.saldo}</td>
 	</tr>
 	<tr>
 		<td>
-			Saldo em Total em conta: 
+			#{msg.saldoTotal}:
 		</td>
 
 		<td> R$ #{saldototal} </td>
-	</tr>
-	
-	
+	</tr>	
 	</table>
 	</center>
 </h:body>
+</f:view>
 </html>
