@@ -5,27 +5,96 @@
 	  xmlns:ui ="http:/java.sun.com/jsf/facelets">
 	  
 <h:head>
-<script type="text/javascript" src="/scripts/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script type="text/javascript">
-
+$document.ready(function(){
+	alert("haha!");
+});
 
 </script>
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<title>Gerenciamento de Favoritos</title>
+<title>Transferencias para Terceiros</title>
+<table width="100%">
+	
+	<tr>
+		<th width="80%" align="left">
+			Bem vindo(a) #{cliente.nome},
+		</th>
+		<th>
+			<h:form>
+			<h:commandLink id="logout" action="#{clienteManagedBean.logout}">
+	  			<h:outputText value="Sair"/>
+			</h:commandLink>
+			</h:form>
+		</th>	
+	</tr>
+	</table>
+
+	
+	<center>
+		<h:form>
+		<p>
+			<h:commandLink id="saldo" action="Saldo">
+	  			<h:outputText value="Saldo"/>
+			</h:commandLink>
+			   -   
+			<h:commandLink id="pagamentos" action="Pagamentos">
+	  			<h:outputText value="Pagamentos"/>
+			</h:commandLink>
+			   -   
+			<h:commandLink id="transferencias" action="Transferencias">
+	  			<h:outputText value="Transferencias"/>
+			</h:commandLink>
+		</p>
+		
+		<p>
+			<h:commandLink id="comprovantes" action="Comprovantes">
+	  			<h:outputText value="Comprovantes"/>
+			</h:commandLink>
+			   -   
+			<h:commandLink id="agendamentos" action="Agendamentos">
+	  			<h:outputText value="Agendamentos"/>
+			</h:commandLink>
+			   -   
+			<h:commandLink id="extrato" action="Extrato">
+	  			<h:outputText value="Extrato"/>
+			</h:commandLink>
+		</p>
+		</h:form>
+	</center>
 </h:head>
 
-<h:body>		
-	<p></p><p></p>
+<h:body>
 	<center>
-	<h:form>
-			Preencha as informações de seu destinatário: <br/>
-			Ag: <h:inputText value="#{transacaoManagedBean.transacao.agenciaD}" /><br/>
-			Cc: <h:inputText value="#{transacaoManagedBean.transacao.contaD}" /><br/>
-			Valor: <h:inputText value="#{transacaoManagedBean.transacao.valor}" /><br/>
-		<h:commandButton value="Transferir" action="#{transacaoManagedBean.transferir}" />
-	<br/><br/><br/>
-	</h:form>		
+		<h:form>
+		<p>
+			<h:commandLink id="cadastrarFavoritos" action="cadastrarFavoritos">
+	  			<h:outputText value="Cadastrar novas contas favoritas"/>
+			</h:commandLink>
+			   -   
+			<h:commandLink id="consultarFavoritos" action="consultarFavoritos">
+	  			<h:outputText value="Listar contas já cadastradas"/>
+			</h:commandLink>
+			   -   
+		
+		
+		
+		
+				
+			<h:commandLink id="transferenciaTerceiro" action="transferenciaTerceiro">
+	  			<h:outputText value="Transferencia para outra titularidade"/>
+			</h:commandLink>
+			   -   
+			<h:commandLink id="toPoupanca" action="toPoupanca">
+	  			<h:outputText value="Investir da Conta Corrente na Poupança"/>
+			</h:commandLink>
+			   -   
+			<h:commandLink id="toCc" action="toCC">
+	  			<h:outputText value="Resgatar da Poupança para Conta Corrente"/>
+			</h:commandLink>
+		</p>
+		</h:form>		
 	</center>
 	
 </h:body>
