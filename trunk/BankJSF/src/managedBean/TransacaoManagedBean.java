@@ -31,7 +31,7 @@ public class TransacaoManagedBean {
 		this.remetente = remetente;
 	}
 	
-	public String ccToPoup(){
+	public String transfToPoupanca(){
 		String pagina = "";
 		
 		FacesContext facesContext = FacesContext.getCurrentInstance();
