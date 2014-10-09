@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	  xmlns:h="http://java.sun.com/jsf/html"
-	  xmlns:f="http://java.sun.com/jsf/core">
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:ui="http://java.sun.com/jsf/facelets">
 	  
 <f:view locale="#{switcher.locale}">	  
 <h:head>
@@ -13,18 +14,19 @@
 </script>
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+
+
+
 <title>#{msg.home}</title>
 
-
+	<ui:include src="/layout/Header.xhtml" />
 	<table width="100%">
 	
 	<tr>
 		<th width="30%" align="left">
 			#{msg.greetings} #{cliente.nome},
 		</th>
-		<th width="30%" align="center">			
-		    	<h:commandLink value="Português" action='#{switcher.switchLocale("pt_BR")}' />
-		    	<h:commandLink value="English" action='#{switcher.switchLocale("en_US")}' />	
+		<th width="30%" align="center">		a
 		</th>
 		<th width="30%" align="right">
 			<h:form>
