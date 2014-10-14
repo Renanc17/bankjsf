@@ -46,21 +46,15 @@ public class ClienteManagedBean {
 		String resultado = "";
 
 		ClienteDAO dao = new ClienteDAO();
-		Cliente user = new Cliente();
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-
+		boolean user;
 		try {
 			user = dao.login(cliente);
-			if (user != null){
-				cliente = user;
-				HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
-				session.setAttribute("cliente", cliente);
-				saldoTotal();
-				resultado = "Home";
+			if (user == true){				
+				resultado = "Login_Confirm";
 			}
 			else{
 				resultado = "erro";
-				msg += " Usuario inexistente.";
+				msg += "Conta não encontrada.";
 			}
 
 		} catch (SQLException e) {
@@ -69,6 +63,38 @@ public class ClienteManagedBean {
 		}
 
 		return resultado;
+	}
+	
+	public String passConfirm(){
+
+		String resultado = "";
+		String msg = "";
+		
+		ClienteDAO dao = new ClienteDAO();
+		Cliente user = new Cliente();
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+				
+		try{
+			user = dao.passConfirm(cliente);
+			if(user != null){
+				cliente = user;
+				HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
+				session.setAttribute("cliente", cliente);
+				saldoTotal();
+				resultado = "Home";
+			}
+			
+			else{
+				resultado = "erro";
+				msg += "Senha incorreta";
+			}
+		}catch(SQLException e){
+			resultado = "erro";
+			msg += "Erro de Banco de dados.";
+		}
+		
+		return resultado;		
+		
 	}
 	
 	public String simulaLogin(){
