@@ -14,7 +14,11 @@
 	<table width="100%">	
 	<tr>
 		<th width="90%" align="center">
-		   
+			<h:form>
+		    	<h:commandLink value="Português" action="#{switcher.portugueseLocale}" />
+		    	   -   
+		    	<h:commandLink value="English" action="#{switcher.englishLocale}" />
+			</h:form>	   
 		</th>
 	</tr>
 	</table>
@@ -22,9 +26,9 @@
 	<center>
 	<p></p>
 	<h:form>
-			Agency: <h:inputText value="#{clienteManagedBean.cliente.agencia}" size="3" /> 
-			Current Account: <h:inputText value="#{clienteManagedBean.cliente.cpf}" /> 
-			<h:commandButton value="#{msg.entrar}" action="#{clienteManagedBean.logar}" />
+			<p>#{msg.passConfirm}</p>
+			#{msg.senha}: <h:inputText type="password" value="#{clienteManagedBean.cliente.senha}" /> 
+			<h:commandButton value="#{msg.entrar}" action="#{clienteManagedBean.passConfirm}" />
 	<br/><br/><br/>
 		Simula Login sem Banco de Dados. <h:commandButton value="Simular Login" action="#{clienteManagedBean.simulaLogin}" />
 	</h:form>

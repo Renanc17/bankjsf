@@ -12,15 +12,37 @@ import factory.ConnectionFactory;
 
 public class ClienteDAO {
 
-	public Cliente login(Cliente c) throws SQLException {
+	public boolean login(Cliente c) throws SQLException {
 
-		Boolean resultado = false;
+		boolean cl = false;
+
+		Connection conn = ConnectionFactory.getConnection();
+
+		String sql = "SELECT * FROM cliente where contac=? and agencia=?";
+
+			PreparedStatement stmt = conn.prepareStatement(sql);
+
+			stmt.setLong(1, c.getContaCorrente().getConta());
+			stmt.setInt(3, c.getAgencia());
+
+			ResultSet rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				cl = true;
+		}
+
+		return cl;
+
+	}
+	
+	public Cliente passConfirm(Cliente c) throws SQLException {
+
 		Cliente cl = null;
 
 		Connection conn = ConnectionFactory.getConnection();
 
-		String sql = "SELECT * FROM cliente where cpf=? and senha=? and agencia=?";
-		for (int i = 0; i < 2; i++) {
+		String sql = "SELECT * FROM cliente where contac=? and senha=? and agencia=?";
+
 			PreparedStatement stmt = conn.prepareStatement(sql);
 
 			stmt.setLong(1, c.getCpf());
@@ -44,18 +66,12 @@ public class ClienteDAO {
 				cp.setConta(rs.getInt("contap"));
 				cp.setSaldo(rs.getDouble("saldop"));
 				cl.setContaPoupanca(cp);
-				resultado = true;
-
-			}
-			if (resultado == false) {
-				sql = "SELECT * FROM cliente where contac=? and senha=? and agencia=?";
-			}
-
 		}
 
 		return cl;
 
 	}
+	
 
 	public Cliente getClienteById(Integer id) throws SQLException {
 

@@ -15,16 +15,18 @@ public class LanguageSwitcher implements Serializable{
 	private static final long serialVersionUID = 4420995111496888033L;  
 	private Locale currentLocale = new Locale("pt", "BR"); 
 	
-	public void englishLocale() {    
+	public String englishLocale() {    
         UIViewRoot viewRoot = FacesContext.getCurrentInstance().getViewRoot();    
         currentLocale = Locale.US;    
-        viewRoot.setLocale(currentLocale);    
+        viewRoot.setLocale(currentLocale);  
+        return "";
     }    
       
-    public void portugueseLocale() {    
+    public String portugueseLocale() {    
         UIViewRoot viewRoot = FacesContext.getCurrentInstance().getViewRoot();    
         currentLocale = new Locale("pt", "BR");    
-        viewRoot.setLocale(currentLocale);    
+        viewRoot.setLocale(currentLocale); 
+        return "";
     }    
       
     public Locale getCurrentLocale() {    
