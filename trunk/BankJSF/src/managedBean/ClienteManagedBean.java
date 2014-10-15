@@ -49,7 +49,7 @@ public class ClienteManagedBean {
 		boolean user;
 		try {
 			user = dao.login(cliente);
-			if (user == true){				
+			if (user == true){
 				resultado = "Login_Confirm";
 			}
 			else{

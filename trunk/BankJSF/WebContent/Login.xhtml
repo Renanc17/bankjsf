@@ -23,7 +23,7 @@
 	<p></p>
 	<h:form>
 			Agency: <h:inputText value="#{clienteManagedBean.cliente.agencia}" size="3" /> 
-			Current Account: <h:inputText value="#{clienteManagedBean.cliente.cpf}" /> 
+			Current Account: <h:inputText value="#{clienteManagedBean.cliente.contaCorrente.conta}" /> 
 			<h:commandButton value="#{msg.entrar}" action="#{clienteManagedBean.logar}" />
 	<br/><br/><br/>
 		Simula Login sem Banco de Dados. <h:commandButton value="Simular Login" action="#{clienteManagedBean.simulaLogin}" />
