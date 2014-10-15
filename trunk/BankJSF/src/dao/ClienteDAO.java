@@ -45,7 +45,7 @@ public class ClienteDAO {
 
 			PreparedStatement stmt = conn.prepareStatement(sql);
 
-			stmt.setLong(1, c.getCpf());
+			stmt.setLong(1, c.getContaCorrente().getConta());
 			stmt.setString(2, c.getSenha());
 			stmt.setInt(3, c.getAgencia());
 

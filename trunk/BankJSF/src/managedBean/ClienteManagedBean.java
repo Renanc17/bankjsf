@@ -68,10 +68,10 @@ public class ClienteManagedBean {
 	public String passConfirm(){
 
 		String resultado = "";
-		String msg = "";
-		
+		msg = "";
+			
 		ClienteDAO dao = new ClienteDAO();
-		Cliente user = new Cliente();
+		Cliente user = null;
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 				
 		try{
@@ -86,7 +86,7 @@ public class ClienteManagedBean {
 			
 			else{
 				resultado = "erro";
-				msg += "Senha incorreta";
+				msg += "Senha incorreta.";
 			}
 		}catch(SQLException e){
 			resultado = "erro";
