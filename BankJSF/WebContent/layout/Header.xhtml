@@ -10,7 +10,7 @@
 <title>Header</title>
 </head>
 <body>
-<p:idleMonitor timeout="5000" onidle="clienteManagedBean.logout" />
+<p:idleMonitor timeout="5000" onidle="loginController.logout" />
 <table width="100%">	
 	<tr>
 		<th width="30%" align="left">
@@ -25,7 +25,7 @@
 		</th>
 		<th width="30%" align="right">
 			<h:form>
-			<h:commandLink id="logout" action="#{clienteManagedBean.logout}" value="#{msg.sair}"></h:commandLink>
+			<h:commandLink id="logout" action="#{loginController.logout}" value="#{msg.sair}"></h:commandLink>
 			</h:form>
 		</th>	
 	</tr>
