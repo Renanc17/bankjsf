@@ -14,6 +14,7 @@ public class Cliente {
 	private ContaCorrente ContaCorrente = new ContaCorrente(); 
 	private ContaPoupanca ContaPoupanca = new ContaPoupanca();	
 	private Calendar data;
+	private String senhaCartao;
 	
 	
 	public ContaCorrente getContaCorrente() {
@@ -86,6 +87,14 @@ public class Cliente {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+
+	public String getSenhaCartao() {
+		return senhaCartao;
+	}
+
+	public void setSenhaCartao(String senhaCartao) {
+		this.senhaCartao = senhaCartao;
 	}
 	
 

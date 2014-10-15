@@ -6,6 +6,13 @@
 	  
 <f:view locale="pt_BR">
 <h:head>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+	
+
+</script>
+
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>#{msg.banco}</title>
 </h:head>
@@ -27,7 +34,7 @@
 	<p></p>
 	<h:form>
 			<p>#{msg.passConfirm}</p>
-			#{msg.senha}: <h:inputText type="password" value="#{clienteManagedBean.cliente.senha}" /> 
+			#{msg.senha}: <h:inputSecret name="passConfirm" value="#{clienteManagedBean.cliente.senha}" readonly="false"/> 
 			<h:commandButton value="#{msg.entrar}" action="#{clienteManagedBean.passConfirm}" />
 	<br/><br/><br/>
 		Simula Login sem Banco de Dados. <h:commandButton value="Simular Login" action="#{clienteManagedBean.simulaLogin}" />

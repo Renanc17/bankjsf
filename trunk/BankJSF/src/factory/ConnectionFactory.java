@@ -24,7 +24,7 @@ public class ConnectionFactory {
 		String server = "localhost";
 		String database = "bankjsf";
 		String usuario = "root";
-		String senha = "fiap";
+		String senha = "";
 
 		String url = "jdbc:mysql://" + server + "/" + database;
 
