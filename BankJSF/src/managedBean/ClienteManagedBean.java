@@ -54,12 +54,12 @@ public class ClienteManagedBean {
 			}
 			else{
 				resultado = "erro";
-				msg += "Conta não encontrada.";
+				msg = "Conta não encontrada.";
 			}
 
 		} catch (SQLException e) {
 			resultado = "erro";
-			msg += " Erro de Banco de dados.";
+			msg = " Erro de Banco de dados.";
 		}
 
 		return resultado;
@@ -108,6 +108,7 @@ public class ClienteManagedBean {
 		cliente.getContaCorrente().setSaldo(2500.0);
 		cliente.getContaPoupanca().setConta(6789);
 		cliente.getContaPoupanca().setSaldo(3600.0);
+		cliente.getContaPoupanca().setSaldo(3600.0);
 		
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
@@ -131,7 +132,12 @@ public class ClienteManagedBean {
 	public String logout(){
 		String pagina = "Login";
 		cliente = null;
+		try{
 		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+		pagina = "Login";
+		}finally{
+		pagina ="Login";
+		}
 		return pagina;
 	}
 

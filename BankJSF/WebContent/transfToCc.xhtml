@@ -11,17 +11,20 @@
 <script type="text/javascript">
 
 $(document).ready(function () {
-
-	alert("jQuery Ok!");    
-
+ 	$("#passConfirmField").hide();
 });
+
+function senha(){
+	$("#passConfirmField").show();
+	$("#valor").prop("readOnly", "true");
+}
 
 
 </script>
 
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<title>#{msg.transfToCc</title>
+<title>#{msg.transfToCc}</title>
 
 	<ui:include src="/layout/Header.xhtml" />
 </h:head>
@@ -53,16 +56,21 @@ $(document).ready(function () {
 			#{msg.valorToTransf}:
 		</td>
 		<td>
-			R$ <h:inputText value="#{transacaoManagedBean.transacao.valor}" size="7" />
+			R$ <h:inputText id="valor" value="#{transacaoManagedBean.transacao.valor}" size="7" />
 		</td>
 	</tr>
 	</table>
 	
 	<p></p>
-	<h:commandButton id="transferir" value="#{msg.transferir}" action="#{transacaoManagedBean.transfToCc}" />
+	<input type="button" id="transferir" value="#{msg.transferir}" onclick="senha()"/>
+	
+	<div id="passConfirmField">
+		<ui:include src="transacaoConfirm.xhtml" />					
+		<h:commandButton value="#{msg.transacaoConfirmGo}" action="#{transacaoManagedBean.transfToCc}" />
+	</div>
+	
 	</h:form>
 	</center>
-	
 </h:body>
 </f:view>
 </html>

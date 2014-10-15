@@ -30,7 +30,14 @@
   <listener>
     <listener-class>com.sun.faces.config.ConfigureListener</listener-class>
   </listener>
+  
   <session-config>
-  <session-timeout>3</session-timeout>
-  </session-config>  
+  	<session-timeout>1</session-timeout>
+  </session-config>
+  
+  <error-page>    
+        <exception-type>javax.faces.application.ViewExpiredException</exception-type>    
+        <location>/Login.xhtml</location>    
+</error-page> 
+   
 </web-app>

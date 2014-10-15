@@ -3,13 +3,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	  xmlns:h="http://java.sun.com/jsf/html"
 	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:p="http://primefaces.org/ui"
 	  xmlns:ui="http://java.sun.com/jsf/facelets">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>Header</title>
 </head>
 <body>
-
+<p:idleMonitor timeout="5000" onidle="clienteManagedBean.logout" />
 <table width="100%">	
 	<tr>
 		<th width="30%" align="left">
@@ -33,7 +34,7 @@
 	<center>
 		<h:form>
 		<p>
-			<h:commandLink id="saldo" action="Saldo" value="#{msg.saldo}"/>
+			<h:commandLink id="saldo" action="Home" value="#{msg.saldo}"/>
 			   -   
 			<h:commandLink id="pagamentos" action="Pagamentos" value="#{msg.pagamentos}"/>
 			   -   

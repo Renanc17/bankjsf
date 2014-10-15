@@ -54,7 +54,7 @@ public class ClienteDAO {
 			while (rs.next()) {
 				cl = new Cliente();
 				ContaCorrente cc = new ContaCorrente();
-				ContaPoupanca cp = new ContaPoupanca();
+				ContaPoupanca cp = new ContaPoupanca();				
 				cl.setId(rs.getInt("id"));
 				cl.setNome(rs.getString("nome"));
 				cl.setCpf(rs.getLong("cpf"));
@@ -66,6 +66,7 @@ public class ClienteDAO {
 				cp.setConta(rs.getInt("contap"));
 				cp.setSaldo(rs.getDouble("saldop"));
 				cl.setContaPoupanca(cp);
+				cl.setSenhaCartao(rs.getString("senhaCartao"));
 		}
 
 		return cl;

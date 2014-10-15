@@ -7,6 +7,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
+import dao.ClienteDAO;
 import dao.TransacaoDAO;
 import bean.Cliente;
 import bean.Transacao;
@@ -17,6 +18,8 @@ public class TransacaoManagedBean {
 	
 	private Transacao transacao = new Transacao();
 	private Cliente remetente;
+	private String senhaCartao;
+	String msg;
 	
 	public Transacao getTransacao() {
 		return transacao;
@@ -29,6 +32,12 @@ public class TransacaoManagedBean {
 	}
 	public void setRemetente(Cliente remetente) {
 		this.remetente = remetente;
+	}
+	public String getSenhaCartao() {
+		return senhaCartao;
+	}
+	public void setSenhaCartao(String senhaCartao) {
+		this.senhaCartao = senhaCartao;
 	}
 	
 	public String transfToPoupanca(){
@@ -56,7 +65,7 @@ public class TransacaoManagedBean {
 		return pagina;
 	}
 	
-	public String transfToCc(){
+	public String transfToCcSemBD(){
 		String pagina = "";
 		
 		FacesContext facesContext = FacesContext.getCurrentInstance();
@@ -80,5 +89,37 @@ public class TransacaoManagedBean {
 		
 		return pagina;
 	}
+	
+	public String transfToCc(){
+		String pagina = "";
+		
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
+		remetente = (Cliente) session.getAttribute("cliente");
+		
+		
+		if(remetente.getSenhaCartao().equals(senhaCartao)){		
+				remetente.getContaCorrente().setSaldo(remetente.getContaCorrente().getSaldo() + transacao.getValor());
+				remetente.getContaPoupanca().setSaldo(remetente.getContaPoupanca().getSaldo() - transacao.getValor());
+				
+				TransacaoDAO dao = new TransacaoDAO();
+				try {	
+						remetente = dao.transfToCc(remetente);
+						pagina = "Home";
+				}catch (SQLException e) {
+					pagina = "erro";
+				}
+		}else{
+				pagina = "erro";
+				msg="Senha incorreta!";
+			}
+				
+		session.setAttribute("cliente", remetente);
+				
+		return pagina;
+	}
+	
+	
+
 
 }
