@@ -1,5 +1,6 @@
 package managedBean;
 
+import java.io.IOException;
 import java.sql.SQLException;
 
 import javax.servlet.http.HttpSession;
@@ -14,11 +15,11 @@ import bean.Cliente;
 @ManagedBean
 public class LoginController {
 
-	public String logout(){
-		String pagina = "Login";
-		cliente = null;
+	public void logout() throws IOException{
 		try{
-		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+			FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+			FacesContext.getCurrentInstance().getExternalContext().redirect("Login.jsf");
+		}finally{}
 	}
 
 
