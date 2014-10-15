@@ -3,7 +3,7 @@ CREATE SCHEMA bankjsf ;
 CREATE TABLE bankjsf.cliente (
   id INT NOT NULL AUTO_INCREMENT,
   nome VARCHAR(45) NOT NULL,
-  cpf INT NOT NULL,
+  cpf bigint NOT NULL,
   agencia INT NOT NULL,
   senha VARCHAR(45) NOT NULL,
   contac INT NOT NULL,
