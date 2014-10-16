@@ -37,12 +37,7 @@
   
   <error-page>    
         <exception-type>javax.faces.application.ViewExpiredException</exception-type>    
-        <location>/Login.jsf</location>  
-</error-page> 
-
-  <error-page>    
-        <exception-type>javax.faces.view.facelets.TagAttributeException</exception-type>    
-        <location>/Login.jsf</location> 
-</error-page> 
+        <location>/Login.jsf</location>
+</error-page>
    
 </web-app>
