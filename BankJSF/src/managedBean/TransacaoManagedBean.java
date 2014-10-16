@@ -19,6 +19,7 @@ public class TransacaoManagedBean {
 	private Transacao transacao = new Transacao();
 	private Cliente remetente;
 	private String senhaCartao;
+	private String tipoTransacao;
 	String msg;
 	
 	public Transacao getTransacao() {
@@ -38,6 +39,12 @@ public class TransacaoManagedBean {
 	}
 	public void setSenhaCartao(String senhaCartao) {
 		this.senhaCartao = senhaCartao;
+	}
+	public String getTipoTransacao() {
+		return tipoTransacao;
+	}
+	public void setTipoTransacao(String tipoTransacao) {
+		this.tipoTransacao = tipoTransacao;
 	}
 	
 	public String transfToPoupanca(){
@@ -117,7 +124,14 @@ public class TransacaoManagedBean {
 				
 		return pagina;
 	}
-	
+
+	public String transacaoConfirm(){
+		if(tipoTransacao.equals("TransfToCc"))
+			return "TransToCc";
+		
+
+		return "";
+	}
 	
 
 

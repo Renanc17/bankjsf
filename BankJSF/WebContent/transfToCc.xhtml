@@ -13,6 +13,7 @@
 
 $(document).ready(function () {
  	$("#passConfirmField").hide();
+ 	$("#tipoTransacao").value("transfToCc");
 });
 
 
@@ -58,7 +59,8 @@ $(document).ready(function () {
 	</table>
 	
 	<p></p>
-	<h:commandButton value="#{msg.transacaoConfirmGo}" action="transacaoConfirm" />
+	<h:inputHidden id="tipoTransacao" value="#{transacaoManagedBean.tipoTransacao}" />
+	<h:commandButton value="#{msg.transacaoConfirmGo}" action="transacaoManagedBean.transacaoConfirm" />
 	
 	
 	</h:form>
