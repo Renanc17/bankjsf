@@ -32,25 +32,5 @@ public class LanguageSwitcher implements Serializable{
     public Locale getCurrentLocale() {    
         return currentLocale;    
     }  
-    
-    
-       
-    Locale locale = FacesContext.getCurrentInstance().getViewRoot().getLocale();
-
-    public String switchLocale(String lang) {
-        locale = new Locale(lang);
-
-        return FacesContext.getCurrentInstance().getViewRoot().getViewId() +
-            "?faces-redirect=true";
-    }
-
-	public Locale getLocale() {
-		return locale;
-	}
-
-	public void setLocale(Locale locale) {
-		this.locale = locale;
-	}
-	
-	
+    	
 }

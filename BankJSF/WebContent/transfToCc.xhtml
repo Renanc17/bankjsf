@@ -59,8 +59,9 @@ $(document).ready(function () {
 	</table>
 	
 	<p></p>
-	<h:inputHidden id="tipoTransacao" value="#{transacaoManagedBean.tipoTransacao}" />
-	<h:commandButton value="#{msg.transacaoConfirmGo}" action="transacaoManagedBean.transacaoConfirm" />
+	<h:commandButton value="#{msg.transacaoConfirmGo}" action="transacaoManagedBean.transacaoConfirm">
+		<f:setPropertyActionListener target="transacaoManagedBean.tipoTransacao" value="TransfToCc"></f:setPropertyActionListener>
+	</h:commandButton>
 	
 	
 	</h:form>

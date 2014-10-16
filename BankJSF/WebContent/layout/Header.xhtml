@@ -1,15 +1,8 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:h="http://java.sun.com/jsf/html"
-	  xmlns:f="http://java.sun.com/jsf/core"
-	  xmlns:ui="http://java.sun.com/jsf/facelets">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<title>Header</title>
-</head>
-<body>
-
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	
 <table width="100%">	
 	<tr>
 		<th width="30%" align="left">
@@ -17,8 +10,8 @@
 		</th>
 		<th width="30%" align="center">
 		    	<h:form>
-		    	<h:commandLink value="Português" action="#{switcher.portugueseLocale}" />
-		    	   -   
+		    	<h:commandLink value="PortuguÃªs" action="#{switcher.portugueseLocale}" />
+		    	  Â -  Â 
 		    	<h:commandLink value="English" action="#{switcher.englishLocale}" />
 				</h:form>
 		</th>
@@ -28,25 +21,24 @@
 			</h:form>
 		</th>	
 	</tr>
-	</table>
+</table>
 	
 	<center>
 		<h:form>
 		<p>
 			<h:commandLink id="saldo" action="Home" value="#{msg.saldo}"/>
-			   -   
+			  Â -  Â 
 			<h:commandLink id="pagamentos" action="Pagamentos" value="#{msg.pagamentos}"/>
-			   -   
+			  Â -  Â 
 			<h:commandLink id="transferencias" action="Transferencias" value="#{msg.transferencias}"/>
 		</p>		
 		<p>
 			<h:commandLink id="comprovantes" action="Comprovantes" value="#{msg.comprovantes}"/>
-			   -   
+			  Â -  Â 
 			<h:commandLink id="agendamentos" action="Agendamentos" value="#{msg.agendamentos}"/>
-			   -   
+			  Â -  Â 
 			<h:commandLink id="extrato" action="Extrato" value="#{msg.extrato}"/>
 		</p>
 		</h:form>
 	</center>
-</body>
-</html>
+</ui:composition>
