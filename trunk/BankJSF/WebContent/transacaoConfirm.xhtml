@@ -15,10 +15,26 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>#{transacaoConfirmGo}</title>
+
+	<ui:include src="/layout/Header.xhtml" />
 </h:head>
-<h:body align="center">
-	<p>#{msg.transacaoConfirm}</p>
-	<br/>
-	#{msg.senha}: <h:inputSecret name="passConfirm" value="#{transacaoManagedBean.senhaCartao}" readonly="false"/>
+
+<h:body>
+	<ui:include src="/layout/SubMenu_Transferencias.xhtml" />
+
+	<p></p><p></p>
+	<center>
+	
+			#{msg.preenchaValor}<br/>
+	<br/><br/><br/>
+	<h:form id="submit">
+
+		<p>#{msg.transacaoConfirm}</p>
+		<br/>
+		#{msg.senha}: <h:inputSecret name="passConfirm" value="#{transacaoManagedBean.senhaCartao}" readonly="false"/>
+		<h:commandButton value="#{msg.transacaoConfirmGo}" action="#{transacaoManagedBean.transfToCc}" />
+		
+	</h:form>
+	</center>
 </h:body>
 </html>
