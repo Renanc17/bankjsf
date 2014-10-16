@@ -65,7 +65,7 @@ public class TransacaoManagedBean {
 		return pagina;
 	}
 	
-	public String transfToCcSemBD(){
+	public String transfToCcOld(){
 		String pagina = "";
 		
 		FacesContext facesContext = FacesContext.getCurrentInstance();
@@ -96,8 +96,7 @@ public class TransacaoManagedBean {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
 		remetente = (Cliente) session.getAttribute("cliente");
-		
-		
+				
 		if(remetente.getSenhaCartao().equals(senhaCartao)){		
 				remetente.getContaCorrente().setSaldo(remetente.getContaCorrente().getSaldo() + transacao.getValor());
 				remetente.getContaPoupanca().setSaldo(remetente.getContaPoupanca().getSaldo() - transacao.getValor());

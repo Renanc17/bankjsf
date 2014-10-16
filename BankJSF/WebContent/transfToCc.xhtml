@@ -7,17 +7,13 @@
 	  
 <f:view locale="#{switcher.currentLocale}">
 <h:head>
+
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script type="text/javascript">
 
 $(document).ready(function () {
  	$("#passConfirmField").hide();
 });
-
-function senha(){
-	$("#passConfirmField").show();
-	$("#valor").prop("readOnly", "true");
-}
 
 
 </script>
@@ -62,12 +58,8 @@ function senha(){
 	</table>
 	
 	<p></p>
-	<input type="button" id="transferir" value="#{msg.transferir}" onclick="senha()"/>
+	<h:commandButton value="#{msg.transacaoConfirmGo}" action="transacaoConfirm" />
 	
-	<div id="passConfirmField">
-		<ui:include src="transacaoConfirm.xhtml" />			
-		<h:commandButton value="#{msg.transacaoConfirmGo}" action="#{transacaoManagedBean.transfToCc}" />
-	</div>
 	
 	</h:form>
 	</center>

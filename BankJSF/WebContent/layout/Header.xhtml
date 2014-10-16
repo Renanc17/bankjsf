@@ -3,14 +3,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	  xmlns:h="http://java.sun.com/jsf/html"
 	  xmlns:f="http://java.sun.com/jsf/core"
-	  xmlns:p="http://primefaces.org/ui"
 	  xmlns:ui="http://java.sun.com/jsf/facelets">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>Header</title>
 </head>
 <body>
-<p:idleMonitor timeout="5000" onidle="loginController.logout" />
+
 <table width="100%">	
 	<tr>
 		<th width="30%" align="left">
@@ -25,7 +24,7 @@
 		</th>
 		<th width="30%" align="right">
 			<h:form>
-			<h:commandLink id="logout" action="#{loginController.logout}" value="#{msg.sair}"></h:commandLink>
+			<h:commandLink onclick="return confirm('#{msg.confirmLogout}')" id="logout" action="#{loginController.logout}" value="#{msg.sair}"></h:commandLink>
 			</h:form>
 		</th>	
 	</tr>
