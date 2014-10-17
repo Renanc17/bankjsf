@@ -35,20 +35,29 @@
 		<td>
 			#{msg.saldoEmCC}:
 		</td>
-		<td>R$ #{cliente.contaCorrente.saldo}</td>
+		<td>R$ <h:outputText value="#{cliente.contaCorrente.saldo}" >
+				<f:convertNumber minFractionDigits="2" />
+				</h:outputText>
+		</td>
 	</tr>
 	<tr>
 		<td>
 			#{msg.saldoEmCP}:
 		</td>
-		<td>R$ #{cliente.contaPoupanca.saldo}</td>
+		<td>R$ <h:outputText value="#{cliente.contaPoupanca.saldo}" >
+				<f:convertNumber minFractionDigits="2" />
+				</h:outputText> 
+		</td>
 	</tr>
 	<tr>
 		<td>
 			#{msg.saldoTotal}:
 		</td>
 
-		<td> R$ #{saldototal} </td>
+		<td> R$ <h:outputText value="#{saldototal}" >
+				<f:convertNumber minFractionDigits="2" />
+				</h:outputText> 
+		</td>
 	</tr>	
 	</table>
 	</center>
