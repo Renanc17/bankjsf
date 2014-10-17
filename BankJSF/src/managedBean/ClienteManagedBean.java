@@ -50,7 +50,7 @@ public class ClienteManagedBean {
 		try {
 			user = dao.login(cliente);
 			if (user == true){
-				resultado = "Login_Confirm";
+				resultado = "Login_Confirm.faces?faces-redirect=true";
 			}
 			else{
 				resultado = "erro";
