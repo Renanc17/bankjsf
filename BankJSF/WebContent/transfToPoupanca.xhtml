@@ -64,7 +64,9 @@ $(document).ready(function () {
 	</table>
 	
 	<p></p>
-	<h:commandButton id="transferir" value="#{msg.transferir}" action="#{transacaoManagedBean.transfToPoupanca}" />
+	<h:commandButton id="transferir" value="#{msg.transferir}" action="transacaoConfirm" >
+	<f:setPropertyActionListener target="#{transacaoManagedBean.tipoTransacao}" value="transfToPoupanca"></f:setPropertyActionListener>
+	</h:commandButton>
 	</h:form>
 	</center>
 	
