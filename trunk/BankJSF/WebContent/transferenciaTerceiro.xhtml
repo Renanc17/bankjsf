@@ -30,7 +30,10 @@
 		<td>
 			#{msg.saldoDisp}:
 		</td>
-		<td>R$ #{cliente.contaCorrente.saldo}</td>
+		<td>R$ <h:outputText value="#{cliente.contaCorrente.saldo}" >
+				<f:convertNumber minFractionDigits="2" />
+				</h:outputText>
+		</td>
 	</tr>
 	<tr></tr>
 	<tr>
@@ -38,7 +41,7 @@
 			#{msg.agencia}
 		</td>
 		<td>
-			<h:inputText value="#{transacaoManagedBean.transacao.agencia}" size="7" />
+			<h:inputText value="#{transacaoManagedBean.transacao.agenciaD}" size="7" />
 		</td>
 	</tr>
 	<tr>
@@ -46,7 +49,7 @@
 			#{msg.cc}	
 		</td>
 		<td>
-			<h:inputText value="#{transacaoManagedBean.transacao.cc}" size="7" />
+			<h:inputText value="#{transacaoManagedBean.transacao.contaD}" size="7" />
 		</td>
 	</tr>
 	<tr>
@@ -60,7 +63,7 @@
 	</table>
 	
 	<p></p>
-	<h:commandButton id="transferir" value="#{msg.transferir}" action="#{transacaoManagedBean.transfToCc}" />
+	<h:commandButton id="transferir" value="#{msg.transferir}" action="#{transacaoManagedBean.transferencia}" />
 	</center>
 	</h:form>
 </h:body>

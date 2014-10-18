@@ -106,5 +106,39 @@ public class ClienteDAO {
 		return cl;
 
 	}
+	
+	public Cliente getClienteByCC(Integer contac) throws SQLException {
+
+		Cliente cl = null;
+
+		Connection conn = ConnectionFactory.getConnection();
+
+		String sql = "SELECT * FROM cliente where contac=?";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+
+		stmt.setInt(1, contac);
+
+		ResultSet rs = stmt.executeQuery();
+
+		while (rs.next()) {
+			cl = new Cliente();
+			ContaCorrente cc = new ContaCorrente();
+			ContaPoupanca cp = new ContaPoupanca();
+			cl.setId(rs.getInt("id"));
+			cl.setNome(rs.getString("nome"));
+			cl.setCpf(rs.getLong("cpf"));
+			cl.setAgencia(rs.getInt("agencia"));
+			cl.setSenha(rs.getString("senha"));
+			cc.setConta(rs.getInt("contac"));
+			cc.setSaldo(rs.getDouble("saldoc"));
+			cl.setContaCorrente(cc);
+			cp.setConta(rs.getInt("contap"));
+			cp.setSaldo(rs.getDouble("saldop"));
+			cl.setContaPoupanca(cp);
+		}
+		return cl;
+
+	}
+	
 
 }

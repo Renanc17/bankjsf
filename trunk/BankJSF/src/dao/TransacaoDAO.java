@@ -55,40 +55,36 @@ public Cliente transfToPoupanca(Cliente c) throws SQLException{
 	
 	}
 	
-	public void transferencia(Transacao t, Double saldoR) throws SQLException{
+	public Cliente transferencia(Cliente c, Transacao t) throws SQLException{
 		
 		Connection conn = ConnectionFactory.getConnection();
-		Double saldoD = null;
-		
-		String sql = "SELECT * FROM cliente where contac=?";
-		
-		PreparedStatement stmt = conn.prepareStatement(sql);
-
-		stmt.setInt(1, t.getContaD());
-		
-		ResultSet rs = stmt.executeQuery();
-		
-		while(rs.next()){
-			saldoD = rs.getDouble("saldoc");
-		}
-		
+		ClienteDAO dao = new ClienteDAO();
+		Cliente dest = dao.getClienteByCC(t.getContaD());
+		Double saldoD = dest.getContaCorrente().getSaldo();
+		Double saldoR = c.getContaCorrente().getSaldo();
+				
 		saldoD += t.getValor();
 		saldoR -= t.getValor();
 		
-		String sql2 = "UPDATE cliente set saldoc = ? where contac = ?";
+		String sql = "UPDATE cliente set saldoc = ? where contac = ?";
 		
 		for (int i = 0; i < 2; i++) {
-			PreparedStatement stmt2 = conn.prepareStatement(sql2);
+			PreparedStatement stmt = conn.prepareStatement(sql);
 			if (i == 0) {
-				stmt2.setDouble(1, saldoD);
-				stmt2.setInt(2, t.getContaD());
-				stmt2.executeUpdate();
+				stmt.setDouble(1, saldoD);
+				stmt.setInt(2, t.getContaD());
+				stmt.executeUpdate();
 			} else {
-				stmt2.setDouble(1, saldoR);
-				stmt2.setInt(2, t.getContaR());
-				stmt2.executeUpdate();
+				stmt.setDouble(1, saldoR);
+				stmt.setInt(2, c.getContaCorrente().getConta());
+				stmt.executeUpdate();
 			}
 		}
+		
+		
+		c = dao.getClienteById(c.getId());
+		
+		return c;
 		
 	}
 
