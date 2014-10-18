@@ -59,14 +59,16 @@ $(document).ready(function () {
 			#{msg.valorToTransf}:
 		</td>
 		<td>
-			R$ <h:inputText id="valor" value="#{transacaoManagedBean.transacao.valor}" size="7" />
+			R$ <h:inputText id="valor" value="#{transacaoManagedBean.transacao.valor}" size="7" >
+			<f:validateDoubleRange minimum="1.0" />
+			</h:inputText>
 		</td>
 	</tr>
 	</table>
 	
 	<p></p>
-	<h:commandButton value="#{msg.transacaoConfirmGo}" action="transacaoManagedBean.transacaoConfirm">
-		<f:setPropertyActionListener target="transacaoManagedBean.tipoTransacao" value="TransfToCc"></f:setPropertyActionListener>
+	<h:commandButton value="#{msg.transacaoConfirmGo}" action="transacaoConfirm">
+		<f:setPropertyActionListener target="#{transacaoManagedBean.tipoTransacao}" value="transfToCc"></f:setPropertyActionListener>
 	</h:commandButton>
 	
 	

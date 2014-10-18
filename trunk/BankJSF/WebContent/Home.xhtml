@@ -18,6 +18,15 @@
 <title>#{msg.home}</title>
 
 	<ui:include src="/layout/Header.xhtml" />
+	
+	<c:set var="session" value="#{clienteManagedBean.saldoTotal}">
+	
+	</c:set>
+	<c:if test="session == null}  (Ainda não está funcionando, verificar se a sessão está válida...)">
+		
+	</c:if>
+	
+	
 </h:head>
 
 <h:body>
@@ -36,7 +45,7 @@
 			#{msg.saldoEmCC}:
 		</td>
 		<td>R$ <h:outputText value="#{cliente.contaCorrente.saldo}" >
-				<f:convertNumber minFractionDigits="2" />
+					<f:convertNumber minFractionDigits="2" />
 				</h:outputText>
 		</td>
 	</tr>
@@ -45,7 +54,7 @@
 			#{msg.saldoEmCP}:
 		</td>
 		<td>R$ <h:outputText value="#{cliente.contaPoupanca.saldo}" >
-				<f:convertNumber minFractionDigits="2" />
+					<f:convertNumber minFractionDigits="2" />
 				</h:outputText> 
 		</td>
 	</tr>
@@ -55,7 +64,7 @@
 		</td>
 
 		<td> R$ <h:outputText value="#{saldototal}" >
-				<f:convertNumber minFractionDigits="2" />
+					<f:convertNumber minFractionDigits="2" />
 				</h:outputText> 
 		</td>
 	</tr>	

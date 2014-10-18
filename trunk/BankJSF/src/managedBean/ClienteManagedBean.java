@@ -93,7 +93,7 @@ public class ClienteManagedBean {
 			msg += "Erro de Banco de dados.";
 		}
 		
-		return resultado;		
+		return resultado + ".faces?faces-redirect=true";		
 		
 	}
 	
@@ -115,7 +115,7 @@ public class ClienteManagedBean {
 		session.setAttribute("cliente", cliente);
 		saldoTotal();
 		
-		return "Home";
+		return "Home" + ".faces?faces-redirect=true";
 	}
 
 	
@@ -138,7 +138,7 @@ public class ClienteManagedBean {
 		}finally{
 		pagina ="Login";
 		}
-		return pagina;
+		return pagina + ".faces?faces-redirect=true";
 	}
 
 

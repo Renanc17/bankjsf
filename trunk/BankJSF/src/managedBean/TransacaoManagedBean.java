@@ -47,6 +47,96 @@ public class TransacaoManagedBean {
 		this.tipoTransacao = tipoTransacao;
 	}
 	
+	
+	public String transacao(){
+		String pagina = "";
+		
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
+		remetente = (Cliente) session.getAttribute("cliente");
+		
+		if(tipoTransacao.equals("transfToPoupanca")){
+			
+			if(remetente.getSenhaCartao().equals(senhaCartao)){	
+				remetente.getContaCorrente().setSaldo(remetente.getContaCorrente().getSaldo() - transacao.getValor());
+				remetente.getContaPoupanca().setSaldo(remetente.getContaPoupanca().getSaldo() + transacao.getValor());
+			
+				TransacaoDAO dao = new TransacaoDAO();
+				try {
+					remetente = dao.transfToPoupanca(remetente);					
+					pagina = "Home";			
+				} catch (SQLException e) {
+					pagina = "erro";
+				}
+			}else{
+				pagina = "erro";
+				msg="Senha incorreta!";
+			}
+			
+				session.setAttribute("cliente", remetente);					
+				return pagina + ".faces?faces-redirect=true";			
+		}
+		
+		else 
+		if(tipoTransacao.equals("transfToCc")){
+			
+			if(remetente.getSenhaCartao().equals(senhaCartao)){		
+					remetente.getContaCorrente().setSaldo(remetente.getContaCorrente().getSaldo() + transacao.getValor());
+					remetente.getContaPoupanca().setSaldo(remetente.getContaPoupanca().getSaldo() - transacao.getValor());
+					
+					TransacaoDAO dao = new TransacaoDAO();
+					try {	
+							remetente = dao.transfToCc(remetente);
+							pagina = "Home";
+					}catch (SQLException e) {
+						pagina = "erro";
+					}
+			}else{
+					pagina = "erro";
+					msg="Senha incorreta!";
+			}
+					
+			session.setAttribute("cliente", remetente);							
+			return pagina + ".faces?faces-redirect=true";			
+		}
+		
+		else
+		if(tipoTransacao.equals("transfToTerc")){
+
+			if(remetente.getSenhaCartao().equals(senhaCartao)){	
+				TransacaoDAO dao = new TransacaoDAO();
+				try {
+					remetente = dao.transferencia(remetente, transacao);
+					pagina = "Home";
+				} catch (SQLException e) {
+					pagina = "erro";
+				}
+				
+				session.setAttribute("cliente", remetente);
+				session.setAttribute("saldototal", remetente.getContaCorrente().getSaldo() + remetente.getContaPoupanca().getSaldo());
+			
+			}else{
+				pagina = "erro";
+				msg="Senha incorreta!";
+			}			
+
+			
+			return pagina + ".faces?faces-redirect=true";
+		}
+				
+		msg="Transacao desconhecida!";
+		return "Erro" + ".faces?faces-redirect=true";	
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public String transfToPoupanca(){
 		String pagina = "";
 		
@@ -149,15 +239,5 @@ public class TransacaoManagedBean {
 
 		return pagina;
 	}
-
-	public String transacaoConfirm(){
-		if(tipoTransacao.equals("TransfToCc"))
-			return "TransToCc";
-		
-
-		return "";
-	}
-	
-
 
 }

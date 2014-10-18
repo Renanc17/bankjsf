@@ -25,14 +25,13 @@
 	<p></p><p></p>
 	<center>
 	
-			#{msg.preenchaValor}<br/>
-	<br/><br/><br/>
 	<h:form id="submit">
 
 		<p>#{msg.transacaoConfirm}</p>
 		<br/>
 		#{msg.senha}: <h:inputSecret name="passConfirm" value="#{transacaoManagedBean.senhaCartao}" />
-		<h:commandButton value="#{msg.transacaoConfirmGo}" action="#{transacaoManagedBean.transfToCc}" />
+		
+		<h:commandButton value="#{msg.transacaoConfirmGo}" action="#{transacaoManagedBean.transacao}" />
 		
 	</h:form>
 	</center>
