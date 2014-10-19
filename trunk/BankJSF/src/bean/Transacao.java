@@ -11,7 +11,7 @@ public class Transacao {
 	private Calendar dataP; //Data de pagamento da transação
 	private Integer contaR; //Numero da conta do remetente
 	private Integer contaD; //Numero da conta do destinatario
-	private Integer agenciaD;
+	private Integer agenciaD; //Agencia do destinatario
 	
 	public Integer getId() {
 		return id;
@@ -61,5 +61,6 @@ public class Transacao {
 	public void setAgenciaD(Integer agenciaD) {
 		this.agenciaD = agenciaD;
 	}
+	
 	
 }
