@@ -48,6 +48,7 @@ public class FavoritoDAO {
 		while(rs.next()){
 			Favorito f = new Favorito();
 			f.setId(rs.getInt("id"));
+			f.setIdCliente(idCliente);
 			f.setNome(rs.getString("nome"));
 			f.setAgencia(rs.getInt("agencia"));
 			f.setContaC(rs.getInt("contaC"));

@@ -9,7 +9,7 @@
 		<p>
 			<h:commandLink id="cadastrarFavoritos" action="cadastrarFavoritos.faces?faces-redirect=true" value="#{msg.cadastrarFavorito}"/>
 			   -   
-			<h:commandLink id="consultarFavoritos" action="favoritosManagedBean.listarFavoritos" value="#{msg.gerenciarFavoritos}"/>
+			<h:commandLink id="consultarFavoritos" action="#{favoritoManagedBean.listarFavoritos}" value="#{msg.gerenciarFavoritos}"/>
 			   -   
 			<h:commandLink id="transferenciaTerceiro" action="transferenciaTerceiro.faces?faces-redirect=true" value="#{msg.transfTerceiro}"/>
 			   -   
