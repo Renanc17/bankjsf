@@ -19,13 +19,30 @@
 	<ui:include src="/layout/Header.xhtml" />
 </h:head>
 
-<h:body>		
-	<ui:repeat var="i" value="#{clienteManagedBean.listarFavoritos}">
-		#{i.nome}
-		#{i.ag}
-		#{i.cc}
-		<!-- Falta opção de Alterar e de Excluir o cadastro desta linha e formatar bonitinho! -->
-	</ui:repeat>	
+<h:body>
+	<ui:include src="/layout/SubMenu_Transferencias.xhtml" />
+<h:form>
+<center>
+	
+	<tr><td>Nome</td><td>Agencia</td><td>Conta Corrente</td></tr>
+	
+	<ui:repeat var="i" value="#{favoritosManagedBean.listaFavoritos}">
+		<tr><td>#{i.nome}</td><td>#{i.agencia}</td><td>#{i.contaC}</td>
+
+		<td>
+			<h:commandButton id="alterar" value="#{msg.alterar}" action="#{favoritoManagedBean.alterarFavorito}" >
+				<f:setPropertyActionListener target="#{favoritoManagedBean.pk}" value="i.id"/>
+			</h:commandButton>		
+		</td>	
+		
+		<td>
+			<h:commandButton id="excluir" value="#{msg.excluir}" action="#{favoritoManagedBean.alterarFavorito}" >
+				<f:setPropertyActionListener target="#{favoritoManagedBean.pk}" value="i.id"/>
+			</h:commandButton>	
+		</td></tr>
+	</ui:repeat>
+</center>	
+</h:form>
 </h:body>
 </f:view>
 </html>
