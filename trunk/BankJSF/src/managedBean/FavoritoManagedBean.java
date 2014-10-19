@@ -19,6 +19,7 @@ public class FavoritoManagedBean {
 	private Favorito f = new Favorito();
 	private Cliente user = new Cliente();
 	private List<Favorito> listaFavoritos;
+	private int pk;
 	private String msg = "";
 	
 	
@@ -45,6 +46,12 @@ public class FavoritoManagedBean {
 	}
 	public void setMsg(String msg) {
 		this.msg = msg;
+	}
+	public int getPk(){
+		return pk;
+	}
+	public void setPk(int pk){
+		this.pk = pk;
 	}
 	
 	public String cadastrarFavorito(){
@@ -86,7 +93,7 @@ public class FavoritoManagedBean {
 		return pagina + ".faces?faces-redirect=true";
 	}
 	
-	public String alterarFavorito(){
+	public String alterarFavorito(){ //refazer
 		
 		String pagina = "";
 		FavoritoDAO dao = new FavoritoDAO();
@@ -105,5 +112,24 @@ public class FavoritoManagedBean {
 		return pagina + ".faces?faces-redirect=true";
 	}
 	
+	public String excluirFavorito(){
+		
+		String pagina ="";
+		FavoritoDAO dao = new FavoritoDAO();
+		
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
+		user = (Cliente) session.getAttribute("cliente");
+		
+		try{
+			dao.excluirFavorito(pk);
+			listarFavoritos();
+		}catch(SQLException e){
+			pagina = "erro";
+		}
+		
+		return pagina;
+		
+	}
 
 }
