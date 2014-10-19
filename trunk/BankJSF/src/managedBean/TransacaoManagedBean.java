@@ -64,7 +64,7 @@ public class TransacaoManagedBean {
 				TransacaoDAO dao = new TransacaoDAO();
 				try {
 					remetente = dao.transfToPoupanca(remetente);					
-					pagina = "Home";			
+					pagina = "sucesso";			
 				} catch (SQLException e) {
 					pagina = "erro";
 				}
@@ -87,7 +87,7 @@ public class TransacaoManagedBean {
 					TransacaoDAO dao = new TransacaoDAO();
 					try {	
 							remetente = dao.transfToCc(remetente);
-							pagina = "Home";
+							pagina = "sucesso";
 					}catch (SQLException e) {
 						pagina = "erro";
 					}
