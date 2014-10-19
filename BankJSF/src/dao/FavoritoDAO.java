@@ -61,5 +61,20 @@ public class FavoritoDAO {
 		
 		return favoritos;
 	}
+	
+	//alterar
+
+	public void excluirFavorito(int pk) throws SQLException{
+		
+		Connection conn = ConnectionFactory.getConnection();
+		
+		String sql = "DELETE FROM favorito WHERE id=?";
+		
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		
+		stmt.setInt(1, pk);
+		stmt.executeUpdate();
+		conn.close();
+	}
 
 }

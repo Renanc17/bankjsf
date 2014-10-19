@@ -40,8 +40,8 @@
 			</td>	
 			
 			<td>
-				<h:commandButton id="excluir" value="#{msg.excluir}" action="#{favoritoManagedBean.alterarFavorito}" >
-					<f:setPropertyActionListener target="#{favoritoManagedBean.pk}" value="i.id"/>
+				<h:commandButton id="excluir" value="#{msg.excluir}" onclick="return confirm('#{msg.confirmDelete}')" action="#{favoritoManagedBean.excluirFavorito}" >
+					<f:setPropertyActionListener target="#{favoritoManagedBean.pk}" value="#{i.id}"/>
 				</h:commandButton>	
 			</td>
 			</tr>

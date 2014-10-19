@@ -23,9 +23,11 @@
 	<ui:include src="/layout/SubMenu_Transferencias.xhtml" />
 	<center>
 	<h:form>
-			#{msg.nome}: <h:inputText value="#{favoritoManagedBean.f.nome}" /><br/>
-			#{msg.ag}: <h:inputText value="#{favoritoManagedBean.f.agencia}" /><br/>
-			#{msg.cc}: <h:inputText value="#{favoritoManagedBean.f.contaC}" /><br/>
+	<table>
+			<tr><td>#{msg.nome}: </td><td><h:inputText value="#{favoritoManagedBean.f.nome}" /></td></tr>
+			<tr><td>#{msg.ag}: </td><td><h:inputText value="#{favoritoManagedBean.f.agencia}" /></td></tr>
+			<tr><td>#{msg.cc}: </td><td><h:inputText value="#{favoritoManagedBean.f.contaC}" /></td></tr>
+	</table>
 		<h:commandButton value="#{msg.cadastrar}" action="#{favoritoManagedBean.cadastrarFavorito}" />
 	</h:form>
 	</center>		
