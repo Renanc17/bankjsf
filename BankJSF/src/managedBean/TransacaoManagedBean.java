@@ -18,7 +18,7 @@ public class TransacaoManagedBean {
 	
 	private Transacao transacao = new Transacao();
 	private Cliente remetente;
-	private String senhaCartao;
+	private int senhaCartao;
 	private String tipoTransacao;
 	String msg;
 	
@@ -34,10 +34,10 @@ public class TransacaoManagedBean {
 	public void setRemetente(Cliente remetente) {
 		this.remetente = remetente;
 	}
-	public String getSenhaCartao() {
+	public int getSenhaCartao() {
 		return senhaCartao;
 	}
-	public void setSenhaCartao(String senhaCartao) {
+	public void setSenhaCartao(int senhaCartao) {
 		this.senhaCartao = senhaCartao;
 	}
 	public String getTipoTransacao() {
@@ -57,7 +57,7 @@ public class TransacaoManagedBean {
 		
 		if(tipoTransacao.equals("transfToPoupanca")){
 			
-			if(remetente.getSenhaCartao().equals(senhaCartao)){	
+			if(remetente.getSenhaCartao() == senhaCartao){	
 				remetente.getContaCorrente().setSaldo(remetente.getContaCorrente().getSaldo() - transacao.getValor());
 				remetente.getContaPoupanca().setSaldo(remetente.getContaPoupanca().getSaldo() + transacao.getValor());
 			
@@ -80,7 +80,7 @@ public class TransacaoManagedBean {
 		else 
 		if(tipoTransacao.equals("transfToCc")){
 			
-			if(remetente.getSenhaCartao().equals(senhaCartao)){		
+			if(remetente.getSenhaCartao() == senhaCartao){		
 					remetente.getContaCorrente().setSaldo(remetente.getContaCorrente().getSaldo() + transacao.getValor());
 					remetente.getContaPoupanca().setSaldo(remetente.getContaPoupanca().getSaldo() - transacao.getValor());
 					
@@ -103,7 +103,7 @@ public class TransacaoManagedBean {
 		else
 		if(tipoTransacao.equals("transfToTerc")){
 
-			if(remetente.getSenhaCartao().equals(senhaCartao)){	
+			if(remetente.getSenhaCartao() == senhaCartao){	
 				TransacaoDAO dao = new TransacaoDAO();
 				try {
 					remetente = dao.transferencia(remetente, transacao);
@@ -194,7 +194,7 @@ public class TransacaoManagedBean {
 		HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
 		remetente = (Cliente) session.getAttribute("cliente");
 				
-		if(remetente.getSenhaCartao().equals(senhaCartao)){		
+		if(remetente.getSenhaCartao() == senhaCartao){		
 				remetente.getContaCorrente().setSaldo(remetente.getContaCorrente().getSaldo() + transacao.getValor());
 				remetente.getContaPoupanca().setSaldo(remetente.getContaPoupanca().getSaldo() - transacao.getValor());
 				
