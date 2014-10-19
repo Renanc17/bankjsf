@@ -125,7 +125,7 @@ public class TransacaoManagedBean {
 		}
 				
 		msg="Transacao desconhecida!";
-		return "Erro" + ".faces?faces-redirect=true";	
+		return pagina + ".faces?faces-redirect=true";	
 	}
 	
 	
