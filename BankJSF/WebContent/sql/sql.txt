@@ -22,12 +22,16 @@ CREATE TABLE bankjsf.cartao (
   s5 VARCHAR(4) NOT NULL,
   PRIMARY KEY (id));
 
+CREATE TABLE bankjsf.favorito (
+  id INT NOT NULL AUTO_INCREMENT,
+  idCliente INT NOT NULL,
+  nome VARCHAR(45) NOT NULL,
+  agencia INT NOT NULL,
+  contac INT NOT NULL,
+  PRIMARY KEY (id));
+
+
+
 
 insert into bankjsf.cliente (nome, cpf, agencia, senha, contac, saldoc, contap, saldop) values('renan',11144477735,10,'1234',9876,2500,6789,3600);
 insert into bankjsf.cliente (nome, cpf, agencia, senha, contac, saldoc, contap, saldop) values('Vincenzo',49249845801,2180,' ',0101,15000,6003,1500);
-
-alter table cliente add senhaCartao INT NOT NULL;
-
-update cliente set senhaCartao=2222 where id=2;
-
-Não estou usando essa tabela de cartão, coloquei o campo "senhaCartao" na tabela Cliente!

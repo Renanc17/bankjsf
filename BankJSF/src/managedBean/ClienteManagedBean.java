@@ -50,7 +50,7 @@ public class ClienteManagedBean {
 		try {
 			user = dao.login(cliente);
 			if (user == true){
-				resultado = "Login_Confirm.faces?faces-redirect=true";
+				resultado = "Login_Confirm";
 			}
 			else{
 				resultado = "erro";
@@ -62,7 +62,7 @@ public class ClienteManagedBean {
 			msg = " Erro de Banco de dados.";
 		}
 
-		return resultado;
+		return resultado + ".faces?faces-redirect=true";
 	}
 	
 	public String passConfirm(){

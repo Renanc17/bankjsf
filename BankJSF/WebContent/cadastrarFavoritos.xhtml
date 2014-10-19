@@ -20,14 +20,14 @@
 </h:head>
 
 <h:body>
+	<center>
 	<h:form>
-			#{msg.nome}: <h:inputText value="#{clienteManagedBean.cliente.nome}" /><br/>
-			#{msg.cpf}: <h:inputText value="#{clienteManagedBean.cliente.cpf}" /><br/>
-			#{msg.ag}: <h:inputText value="#{clienteManagedBean.cliente.agencia}" /><br/>
-			#{msg.cc}: <h:inputText value="#{clienteManagedBean.cliente.cc}" /><br/>
-		<h:commandButton value="#{msg.cadastrar}" action="#{clienteManagedBean.cadastrarFavorito}" />
-	<br/><br/><br/>
-	</h:form>		
+			#{msg.nome}: <h:inputText value="#{favoritoManagedBean.f.nome}" /><br/>
+			#{msg.ag}: <h:inputText value="#{favoritoManagedBean.f.agencia}" /><br/>
+			#{msg.cc}: <h:inputText value="#{favoritoManagedBean.f.contaC}" /><br/>
+		<h:commandButton value="#{msg.cadastrar}" action="#{favoritoManagedBean.cadastrarFavorito}" />
+	</h:form>
+	</center>		
 </h:body>
 </f:view>
 </html>
