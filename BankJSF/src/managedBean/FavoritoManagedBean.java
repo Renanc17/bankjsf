@@ -50,7 +50,7 @@ public class FavoritoManagedBean {
 		try {
 			f.setIdCliente(user.getId());
 			dao.cadastrarFavorito(f);
-			pagina = "Home";
+			pagina = "sucesso";
 		}catch(SQLException e){
 			msg = "Erro ao cadastrar o favorito";
 			pagina = "erro";

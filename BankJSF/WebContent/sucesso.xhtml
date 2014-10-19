@@ -1,17 +1,28 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+	  
+<f:view locale="#{switcher.currentLocale}">	
 <head>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script type="text/javascript">
-$document.ready(function(){
-	alert('Operação Realizada com Sucesso!');
-}};
-</script>
- <meta http-equiv="refresh" content="3;url='Home.jsf'"/>
+	
+function redirectUser(){
+	alert("#{msg.operacaoFeita}");	
+	window.location="Home.jsf";
+}
+
+</script> 	
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<!-- <meta http-equiv="refresh" content="2;url='Home.jsf'"/> -->
 </head>
 
-<body>
+<body onload="redirectUser()">
 
 </body>
+</f:view>
 </html>

@@ -23,7 +23,7 @@ public class FavoritoDAO {
 		stmt.setInt(3, f.getAgencia());
 		stmt.setInt(4, f.getContaC());
 
-		stmt.executeQuery();
+		stmt.executeUpdate();
 		conn.close();
 		
 	}
