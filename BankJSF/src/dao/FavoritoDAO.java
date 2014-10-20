@@ -62,7 +62,22 @@ public class FavoritoDAO {
 		return favoritos;
 	}
 	
-	//alterar
+	public void alterarFavorito(Favorito f) throws SQLException{
+		
+		Connection conn = ConnectionFactory.getConnection();
+		
+		String sql = "UPDATE favorito SET nome=?, agencia=?, contac=? WHERE id=?";
+		
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		
+		stmt.setString(1, f.getNome());
+		stmt.setInt(2, f.getAgencia());
+		stmt.setInt(3, f.getContaC());
+		stmt.setInt(4, f.getId());
+		
+		stmt.executeUpdate();
+		conn.close();
+	}
 
 	public void excluirFavorito(int pk) throws SQLException{
 		
