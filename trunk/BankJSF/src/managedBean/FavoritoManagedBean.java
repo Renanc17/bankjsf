@@ -77,7 +77,7 @@ public class FavoritoManagedBean {
 	
 	public String listarFavoritos(){
 		FavoritoDAO dao = new FavoritoDAO();
-		String pagina = "Home";
+		String pagina = "";
 		
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
@@ -93,7 +93,7 @@ public class FavoritoManagedBean {
 		return pagina + ".faces?faces-redirect=true";
 	}
 	
-	public String alterarFavorito(){ //refazer
+	public String alterarFavorito(){
 		
 		String pagina = "";
 		FavoritoDAO dao = new FavoritoDAO();
@@ -103,8 +103,8 @@ public class FavoritoManagedBean {
 		user = (Cliente) session.getAttribute("cliente");
 		
 		try{
-			dao.cadastrarFavorito(f);
-			
+			dao.alterarFavorito(f);
+			pagina = "consultarFavoritos";
 		}catch(SQLException e){
 			pagina="erro";
 		}
