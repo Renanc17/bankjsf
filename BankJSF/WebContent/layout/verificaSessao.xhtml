@@ -1,0 +1,13 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+	
+	<c:choose>
+		<c:when test="${clienteManagedBean.cliente.nome eq null}">
+			<meta http-equiv="refresh" content="0,URL=Login.jsf" />
+		</c:when>
+	</c:choose>
+
+</ui:composition>
