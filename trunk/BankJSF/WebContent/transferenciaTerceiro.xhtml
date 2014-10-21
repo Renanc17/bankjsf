@@ -69,6 +69,8 @@
 	<h:commandButton id="transferir" value="#{msg.transferir}" action="transacaoConfirm" >
 		<f:setPropertyActionListener target="#{transacaoManagedBean.tipoTransacao}" value="transfToTerc"></f:setPropertyActionListener>
 	</h:commandButton>
+	<br/><br/>
+	<h:commandLink id="buscarFavorito" value="#{msg.buscarFavorito}" action="#{favoritoManagedBean.listarFavoritos}" />
 	</center>
 	</h:form>
 </h:body>

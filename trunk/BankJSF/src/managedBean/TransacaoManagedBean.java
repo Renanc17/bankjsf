@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import dao.ClienteDAO;
 import dao.TransacaoDAO;
 import bean.Cliente;
+import bean.Favorito;
 import bean.Transacao;
 
 @SessionScoped
@@ -18,6 +19,7 @@ public class TransacaoManagedBean {
 	
 	private Transacao transacao = new Transacao();
 	private Cliente remetente;
+	private Favorito favorito;
 	private int senhaCartao;
 	private String tipoTransacao;
 	String msg;
@@ -30,6 +32,12 @@ public class TransacaoManagedBean {
 	}
 	public Cliente getRemetente() {
 		return remetente;
+	}
+	public Favorito getFavorito() {
+		return favorito;
+	}
+	public void setFavorito(Favorito favorito) {
+		this.favorito = favorito;
 	}
 	public void setRemetente(Cliente remetente) {
 		this.remetente = remetente;
@@ -129,7 +137,15 @@ public class TransacaoManagedBean {
 	}
 	
 	
-	
+	public String selecionarFavorito(){
+		String pagina = "transferenciaTerceiro";
+		
+		transacao.setAgenciaD(favorito.getAgencia());
+		transacao.setContaD(favorito.getContaC());
+		
+		return pagina + ".faces?faces-redirect=true";
+		
+	}
 	
 	
 	
@@ -214,5 +230,6 @@ public class TransacaoManagedBean {
 
 		return pagina;
 	}
+	
 
 }
