@@ -22,7 +22,7 @@ public class TransacaoManagedBean {
 	private Favorito favorito;
 	private int senhaCartao;
 	private String tipoTransacao;
-	String msg;
+	private String msg;
 	
 	public Transacao getTransacao() {
 		return transacao;
@@ -54,7 +54,12 @@ public class TransacaoManagedBean {
 	public void setTipoTransacao(String tipoTransacao) {
 		this.tipoTransacao = tipoTransacao;
 	}
-	
+	public String getMsg() {
+		return msg;
+	}
+	public void setMsg(String msg) {
+		this.msg = msg;
+	}
 	
 	public String transacao(){
 		String pagina = "";
@@ -78,7 +83,7 @@ public class TransacaoManagedBean {
 				}
 			}else{
 				pagina = "erro";
-				msg="Senha incorreta!";
+				setMsg("Senha incorreta!");
 			}
 			
 				session.setAttribute("cliente", remetente);					
@@ -101,7 +106,7 @@ public class TransacaoManagedBean {
 					}
 			}else{
 					pagina = "erro";
-					msg="Senha incorreta!";
+					setMsg("Senha incorreta!");
 			}
 					
 			session.setAttribute("cliente", remetente);							
@@ -118,6 +123,10 @@ public class TransacaoManagedBean {
 					pagina = "sucesso";
 				} catch (SQLException e) {
 					pagina = "erro";
+					setMsg("SQLException!");
+				}catch (NullPointerException e) {
+					pagina = "erro";
+					setMsg("Null Pointer!");
 				}
 				
 				session.setAttribute("cliente", remetente);
@@ -125,14 +134,14 @@ public class TransacaoManagedBean {
 			
 			}else{
 				pagina = "erro";
-				msg="Senha incorreta!";
+				setMsg("Senha incorreta!");
 			}			
 
 			
 			return pagina + ".faces?faces-redirect=true";
 		}
 				
-		msg="Transacao desconhecida!";
+		setMsg("Transacao desconhecida!");
 		return pagina + ".faces?faces-redirect=true";	
 	}
 	
@@ -198,7 +207,7 @@ public class TransacaoManagedBean {
 				}
 		}else{
 				pagina = "erro";
-				msg="Senha incorreta!";
+				setMsg("Senha incorreta!");
 			}
 				
 		session.setAttribute("cliente", remetente);
@@ -230,6 +239,7 @@ public class TransacaoManagedBean {
 
 		return pagina;
 	}
+	
 	
 
 }

@@ -1,14 +1,13 @@
 package bean;
 
-import java.util.Calendar;
+import java.util.Date;
 
 public class Transacao {
 
 	private Integer id;
 	private String descricao;
 	private Double valor;
-	private Calendar dataR; //Data de realização da transação
-	private Calendar dataP; //Data de pagamento da transação
+	private Date data; //Data da transação
 	private Integer contaR; //Numero da conta do remetente
 	private Integer contaD; //Numero da conta do destinatario
 	private Integer agenciaD; //Agencia do destinatario
@@ -31,17 +30,11 @@ public class Transacao {
 	public void setValor(Double valor) {
 		this.valor = valor;
 	}
-	public Calendar getDataR() {
-		return dataR;
+	public Date getDataR() {
+		return data;
 	}
-	public void setDataR(Calendar dataR) {
-		this.dataR = dataR;
-	}
-	public Calendar getDataP() {
-		return dataP;
-	}
-	public void setDataP(Calendar dataP) {
-		this.dataP = dataP;
+	public void setDataR(Date dataR) {
+		this.data = dataR;
 	}
 	public Integer getContaR() {
 		return contaR;

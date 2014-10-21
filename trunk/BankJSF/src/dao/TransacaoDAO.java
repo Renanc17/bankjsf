@@ -59,24 +59,26 @@ public Cliente transfToPoupanca(Cliente c) throws SQLException{
 		
 		Connection conn = ConnectionFactory.getConnection();
 		ClienteDAO dao = new ClienteDAO();
-		Cliente dest = dao.getClienteByCC(t.getContaD());
+		Cliente dest = dao.getCliente(t.getContaD(), t.getAgenciaD());
 		Double saldoD = dest.getContaCorrente().getSaldo();
 		Double saldoR = c.getContaCorrente().getSaldo();
 				
 		saldoD += t.getValor();
 		saldoR -= t.getValor();
 		
-		String sql = "UPDATE cliente set saldoc = ? where contac = ?";
+		String sql = "UPDATE cliente set saldoc = ? where contac = ? and agencia = ?";
 		
 		for (int i = 0; i < 2; i++) {
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			if (i == 0) {
 				stmt.setDouble(1, saldoD);
 				stmt.setInt(2, t.getContaD());
+				stmt.setInt(3, t.getAgenciaD());
 				stmt.executeUpdate();
 			} else {
 				stmt.setDouble(1, saldoR);
 				stmt.setInt(2, c.getContaCorrente().getConta());
+				stmt.setInt(3, c.getAgencia());
 				stmt.executeUpdate();
 			}
 		}

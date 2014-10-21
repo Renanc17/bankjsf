@@ -108,16 +108,17 @@ public class ClienteDAO {
 
 	}
 	
-	public Cliente getClienteByCC(Integer contac) throws SQLException {
+	public Cliente getCliente (Integer contac, Integer agencia) throws SQLException {
 
 		Cliente cl = null;
 
 		Connection conn = ConnectionFactory.getConnection();
 
-		String sql = "SELECT * FROM cliente where contac=?";
+		String sql = "SELECT * FROM cliente where contac=? and agencia=?";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 
 		stmt.setInt(1, contac);
+		stmt.setInt(2, agencia);
 
 		ResultSet rs = stmt.executeQuery();
 
