@@ -13,15 +13,6 @@ CREATE TABLE bankjsf.cliente (
   senhaCartao INT NOT NULL,
   PRIMARY KEY (id));
   
-CREATE TABLE bankjsf.cartao (
-  id INT NOT NULL,
-  s1 VARCHAR(4) NOT NULL,
-  s2 VARCHAR(4) NOT NULL,
-  s3 VARCHAR(4) NOT NULL,
-  s4 VARCHAR(4) NOT NULL,
-  s5 VARCHAR(4) NOT NULL,
-  PRIMARY KEY (id));
-
 CREATE TABLE bankjsf.favorito (
   id INT NOT NULL AUTO_INCREMENT,
   idCliente INT NOT NULL,
@@ -33,5 +24,5 @@ CREATE TABLE bankjsf.favorito (
 
 
 
-insert into bankjsf.cliente (nome, cpf, agencia, senha, contac, saldoc, contap, saldop) values('renan',11144477735,10,'1234',9876,2500,6789,3600);
-insert into bankjsf.cliente (nome, cpf, agencia, senha, contac, saldoc, contap, saldop) values('Vincenzo',49249845801,2180,' ',0101,15000,6003,1500);
+insert into bankjsf.cliente (nome, cpf, agencia, senha, contac, saldoc, contap, saldop, senhaCartao) values('Renan',11144477735,10,'1234',9876,2500,6789,3600, 2);
+insert into bankjsf.cliente (nome, cpf, agencia, senha, contac, saldoc, contap, saldop, senhaCartao) values('Vincenzo',49249845801,2180,' ',0101,15000,6003,1500, 2);
