@@ -4,7 +4,8 @@
 	  xmlns:h="http://java.sun.com/jsf/html"
 	  xmlns:f="http://java.sun.com/jsf/core"
 	  xmlns:ui="http://java.sun.com/jsf/facelets"
-	  xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+	  xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	  xmlns:p="http://primefaces.org/ui">
 	  
 <f:view locale="#{switcher.currentLocale}">	  
 <h:head>
@@ -64,6 +65,7 @@ $(document).ready(function () {
 		</td>
 	</tr>	
 	</table>
+	<p:editor></p:editor>
 	</center>
 </h:body>
 </f:view>
