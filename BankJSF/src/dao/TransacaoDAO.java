@@ -7,6 +7,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
+
 import bean.Cliente;
 import bean.Transacao;
 import factory.ConnectionFactory;
@@ -87,6 +90,7 @@ public Cliente transfToPoupanca(Cliente c) throws SQLException{
 		
 		
 		t.setData(new java.util.Date());
+		t = fillTransacao(t);
 		gravarHist(t);
 		c = dao.getClienteById(c.getId());
 		
@@ -158,6 +162,22 @@ public Cliente transfToPoupanca(Cliente c) throws SQLException{
 		conn.close();
 		return lista;
 		
+	}
+	
+	public Transacao fillTransacao(Transacao t) throws SQLException{
+		ClienteDAO dao = new ClienteDAO();
+		
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
+		Cliente rem = (Cliente) session.getAttribute("cliente");
+		Cliente dest = dao.getCliente(t.getContaD(), t.getAgenciaD());
+		
+		t.setIdR(rem.getId());
+		t.setContaR(rem.getContaCorrente().getConta());
+		t.setAgenciaR(rem.getAgencia());
+		t.setIdD(dest.getId());
+		
+		return t;
 	}
 
 }
