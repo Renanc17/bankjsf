@@ -1,11 +1,65 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<title>Insert title here</title>
-</head>
-<body>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:ui="http://java.sun.com/jsf/facelets">
+	  
+<f:view locale="#{switcher.currentLocale}">	  
 
-</body>
+<h:head>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+</script>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+
+<title>#{msg.listaFavoritos}</title>
+
+	<ui:include src="/layout/Header.xhtml" />
+</h:head>
+
+<h:body>
+	<ui:include src="/layout/SubMenu_Transferencias.xhtml" />
+<h:form>
+<center>
+	<table>
+		<tr>
+		<td>#{msg.nome}</td>
+		<td>#{msg.ag}</td>
+		<td>#{msg.conta}</td>
+		</tr>
+		
+		<ui:repeat var="i" value="#{favoritoManagedBean.listaFavoritos}">
+			<tr>
+			<td>
+				<h:commandLink id="selecionar" value="#{i.nome}" action="#{transacaoManagedBean.selecionarFavorito}" >
+					<f:setPropertyActionListener target="#{transacaoManagedBean.favorito}" value="#{i}"/>
+				</h:commandLink>
+			</td>
+			
+			<td>#{i.agencia}</td><td>#{i.contaC}</td>
+	
+			<td>
+				<h:commandButton id="alterar" value="#{msg.alterar}" action="alterarFavoritos" >
+					<f:setPropertyActionListener target="#{favoritoManagedBean.f}" value="#{i}"/>
+				</h:commandButton>		
+			</td>	
+			
+			<td>
+				<h:commandButton id="excluir" value="#{msg.excluir}" onclick="return confirm('#{msg.confirmDelete}')" action="#{favoritoManagedBean.excluirFavorito}" >
+					<f:setPropertyActionListener target="#{favoritoManagedBean.pk}" value="#{i.id}"/>
+				</h:commandButton>	
+			</td>
+			</tr>
+			
+		</ui:repeat>
+	</table>
+	<br/><br/><br/>
+	
+	
+</center>	
+</h:form>
+</h:body>
+</f:view>
 </html>
