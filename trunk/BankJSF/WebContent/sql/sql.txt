@@ -21,6 +21,19 @@ CREATE TABLE bankjsf.favorito (
   contac INT NOT NULL,
   PRIMARY KEY (id));
 
+CREATE TABLE bankjsf.historico (
+  id INT(11) NOT NULL AUTO_INCREMENT,
+  data DATE NOT NULL,
+  tipoTransacao VARCHAR(45) NOT NULL,
+  descricao VARCHAR(255) NULL,
+  valor DOUBLE NOT NULL,
+  idR INT(11) NULL,
+  contaR INT(11) NULL DEFAULT NULL,
+  agenciaR INT(11) NULL DEFAULT NULL,
+  idD INT(11) NULL DEFAULT NULL,
+  contaD INT(11) NULL DEFAULT NULL,
+  agenciaD INT(11) NULL,
+  PRIMARY KEY (id));
 
 
 

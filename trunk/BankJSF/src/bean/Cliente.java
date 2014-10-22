@@ -1,6 +1,6 @@
 package bean;
 
-import java.util.Calendar;
+import java.sql.Date;
 
 
 public class Cliente {
@@ -13,7 +13,7 @@ public class Cliente {
 	private String tipoCliente;
 	private ContaCorrente ContaCorrente = new ContaCorrente(); 
 	private ContaPoupanca ContaPoupanca = new ContaPoupanca();	
-	private Calendar data;
+	private Date data;
 	private int senhaCartao;
 	
 	
@@ -41,11 +41,11 @@ public class Cliente {
 		this.tipoCliente = tipoCliente;
 	}
 
-	public Calendar getData() {
+	public Date getData() {
 		return data;
 	}
 
-	public void setData(Calendar data) {
+	public void setData(Date data) {
 		this.data = data;
 	}
 
