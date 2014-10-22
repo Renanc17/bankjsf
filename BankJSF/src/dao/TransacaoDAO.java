@@ -1,9 +1,12 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import bean.Cliente;
 import bean.Transacao;
@@ -27,7 +30,7 @@ public Cliente transfToPoupanca(Cliente c) throws SQLException{
 		ClienteDAO dao = new ClienteDAO();
 		c = dao.getClienteById(c.getId());
 		
-		
+		conn.close();
 		return c;
 		
 		
@@ -49,7 +52,7 @@ public Cliente transfToPoupanca(Cliente c) throws SQLException{
 	ClienteDAO dao = new ClienteDAO();
 	c = dao.getClienteById(c.getId());
 	
-	
+	conn.close();
 	return c;
 	
 	
@@ -86,7 +89,70 @@ public Cliente transfToPoupanca(Cliente c) throws SQLException{
 		
 		c = dao.getClienteById(c.getId());
 		
+		conn.close();
 		return c;
+		
+	}
+	
+	public void gravarHist(Transacao t) throws SQLException{
+		Connection conn = ConnectionFactory.getConnection();
+		
+		String sql = "INSERT into historico(data, tipoTransacao, descricao, valor, idR, contaR, agenciaR, idD, contaD, agenciaD) VALUES(?,?,?,?,?,?,?,?,?,?)";
+		
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		
+		stmt.setDate(1, (Date) t.getData());
+		stmt.setString(2, t.getTipoTransacao());
+		stmt.setString(3, t.getDescricao());
+		stmt.setDouble(4, t.getValor());
+		stmt.setInt(5, t.getIdR());
+		stmt.setInt(6, t.getContaR());
+		stmt.setInt(7, t.getAgenciaR());
+		stmt.setInt(8, t.getIdD());
+		stmt.setInt(9, t.getContaD());
+		stmt.setInt(10, t.getAgenciaD());
+		
+		stmt.executeUpdate();
+		
+		conn.close();
+		
+		
+	}
+	
+	public List<Transacao> historico(Integer id) throws SQLException{
+		
+		Connection conn = ConnectionFactory.getConnection();
+		List<Transacao> lista = new ArrayList<Transacao>();
+		
+		String sql = "SELECT * FROM historico where idR = ?";
+		
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		
+		stmt.setInt(1, id);
+		
+		ResultSet rs = stmt.executeQuery();
+		
+		while(rs.next()){
+			
+			Transacao t = new Transacao();
+			
+			t.setData(rs.getDate("data"));
+			t.setTipoTransacao(rs.getString("tipoTransacao"));
+			t.setDescricao(rs.getString("descricao"));
+			t.setValor(rs.getDouble("valor"));
+			t.setIdR(rs.getInt("idR"));
+			t.setContaR(rs.getInt("contaR"));
+			t.setAgenciaR(rs.getInt("agenciaR"));
+			t.setIdD(rs.getInt("idD"));
+			t.setContaD(rs.getInt("contaD"));
+			t.setAgenciaD(rs.getInt("agenciaD"));
+			
+			lista.add(t);
+			
+		}
+		
+		conn.close();
+		return lista;
 		
 	}
 
