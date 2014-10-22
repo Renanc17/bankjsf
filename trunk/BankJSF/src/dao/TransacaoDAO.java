@@ -1,7 +1,6 @@
 package dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -87,6 +86,8 @@ public Cliente transfToPoupanca(Cliente c) throws SQLException{
 		}
 		
 		
+		t.setData(new java.util.Date());
+		gravarHist(t);
 		c = dao.getClienteById(c.getId());
 		
 		conn.close();
@@ -100,8 +101,11 @@ public Cliente transfToPoupanca(Cliente c) throws SQLException{
 		String sql = "INSERT into historico(data, tipoTransacao, descricao, valor, idR, contaR, agenciaR, idD, contaD, agenciaD) VALUES(?,?,?,?,?,?,?,?,?,?)";
 		
 		PreparedStatement stmt = conn.prepareStatement(sql);
+
+		java.util.Date data = t.getData();
+		java.sql.Date datasql = new java.sql.Date(data.getTime());
 		
-		stmt.setDate(1, (Date) t.getData());
+		stmt.setDate(1, datasql);
 		stmt.setString(2, t.getTipoTransacao());
 		stmt.setString(3, t.getDescricao());
 		stmt.setDouble(4, t.getValor());

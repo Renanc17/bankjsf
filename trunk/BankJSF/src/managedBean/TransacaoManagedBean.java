@@ -76,6 +76,7 @@ public class TransacaoManagedBean {
 			
 				TransacaoDAO dao = new TransacaoDAO();
 				try {
+					
 					remetente = dao.transfToPoupanca(remetente);					
 					pagina = "sucesso";			
 				} catch (SQLException e) {
@@ -119,6 +120,7 @@ public class TransacaoManagedBean {
 			if(remetente.getSenhaCartao() == senhaCartao){	
 				TransacaoDAO dao = new TransacaoDAO();
 				try {
+					transacao.setTipoTransacao(tipoTransacao);
 					remetente = dao.transferencia(remetente, transacao);
 					pagina = "sucesso";
 				} catch (SQLException e) {
