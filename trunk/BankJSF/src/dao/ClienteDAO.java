@@ -30,7 +30,7 @@ public class ClienteDAO {
 			while (rs.next()) {
 				cl = true;
 		}
-
+		conn.close();
 		return cl;
 
 	}
@@ -68,7 +68,8 @@ public class ClienteDAO {
 				cl.setContaPoupanca(cp);
 				cl.setSenhaCartao(rs.getInt("senhaCartao"));
 		}
-
+		
+		conn.close();
 		return cl;
 
 	}
@@ -104,6 +105,8 @@ public class ClienteDAO {
 			cl.setContaPoupanca(cp);
 			cl.setSenhaCartao(rs.getInt("senhaCartao"));
 		}
+		
+		conn.close();
 		return cl;
 
 	}
@@ -139,6 +142,8 @@ public class ClienteDAO {
 			cl.setContaPoupanca(cp);
 			cl.setSenhaCartao(rs.getInt("senhaCartao"));
 		}
+		
+		conn.close();
 		return cl;
 
 	}
