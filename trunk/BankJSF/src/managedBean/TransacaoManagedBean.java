@@ -1,13 +1,14 @@
 package managedBean;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
-import dao.ClienteDAO;
 import dao.TransacaoDAO;
 import bean.Cliente;
 import bean.Favorito;
@@ -23,6 +24,7 @@ public class TransacaoManagedBean {
 	private int senhaCartao;
 	private String tipoTransacao;
 	private String msg;
+	private List<Transacao> listaExtrato = new ArrayList<Transacao>();
 	
 	public Transacao getTransacao() {
 		return transacao;
@@ -242,6 +244,23 @@ public class TransacaoManagedBean {
 		return pagina;
 	}
 	
-	
+	public String listarExtrato(){
+		String pagina = "";
+		
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
+		remetente = (Cliente) session.getAttribute("cliente");
+			
+		TransacaoDAO dao = new TransacaoDAO();
+		try {
+			listaExtrato = dao.historico(remetente.getId());
+			pagina = "Extrato";
+		} catch (SQLException e) {
+			pagina = "erro";
+		}
+		
+		
+		return pagina;
+	}
 
 }
