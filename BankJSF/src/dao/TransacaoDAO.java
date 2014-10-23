@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.faces.context.FacesContext;
@@ -129,16 +130,21 @@ public Cliente transfToPoupanca(Cliente c, Transacao t) throws SQLException{
 		
 	}
 	
-	public List<Transacao> historico(Integer id) throws SQLException{
+	public List<Transacao> historico(Integer id, Date fromDate, Date untilDate) throws SQLException{
 		
 		Connection conn = ConnectionFactory.getConnection();
 		List<Transacao> lista = new ArrayList<Transacao>();
 		
-		String sql = "SELECT * FROM historico where idR = ?";
+		String sql = "SELECT * FROM historico where idR = ? and data between '?' and '?' ";
 		
 		PreparedStatement stmt = conn.prepareStatement(sql);
-		
+
+		java.sql.Date fromDateSQL = new java.sql.Date(fromDate.getTime());		
+		java.sql.Date untilDateSQL = new java.sql.Date(untilDate.getTime());
+			
 		stmt.setInt(1, id);
+		stmt.setDate(2, fromDateSQL);
+		stmt.setDate(3, untilDateSQL);
 		
 		ResultSet rs = stmt.executeQuery();
 		

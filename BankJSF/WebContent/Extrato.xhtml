@@ -9,10 +9,6 @@
 <f:view locale="#{switcher.currentLocale}">	  
 
 <h:head>
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script type="text/javascript">
-
-</script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 
 <style type="text/css">  
@@ -20,21 +16,32 @@
                font-size: 13px !important;  
            }  
 </style>
-  
        
 <title>#{msg.listaFavoritos}</title>
 
 	<ui:include src="/layout/Header.xhtml" />
 </h:head>
-
 <h:body>
-	<ui:include src="/layout/SubMenu_Transferencias.xhtml" />
-<h:form>
 <center>
+
+	<h:form>
 	
-	<p:outputLabel for="restricted" value="Data de Pagamento: " />
-	<p:calendar style="width: 15px" maxlength="10"  id="restricted" mindate="#{date.dataAtualMenos30}" maxdate="#{date.dataAtual}" />
 	
+	<p:outputLabel for="from" value="#{msg.from}:" />
+	<p:calendar style="width: 15px" maxlength="10"  id="from" mindate="#{date.dataAtualMenos30}" maxdate="#{date.dataAtual}"
+				value="#{transacaoManagedBean.fromDate}" />
+	
+	<p:outputLabel for="until" value="#{msg.until}:" />
+	<p:calendar style="width: 15px" maxlength="10"  id="until" mindate="#{date.dataAtualMenos30}" maxdate="#{date.dataAtual}"
+				value="#{transacaoManagedBean.untilDate}" />
+	
+	<h:commandButton value="Buscar Extrato" action="#{transacaoManagedBean.listarExtrato}" />
+	</h:form>
+	
+	
+	
+	<h:form>	
+	<br/><br/><br/>
 	<div style="width:85%">
 	<p:dataTable var="i" value="#{transacaoManagedBean.listaExtrato}">
 	
@@ -79,9 +86,8 @@
 	
 	<br/><br/><br/> 	
 	*#{msg.clickToTransf}
-	
+	</h:form>
 </center>	
-</h:form>
 </h:body>
 </f:view>
 </html>
