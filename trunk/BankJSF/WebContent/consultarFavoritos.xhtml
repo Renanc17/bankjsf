@@ -49,15 +49,15 @@
 	    </p:column>
 	    
 	    <p:column>
-	    	<h:commandButton id="alterar" value="#{msg.alterar}" action="alterarFavoritos" >
+	    	<h:commandLink id="alterar" value="#{msg.alterar}" action="alterarFavoritos" >
 				<f:setPropertyActionListener target="#{favoritoManagedBean.f}" value="#{i}"/>
-			</h:commandButton>	
+			</h:commandLink>	
 	    </p:column>
 	    
 	    <p:column>
-	   	 	<h:commandButton id="excluir" value="#{msg.excluir}" onclick="return confirm('#{msg.confirmDelete}')" action="#{favoritoManagedBean.excluirFavorito}" >
+	   	 	<h:commandLink id="excluir" value="#{msg.excluir}" onclick="return confirm('#{msg.confirmDelete}')" action="#{favoritoManagedBean.excluirFavorito}" >
 				<f:setPropertyActionListener target="#{favoritoManagedBean.pk}" value="#{i.id}"/>
-			</h:commandButton>	
+			</h:commandLink>	
 	    </p:column>
 	</p:dataTable>
 	</div>
