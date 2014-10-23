@@ -2,6 +2,7 @@ package managedBean;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -24,6 +25,8 @@ public class TransacaoManagedBean {
 	private int senhaCartao;
 	private String tipoTransacao;
 	private String msg;
+	private Date fromDate = new Date();
+	private Date untilDate = new Date();
 	private List<Transacao> listaExtrato = new ArrayList<Transacao>();
 	
 	public Transacao getTransacao() {
@@ -68,7 +71,18 @@ public class TransacaoManagedBean {
 	public void setListaExtrato(List<Transacao> listaExtrato){
 		this.listaExtrato = listaExtrato;
 	}
-	
+	public Date getFromDate() {
+		return fromDate;
+	}
+	public void setFromDate(Date fromDate) {
+		this.fromDate = fromDate;
+	}
+	public Date getUntilDate() {
+		return untilDate;
+	}
+	public void setUntilDate(Date untilDate) {
+		this.untilDate = untilDate;
+	}
 	
 	public String transacao(){
 		String pagina = "";
@@ -200,7 +214,7 @@ public class TransacaoManagedBean {
 			
 		TransacaoDAO dao = new TransacaoDAO();
 		try {
-			listaExtrato = dao.historico(remetente.getId());
+			listaExtrato = dao.historico(remetente.getId(), fromDate, untilDate);
 			pagina = "Extrato";
 		} catch (SQLException e) {
 			pagina = "erro";
@@ -209,5 +223,6 @@ public class TransacaoManagedBean {
 		
 		return pagina;
 	}
+	
 
 }
