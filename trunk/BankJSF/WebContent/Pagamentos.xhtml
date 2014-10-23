@@ -7,16 +7,87 @@
 	  xmlns:p="http://primefaces.org/ui">
 	  
 <f:view locale="#{switcher.currentLocale}">	  
+
 <h:head>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript">
 
+</script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<title>Pagamentos</title>
+<style type="text/css">  
+           .ui-widget {  
+               font-size: 10px !important;  
+           }  
+</style>
 
+<title>#{msg.pagamentos}</title>
 
 	<ui:include src="/layout/Header.xhtml" />
 </h:head>
+
 <h:body>
-<center>
+	<ui:include src="/layout/SubMenu_Transferencias.xhtml" />
+<center>	
+	
+			#{msg.preenchaPagamento}<br/>
+	<br/><br/><br/>
+	<h:form id="submit">
+	
+	
+	<table>
+	<tr>
+		<td>
+			#{msg.saldoDisp}:
+		</td>
+		<td>R$ <h:outputText value="#{cliente.contaCorrente.saldo}" >
+				<f:convertNumber minFractionDigits="2" />
+				</h:outputText>
+		</td>
+	</tr>
+	<tr></tr>
+	<tr>
+		<td>
+			#{msg.barcode}:
+		</td>
+		<td>
+			<h:inputText size="12" maxlength="12"/>&nbsp;
+			<h:inputText size="12" maxlength="12"/>&nbsp;
+			<h:inputText size="12" maxlength="12"/>&nbsp;
+		</td>
+	</tr>
+	<tr>
+		
+	</tr>
+	<tr>
+		<td>
+			#{msg.valorPagamento}:
+		</td>
+		<td>
+			R$ <h:inputText value="#{transacaoManagedBean.transacao.valor}" size="7" >
+				
+			</h:inputText>
+			
+		</td>
+	</tr>
+	<tr>
+		<td valign="top">
+			#{msg.descricao}:
+		</td>
+		<td>
+			 <p:inputTextarea value="#{transacaoManagedBean.transacao.descricao}" rows="5" cols="30" counter="display" maxlength="50" counterTemplate="{0} #{msg.charRemain}" autoResize="false" />
+   			 <br/><h:outputText id="display" />
+		</td>
+	</tr>
+	</table>
+	
+	<p></p>
+	<h:commandButton id="transferir" value="#{msg.transferir}" action="transacaoConfirm" >
+		<f:setPropertyActionListener target="#{transacaoManagedBean.tipoTransacao}" value="Payment"></f:setPropertyActionListener>
+	</h:commandButton>
+	<br/><br/>
+	<h:commandButton id="buscarFavorito" value="#{msg.buscarFavorito}" action="#{favoritoManagedBean.listarFavoritos}" />
+	
+	</h:form>
 	
 </center>
 </h:body>

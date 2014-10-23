@@ -27,9 +27,12 @@
 
 <h:body>
 	<ui:include src="/layout/SubMenu_Transferencias.xhtml" />
+<center>	
 	
+			#{msg.preenchaValor}<br/>
+	<br/><br/><br/>
 	<h:form id="submit">
-	<center>
+	
 	
 	<table>
 	<tr>
@@ -86,8 +89,10 @@
 	</h:commandButton>
 	<br/><br/>
 	<h:commandButton id="buscarFavorito" value="#{msg.buscarFavorito}" action="#{favoritoManagedBean.listarFavoritos}" />
-	</center>
+	
 	</h:form>
+	
+</center>
 </h:body>
 </f:view>
 </html>
