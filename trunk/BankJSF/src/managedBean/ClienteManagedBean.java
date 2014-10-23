@@ -96,29 +96,7 @@ public class ClienteManagedBean {
 		return resultado + ".faces?faces-redirect=true";		
 		
 	}
-	
-	public String simulaLogin(){
 		
-		cliente.setId(1);
-		cliente.setNome("Renan");
-		cliente.setCpf((long)123456789);
-		cliente.setAgencia(10);
-		cliente.setSenha("1234");
-		cliente.getContaCorrente().setConta(9876);
-		cliente.getContaCorrente().setSaldo(2500.0);
-		cliente.getContaPoupanca().setConta(6789);
-		cliente.getContaPoupanca().setSaldo(3600.0);
-		cliente.getContaPoupanca().setSaldo(3600.0);
-		
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-		HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
-		session.setAttribute("cliente", cliente);
-		saldoTotal();
-		
-		return "Home" + ".faces?faces-redirect=true";
-	}
-
-	
 	public void saldoTotal(){
 		
 		FacesContext facesContext = FacesContext.getCurrentInstance();

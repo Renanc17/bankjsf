@@ -35,6 +35,10 @@ CREATE TABLE bankjsf.historico (
   agenciaD INT(11) NULL,
   PRIMARY KEY (id));
 
+ALTER TABLE bankjsf.historico 
+ADD COLUMN saldoR DOUBLE NULL AFTER agenciaR,
+ADD COLUMN saldoD DOUBLE NULL AFTER agenciaD;
+
 
 
 insert into bankjsf.cliente (nome, cpf, agencia, senha, contac, saldoc, contap, saldop, senhaCartao) values('Renan',11144477735,10,'1234',9876,2500,6789,3600, 2);
