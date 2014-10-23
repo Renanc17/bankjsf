@@ -72,6 +72,7 @@ public Cliente transfToPoupanca(Cliente c, Transacao t) throws SQLException{
 		Cliente dest = dao.getCliente(t.getContaD(), t.getAgenciaD());
 		Double saldoD = dest.getContaCorrente().getSaldo();
 		Double saldoR = c.getContaCorrente().getSaldo();
+		if(t.getDescricao().equals(""))
 		t.setDescricao("Transf. p/ cliente " + dest.getNome());
 				
 		saldoD += t.getValor();

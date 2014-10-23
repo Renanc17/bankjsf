@@ -108,7 +108,8 @@ public class TransacaoManagedBean {
 				transacao.setTipoTransacao(tipoTransacao);
 				transacao.setSaldoR(remetente.getContaCorrente().getSaldo());
 				transacao.setSaldoD(remetente.getContaPoupanca().getSaldo());
-				transacao.setDescricao("Trasnf. de Conta Corrente p/ Conta Poup.");
+				if(transacao.getDescricao().equals(""))
+				transacao.setDescricao("Transf. de Conta Corrente p/ Conta Poup.");
 				
 				TransacaoDAO dao = new TransacaoDAO();
 				try {
@@ -123,7 +124,8 @@ public class TransacaoManagedBean {
 				setMsg("Senha incorreta!");
 			}
 			
-				session.setAttribute("cliente", remetente);					
+				session.setAttribute("cliente", remetente);	
+				transacao = new Transacao();
 				return pagina + ".faces?faces-redirect=true";			
 		}		
 		else 
@@ -145,7 +147,8 @@ public class TransacaoManagedBean {
 					transacao.setTipoTransacao(tipoTransacao);
 					transacao.setSaldoR(remetente.getContaPoupanca().getSaldo());
 					transacao.setSaldoD(remetente.getContaCorrente().getSaldo());
-					transacao.setDescricao("Trasnf. de Conta Poup. p/ Conta Corrente");
+					if(transacao.getDescricao().equals(""))
+					transacao.setDescricao("Transf. de Conta Poup. p/ Conta Corrente");
 					
 					TransacaoDAO dao = new TransacaoDAO();
 					try {	
@@ -160,7 +163,8 @@ public class TransacaoManagedBean {
 					setMsg("Senha incorreta!");
 			}
 					
-			session.setAttribute("cliente", remetente);							
+			session.setAttribute("cliente", remetente);	
+			transacao = new Transacao();
 			return pagina + ".faces?faces-redirect=true";			
 		}		
 		else
@@ -191,7 +195,7 @@ public class TransacaoManagedBean {
 				setMsg("Senha incorreta!");
 			}			
 
-			
+			transacao = new Transacao();
 			return pagina + ".faces?faces-redirect=true";
 		}
 				
