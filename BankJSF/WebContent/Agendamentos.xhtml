@@ -10,7 +10,14 @@
 <h:head>
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<title>Agendamentos</title>
+
+<style type="text/css">  
+           .ui-widget {  
+               font-size: 15px !important;  
+           }  
+</style>
+
+<title>#{msg.agendamentos}</title>
 
 
 	<ui:include src="/layout/Header.xhtml" />
@@ -18,7 +25,7 @@
 <h:body>
 <center>
 		<p:outputLabel for="restricted" value="Data de Pagamento: " />
-	    <p:calendar style="width: 15px" maxlength="10"  id="restricted" mindate="4/1/14" maxdate="7/1/14" />
+	    <p:calendar style="width: 15px" maxlength="10"  id="restricted" mindate="#{date.dataAtualMenos30}" maxdate="#{date.dataAtual}" />
 </center>
 </h:body>
 </f:view>

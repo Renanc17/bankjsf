@@ -16,7 +16,7 @@ import factory.ConnectionFactory;
 
 public class TransacaoDAO {
 	
-public Cliente transfToPoupanca(Cliente c) throws SQLException{		
+public Cliente transfToPoupanca(Cliente c, Transacao t) throws SQLException{		
 		
 		Connection conn = ConnectionFactory.getConnection();
 		String sql = "UPDATE cliente SET saldoc=?, saldop=? where id=?";
@@ -29,6 +29,8 @@ public Cliente transfToPoupanca(Cliente c) throws SQLException{
 		
 		stmt.executeUpdate();
 		
+		gravarHist(t);
+		
 		ClienteDAO dao = new ClienteDAO();
 		c = dao.getClienteById(c.getId());
 		
@@ -38,7 +40,7 @@ public Cliente transfToPoupanca(Cliente c) throws SQLException{
 		
 	}
 
-	public Cliente transfToCc(Cliente c) throws SQLException{	
+	public Cliente transfToCc(Cliente c, Transacao t) throws SQLException{	
 	
 	Connection conn = ConnectionFactory.getConnection();
 	String sql = "UPDATE cliente SET saldoc=?, saldop=? where id=?";
@@ -50,6 +52,8 @@ public Cliente transfToPoupanca(Cliente c) throws SQLException{
 	stmt.setInt(3, c.getId());
 	
 	stmt.executeUpdate();
+	
+	gravarHist(t);	
 	
 	ClienteDAO dao = new ClienteDAO();
 	c = dao.getClienteById(c.getId());
@@ -88,8 +92,6 @@ public Cliente transfToPoupanca(Cliente c) throws SQLException{
 			}
 		}
 		
-		
-		t.setData(new java.util.Date());
 		t = fillTransacao(t);
 		gravarHist(t);
 		c = dao.getClienteById(c.getId());

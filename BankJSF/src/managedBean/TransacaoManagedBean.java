@@ -62,6 +62,13 @@ public class TransacaoManagedBean {
 	public void setMsg(String msg) {
 		this.msg = msg;
 	}
+	public List<Transacao> getListaExtrato(){
+		return listaExtrato;
+	}
+	public void setListaExtrato(List<Transacao> listaExtrato){
+		this.listaExtrato = listaExtrato;
+	}
+	
 	
 	public String transacao(){
 		String pagina = "";
@@ -75,11 +82,21 @@ public class TransacaoManagedBean {
 			if(remetente.getSenhaCartao() == senhaCartao){	
 				remetente.getContaCorrente().setSaldo(remetente.getContaCorrente().getSaldo() - transacao.getValor());
 				remetente.getContaPoupanca().setSaldo(remetente.getContaPoupanca().getSaldo() + transacao.getValor());
-			
+				
+				//Setar tudo pro proprio cliente - Preparar gravação de Historico
+				transacao.setIdD(remetente.getId());
+				transacao.setAgenciaD(remetente.getAgencia());
+				transacao.setContaD(remetente.getContaPoupanca().getConta());
+				transacao.setIdR(remetente.getId());
+				transacao.setAgenciaR(remetente.getAgencia());
+				transacao.setContaR(remetente.getContaCorrente().getConta());
+				transacao.setData(new java.util.Date());
+				transacao.setTipoTransacao(tipoTransacao);
+				
 				TransacaoDAO dao = new TransacaoDAO();
 				try {
 					
-					remetente = dao.transfToPoupanca(remetente);					
+					remetente = dao.transfToPoupanca(remetente, transacao);					
 					pagina = "sucesso";			
 				} catch (SQLException e) {
 					pagina = "erro";
@@ -91,21 +108,32 @@ public class TransacaoManagedBean {
 			
 				session.setAttribute("cliente", remetente);					
 				return pagina + ".faces?faces-redirect=true";			
-		}
-		
+		}		
 		else 
 		if(tipoTransacao.equals("transfToCc")){
 			
-			if(remetente.getSenhaCartao() == senhaCartao){		
+			if(remetente.getSenhaCartao() == senhaCartao){	
+				
 					remetente.getContaCorrente().setSaldo(remetente.getContaCorrente().getSaldo() + transacao.getValor());
 					remetente.getContaPoupanca().setSaldo(remetente.getContaPoupanca().getSaldo() - transacao.getValor());
 					
+					//Setar tudo pro proprio cliente - Preparar gravação de Historico
+					transacao.setIdD(remetente.getId());
+					transacao.setAgenciaD(remetente.getAgencia());
+					transacao.setContaD(remetente.getContaCorrente().getConta());
+					transacao.setIdR(remetente.getId());
+					transacao.setAgenciaR(remetente.getAgencia());
+					transacao.setContaR(remetente.getContaPoupanca().getConta());
+					transacao.setData(new java.util.Date());
+					transacao.setTipoTransacao(tipoTransacao);				
+					
 					TransacaoDAO dao = new TransacaoDAO();
 					try {	
-							remetente = dao.transfToCc(remetente);
+							remetente = dao.transfToCc(remetente, transacao);
 							pagina = "sucesso";
 					}catch (SQLException e) {
 						pagina = "erro";
+						setMsg("SQL!");
 					}
 			}else{
 					pagina = "erro";
@@ -114,21 +142,23 @@ public class TransacaoManagedBean {
 					
 			session.setAttribute("cliente", remetente);							
 			return pagina + ".faces?faces-redirect=true";			
-		}
-		
+		}		
 		else
 		if(tipoTransacao.equals("transfToTerc")){
 
 			if(remetente.getSenhaCartao() == senhaCartao){	
+								
+				transacao.setData(new java.util.Date());
+				transacao.setTipoTransacao(tipoTransacao);
+				
 				TransacaoDAO dao = new TransacaoDAO();
 				try {
-					transacao.setTipoTransacao(tipoTransacao);
 					remetente = dao.transferencia(remetente, transacao);
 					pagina = "sucesso";
 				} catch (SQLException e) {
 					pagina = "erro";
 					setMsg("SQLException!");
-				}catch (NullPointerException e) {
+				} catch (NullPointerException e) {
 					pagina = "erro";
 					setMsg("Null Pointer!");
 				}
@@ -160,89 +190,6 @@ public class TransacaoManagedBean {
 		
 	}
 	
-	
-	
-	
-	
-	
-	
-	public String transfToPoupanca(){
-		String pagina = "";
-		
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-		HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
-		remetente = (Cliente) session.getAttribute("cliente");
-		
-		remetente.getContaCorrente().setSaldo(remetente.getContaCorrente().getSaldo() - transacao.getValor());
-		remetente.getContaPoupanca().setSaldo(remetente.getContaPoupanca().getSaldo() + transacao.getValor());
-		
-		TransacaoDAO dao = new TransacaoDAO();
-		try {
-			remetente = dao.transfToPoupanca(remetente);
-		} catch (SQLException e) {
-			pagina = "erro";
-		}
-		
-		session.setAttribute("cliente", remetente);
-		
-		pagina = "Home";
-		
-		
-		return pagina;
-	}
-	
-	public String transfToCc(){
-		String pagina = "";
-		
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-		HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
-		remetente = (Cliente) session.getAttribute("cliente");
-				
-		if(remetente.getSenhaCartao() == senhaCartao){		
-				remetente.getContaCorrente().setSaldo(remetente.getContaCorrente().getSaldo() + transacao.getValor());
-				remetente.getContaPoupanca().setSaldo(remetente.getContaPoupanca().getSaldo() - transacao.getValor());
-				
-				TransacaoDAO dao = new TransacaoDAO();
-				try {	
-						remetente = dao.transfToCc(remetente);
-						pagina = "Home";
-				}catch (SQLException e) {
-					pagina = "erro";
-				}
-		}else{
-				pagina = "erro";
-				setMsg("Senha incorreta!");
-			}
-				
-		session.setAttribute("cliente", remetente);
-		
-				
-		return pagina;
-	}
-	
-	public String transferencia() {
-		String pagina = "";
-
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-		HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
-		remetente = (Cliente) session.getAttribute("cliente");
-
-		
-
-			TransacaoDAO dao = new TransacaoDAO();
-			try {
-				remetente = dao.transferencia(remetente, transacao);
-				pagina = "Home";
-			} catch (SQLException e) {
-				pagina = "erro";
-			}
-		
-
-		session.setAttribute("cliente", remetente);
-		session.setAttribute("saldototal", remetente.getContaCorrente().getSaldo() + remetente.getContaPoupanca().getSaldo());
-
-		return pagina;
-	}
 	
 	public String listarExtrato(){
 		String pagina = "";

@@ -1,6 +1,3 @@
-
-
-
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
@@ -40,7 +37,7 @@
 			   -   
 			<h:commandLink id="agendamentos" action="Agendamentos.faces?faces-redirect=true" value="#{msg.agendamentos}"/>
 			   -   
-			<h:commandLink id="extrato" action="Extrato.faces?faces-redirect=true" value="#{msg.extrato}"/>
+			<h:commandLink id="extrato" action="#{transacaoManagedBean.listarExtrato}" value="#{msg.extrato}"/>
 		</p>
 		</h:form>
 	</center>
