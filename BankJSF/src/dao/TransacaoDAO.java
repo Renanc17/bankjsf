@@ -93,7 +93,7 @@ public Cliente transfToPoupanca(Cliente c, Transacao t) throws SQLException{
 			}
 		}
 		
-		t = fillTransacao(t);
+		t = fillTransacao(t, saldoR, saldoD);
 		gravarHist(t);
 		c = dao.getClienteById(c.getId());
 		
@@ -102,13 +102,31 @@ public Cliente transfToPoupanca(Cliente c, Transacao t) throws SQLException{
 		
 	}
 	
+	public Transacao fillTransacao(Transacao t, Double saldoR, Double saldoD) throws SQLException{
+		ClienteDAO dao = new ClienteDAO();
+		
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
+		Cliente rem = (Cliente) session.getAttribute("cliente");
+		Cliente dest = dao.getCliente(t.getContaD(), t.getAgenciaD());
+		
+		t.setIdR(rem.getId());
+		t.setContaR(rem.getContaCorrente().getConta());
+		t.setAgenciaR(rem.getAgencia());
+		t.setIdD(dest.getId());
+		t.setSaldoR(saldoR);
+		t.setSaldoD(saldoD);
+		
+		return t;
+	}
+	
 	public void gravarHist(Transacao t) throws SQLException{
 		Connection conn = ConnectionFactory.getConnection();
 		
-		String sql = "INSERT into historico(data, tipoTransacao, descricao, valor, idR, contaR, agenciaR, idD, contaD, agenciaD) VALUES(?,?,?,?,?,?,?,?,?,?)";
+		String sql = "INSERT into historico(data, tipoTransacao, descricao, valor, idR, contaR, agenciaR, saldoR, idD, contaD, agenciaD, saldoD) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
 		
 		PreparedStatement stmt = conn.prepareStatement(sql);
-
+		
 		java.util.Date data = t.getData();
 		java.sql.Date datasql = new java.sql.Date(data.getTime());
 		
@@ -119,9 +137,11 @@ public Cliente transfToPoupanca(Cliente c, Transacao t) throws SQLException{
 		stmt.setInt(5, t.getIdR());
 		stmt.setInt(6, t.getContaR());
 		stmt.setInt(7, t.getAgenciaR());
-		stmt.setInt(8, t.getIdD());
-		stmt.setInt(9, t.getContaD());
-		stmt.setInt(10, t.getAgenciaD());
+		stmt.setDouble(8, t.getSaldoR());
+		stmt.setInt(9, t.getIdD());
+		stmt.setInt(10, t.getContaD());
+		stmt.setInt(11, t.getAgenciaD());
+		stmt.setDouble(12, t.getSaldoD());
 		
 		stmt.executeUpdate();
 		
@@ -135,16 +155,17 @@ public Cliente transfToPoupanca(Cliente c, Transacao t) throws SQLException{
 		Connection conn = ConnectionFactory.getConnection();
 		List<Transacao> lista = new ArrayList<Transacao>();
 		
-		String sql = "SELECT * FROM historico where idR = ? and data between '?' and '?' ";
+		String sql = "SELECT * FROM historico WHERE idR = ? or idD = ? AND data BETWEEN ? and ? "; 
 		
 		PreparedStatement stmt = conn.prepareStatement(sql);
 
 		java.sql.Date fromDateSQL = new java.sql.Date(fromDate.getTime());		
 		java.sql.Date untilDateSQL = new java.sql.Date(untilDate.getTime());
-			
+
 		stmt.setInt(1, id);
-		stmt.setDate(2, fromDateSQL);
-		stmt.setDate(3, untilDateSQL);
+		stmt.setInt(2, id);
+		stmt.setDate(3, fromDateSQL);
+		stmt.setDate(4, untilDateSQL);
 		
 		ResultSet rs = stmt.executeQuery();
 		
@@ -163,6 +184,13 @@ public Cliente transfToPoupanca(Cliente c, Transacao t) throws SQLException{
 			t.setContaD(rs.getInt("contaD"));
 			t.setAgenciaD(rs.getInt("agenciaD"));
 			
+			if(t.getIdR() == id){			
+				t.setSaldo(rs.getDouble("SaldoR"));
+			}else
+				if(t.getIdD() == id)
+					t.setSaldo(rs.getDouble("SaldoD"));
+					
+			
 			lista.add(t);
 			
 		}
@@ -172,20 +200,6 @@ public Cliente transfToPoupanca(Cliente c, Transacao t) throws SQLException{
 		
 	}
 	
-	public Transacao fillTransacao(Transacao t) throws SQLException{
-		ClienteDAO dao = new ClienteDAO();
-		
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-		HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
-		Cliente rem = (Cliente) session.getAttribute("cliente");
-		Cliente dest = dao.getCliente(t.getContaD(), t.getAgenciaD());
-		
-		t.setIdR(rem.getId());
-		t.setContaR(rem.getContaCorrente().getConta());
-		t.setAgenciaR(rem.getAgencia());
-		t.setIdD(dest.getId());
-		
-		return t;
-	}
+	
 
 }

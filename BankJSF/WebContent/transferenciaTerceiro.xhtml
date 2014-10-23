@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	  xmlns:h="http://java.sun.com/jsf/html"
 	  xmlns:f="http://java.sun.com/jsf/core"
-	  xmlns:ui="http://java.sun.com/jsf/facelets">
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:p="http://primefaces.org/ui">
 	  
 <f:view locale="#{switcher.currentLocale}">	  
 
@@ -13,6 +14,11 @@
 
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<style type="text/css">  
+           .ui-widget {  
+               font-size: 10px !important;  
+           }  
+</style>
 
 <title>#{msg.transfTerceiro}</title>
 
@@ -38,18 +44,18 @@
 	<tr></tr>
 	<tr>
 		<td>
-			#{msg.agencia}
+			#{msg.agencia}:
 		</td>
 		<td>
-			<h:inputText value="#{transacaoManagedBean.transacao.agenciaD}" size="7" />
+			<h:inputText value="#{transacaoManagedBean.transacao.agenciaD}" size="11" />
 		</td>
 	</tr>
 	<tr>
 		<td>
-			#{msg.cc}	
+			#{msg.cc}:	
 		</td>
 		<td>
-			<h:inputText value="#{transacaoManagedBean.transacao.contaD}" size="7" />
+			<h:inputText value="#{transacaoManagedBean.transacao.contaD}" size="11" />
 		</td>
 	</tr>
 	<tr>
@@ -61,6 +67,15 @@
 				
 			</h:inputText>
 			
+		</td>
+	</tr>
+	<tr>
+		<td valign="top">
+			#{msg.descricao}:
+		</td>
+		<td>
+			 <p:inputTextarea value="#{transacaoManagedBean.transacao.descricao}" rows="5" cols="30" counter="display" maxlength="50" counterTemplate="{0} #{msg.charRemain}" autoResize="false" />
+   			 <br/><h:outputText id="display" />
 		</td>
 	</tr>
 	</table>

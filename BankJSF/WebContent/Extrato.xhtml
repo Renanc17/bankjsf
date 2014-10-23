@@ -25,28 +25,31 @@
 <center>
 
 	<h:form>
+	<br/><br/>
 	
-	
-	<p:outputLabel for="from" value="#{msg.from}:" />
+	<p:outputLabel for="from" value="#{msg.from}:" />  
 	<p:calendar style="width: 15px" maxlength="10"  id="from" mindate="#{date.dataAtualMenos30}" maxdate="#{date.dataAtual}"
-				value="#{transacaoManagedBean.fromDate}" />
-	
+				value="#{transacaoManagedBean.fromDate}"  pattern="dd-MM-yy"/>
+	    
 	<p:outputLabel for="until" value="#{msg.until}:" />
-	<p:calendar style="width: 15px" maxlength="10"  id="until" mindate="#{date.dataAtualMenos30}" maxdate="#{date.dataAtual}"
-				value="#{transacaoManagedBean.untilDate}" />
+	<p:calendar style="width: 15px" maxlength="10"  id="until" mindate="#{date.dataAtualMenos90}" maxdate="#{date.dataAtual}"
+				value="#{transacaoManagedBean.untilDate}" pattern="dd-MM-yy"/>
+	    
+	<h:commandButton value="#{msg.submitExtract}" action="#{transacaoManagedBean.listarExtrato}" />
 	
-	<h:commandButton value="Buscar Extrato" action="#{transacaoManagedBean.listarExtrato}" />
 	</h:form>
 	
 	
 	
 	<h:form>	
-	<br/><br/><br/>
+	<br/>
 	<div style="width:85%">
 	<p:dataTable var="i" value="#{transacaoManagedBean.listaExtrato}">
 	
-	    <p:column headerText="#{msg.data}" style="width:9%">
-	        <h:outputText value="#{i.data}" />
+	    <p:column headerText="#{msg.data}" style="width:8%">
+	        <h:outputText value="#{i.data}" >
+	        	<f:convertDateTime pattern="dd/MM/yyyy" />
+	        </h:outputText>
 	    </p:column>
 	 
 	    <p:column headerText="#{msg.tipoTransacao}" style="width:15%">
@@ -73,19 +76,23 @@
 	        <h:outputText value="#{i.contaD}" />
 	    </p:column>
 	    
-	    <p:column headerText="#{msg.valor}" style="width:6%">
-	        <h:outputText value="R$ #{i.valor}" />
+	    <p:column headerText="#{msg.valor}" style="width:10%">
+	        R$ <h:outputText value="#{i.valor}" >
+	        	<f:convertNumber minFractionDigits="2" />
+	        </h:outputText>
 	    </p:column>
 	    
 	    <p:column headerText="#{msg.saldo}" style="width:10%">
-	        
+	        R$ <h:outputText value="#{i.saldo}" >
+	        	<f:convertNumber minFractionDigits="2" />
+	        </h:outputText>
 	    </p:column>
 	    
 	</p:dataTable>
 	</div>
 	
 	<br/><br/><br/> 	
-	*#{msg.clickToTransf}
+	*#{msg.selectPeriodo}
 	</h:form>
 </center>	
 </h:body>

@@ -106,6 +106,8 @@ public class TransacaoManagedBean {
 				transacao.setContaR(remetente.getContaCorrente().getConta());
 				transacao.setData(new java.util.Date());
 				transacao.setTipoTransacao(tipoTransacao);
+				transacao.setSaldoR(remetente.getContaCorrente().getSaldo());
+				transacao.setSaldoD(remetente.getContaPoupanca().getSaldo());
 				
 				TransacaoDAO dao = new TransacaoDAO();
 				try {
@@ -139,7 +141,9 @@ public class TransacaoManagedBean {
 					transacao.setAgenciaR(remetente.getAgencia());
 					transacao.setContaR(remetente.getContaPoupanca().getConta());
 					transacao.setData(new java.util.Date());
-					transacao.setTipoTransacao(tipoTransacao);				
+					transacao.setTipoTransacao(tipoTransacao);
+					transacao.setSaldoR(remetente.getContaPoupanca().getSaldo());
+					transacao.setSaldoD(remetente.getContaCorrente().getSaldo());
 					
 					TransacaoDAO dao = new TransacaoDAO();
 					try {	
@@ -218,6 +222,7 @@ public class TransacaoManagedBean {
 			pagina = "Extrato";
 		} catch (SQLException e) {
 			pagina = "erro";
+			msg += e;
 		}
 		
 		

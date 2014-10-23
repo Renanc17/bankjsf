@@ -15,6 +15,9 @@ public class Transacao {
 	private Integer idD;	
 	private Integer contaD; //Numero da conta do destinatario
 	private Integer agenciaD; //Agencia do destinatario
+	private Double saldoR;
+	private Double saldoD;
+	private Double saldo;
 	
 	public Integer getId() {
 		return id;
@@ -81,6 +84,24 @@ public class Transacao {
 	}
 	public void setIdD(Integer idD) {
 		this.idD = idD;
+	}
+	public Double getSaldo() {
+		return saldo;
+	}
+	public void setSaldo(Double saldo) {
+		this.saldo = saldo;
+	}
+	public Double getSaldoR() {
+		return saldoR;
+	}
+	public void setSaldoR(Double saldoR) {
+		this.saldoR = saldoR;
+	}
+	public Double getSaldoD() {
+		return saldoD;
+	}
+	public void setSaldoD(Double saldoD) {
+		this.saldoD = saldoD;
 	}
 	
 	
