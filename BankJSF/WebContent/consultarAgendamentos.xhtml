@@ -33,30 +33,33 @@
 <center>
 
 	<div style="width:50%">
-	<p:dataTable var="i" value="#{agendamentoManagedBean.listaAgenda}">
-	    <p:column headerText="#{msg.nome}">
-	        <h:commandLink id="selecionar" value="#{i.nome}" action="#{agendamentoManagedBean.selecionarAgendamento}" >
-				<f:setPropertyActionListener target="#{agendamentoManagedBean.a}" value="#{a}"/>
-			</h:commandLink>
-	    </p:column>
+	<p:dataTable var="a" value="#{agendamentoManagedBean.listaAgenda}">
+	    
+	    <p:column headerText="#{msg.data}">
+	        <h:outputText value="#{a.data}" />
+	    </p:column> 
 	 
-	    <p:column headerText="#{msg.ag}">
-	        <h:outputText value="#{i.agencia}" />
+	    <p:column headerText="#{msg.tipoAgendamento}">
+	        <h:outputText value="#{a.tipoAgendamento}" />
 	    </p:column>
 	 	 
-	    <p:column headerText="#{msg.conta}">
-	        <h:outputText value="#{i.contaC}" />
+	    <p:column headerText="#{msg.descricao}">
+	        <h:outputText value="#{a.descricao}" />
+	    </p:column>
+	    
+	    <p:column headerText="#{msg.descricao}">
+	        <h:outputText value="#{a.descricao}" />
 	    </p:column>
 	    
 	    <p:column>
-	    	<h:commandLink id="alterar" value="#{msg.alterar}" action="alterarFavoritos" >
-				<f:setPropertyActionListener target="#{favoritoManagedBean.f}" value="#{i}"/>
+	    	<h:commandLink id="alterar" value="#{msg.alterar}" action="#{agendamentoMManagedBean.alterarAgendamento}" >
+				<f:setPropertyActionListener target="#{agendamentoManagedBean.a}" value="#{a}"/>
 			</h:commandLink>	
 	    </p:column>
 	    
 	    <p:column>
-	   	 	<h:commandLink id="excluir" value="#{msg.excluir}" onclick="return confirm('#{msg.confirmDelete}')" action="#{favoritoManagedBean.excluirFavorito}" >
-				<f:setPropertyActionListener target="#{favoritoManagedBean.pk}" value="#{i.id}"/>
+	   	 	<h:commandLink id="excluir" value="#{msg.excluir}" onclick="return confirm('#{msg.confirmDelete}')" action="#{agendamentoManagedBean.excluir}" >
+				<f:setPropertyActionListener target="#{agendamentoManagedBean.a}" value="#{a}"/>
 			</h:commandLink>	
 	    </p:column>
 	</p:dataTable>
