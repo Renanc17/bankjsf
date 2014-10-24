@@ -138,7 +138,7 @@ public class AgendamentoManagedBean {
 		AgendamentoDAO dao = new AgendamentoDAO();
 		
 		try{
-			dao.excluirAgendamento(usuario.getId());
+			dao.excluirAgendamento(a.getId());
 			pagina = "listarAgenda";
 		}catch(SQLException e){
 			pagina="erro";
@@ -148,6 +148,12 @@ public class AgendamentoManagedBean {
 		return pagina + ".faces?faces-redirect=true";
 	}
 	
-	
+	public String alterarAgendamento(){
+		String pagina = "Ag_" + a.getTipoAgendamento();		
+		
+		
+		return pagina + ".faces?faces-redirect=true";
+		
+	}
 
 }

@@ -18,12 +18,24 @@ public class AgendamentoDAO {
 		Connection conn = ConnectionFactory.getConnection();
 		String sql = "";
 		
+		sql="SELECT * FROM agendamento WHERE id=?";
+		
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		
+		stmt.setInt(1, a.getId());
+		
+		ResultSet rs = stmt.executeQuery();
+		
+		if(rs != null){
+			alterarAgendamento(a);
+			conn.close();
+		}else{
 		if(a.getIdD() != 0 && a.getContaD() != 0 && a.getAgenciaD() != 0)
 			sql = "INSERT INTO agendamento (idUsuario, data, tipoAgendamento, descricao, valor, idD, contaD, agenciaD) values(?,?,?,?,?,?,?,?)";
 		else
 			sql = "INSERT INTO agendamento (idUsuario, data, tipoAgendamento, descricao, valor) values(?,?,?,?,?)";
 				
-		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt = conn.prepareStatement(sql);
 		
 		java.util.Date data = a.getData();
 		java.sql.Date datasql = new java.sql.Date(data.getTime());
@@ -41,7 +53,8 @@ public class AgendamentoDAO {
 		
 		stmt.executeUpdate();
 		conn.close();
-	}	
+		}
+	}
 	
 	public void alterarAgendamento(Agendamento a) throws SQLException{
 		Connection conn = ConnectionFactory.getConnection();
