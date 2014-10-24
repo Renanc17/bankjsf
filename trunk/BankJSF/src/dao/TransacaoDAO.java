@@ -43,26 +43,48 @@ public Cliente transfToPoupanca(Cliente c, Transacao t) throws SQLException{
 
 	public Cliente transfToCc(Cliente c, Transacao t) throws SQLException{	
 	
-	Connection conn = ConnectionFactory.getConnection();
-	String sql = "UPDATE cliente SET saldoc=?, saldop=? where id=?";
+		Connection conn = ConnectionFactory.getConnection();
+		String sql = "UPDATE cliente SET saldoc=?, saldop=? where id=?";
+		
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		
+		stmt.setDouble(1, c.getContaCorrente().getSaldo());
+		stmt.setDouble(2, c.getContaPoupanca().getSaldo());
+		stmt.setInt(3, c.getId());
+		
+		stmt.executeUpdate();
+		
+		gravarHist(t);	
+		
+		ClienteDAO dao = new ClienteDAO();
+		c = dao.getClienteById(c.getId());
+		
+		conn.close();
+		return c;
 	
-	PreparedStatement stmt = conn.prepareStatement(sql);
 	
-	stmt.setDouble(1, c.getContaCorrente().getSaldo());
-	stmt.setDouble(2, c.getContaPoupanca().getSaldo());
-	stmt.setInt(3, c.getId());
+	}
 	
-	stmt.executeUpdate();
-	
-	gravarHist(t);	
-	
-	ClienteDAO dao = new ClienteDAO();
-	c = dao.getClienteById(c.getId());
-	
-	conn.close();
-	return c;
-	
-	
+	public Cliente Pagamento(Cliente c, Transacao t) throws SQLException{
+			
+			Connection conn = ConnectionFactory.getConnection();
+			ClienteDAO dao = new ClienteDAO();
+			
+			String sql = "UPDATE cliente SET saldoc=? where id=?";
+			
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			
+			stmt.setDouble(1, c.getContaCorrente().getSaldo());
+			stmt.setInt(2, c.getId());
+			
+			stmt.executeUpdate();
+			
+			gravarHist(t);	
+			
+			c = dao.getClienteById(c.getId());
+			
+			conn.close();
+			return c;
 	}
 	
 	public Cliente transferencia(Cliente c, Transacao t) throws SQLException{
@@ -74,7 +96,7 @@ public Cliente transfToPoupanca(Cliente c, Transacao t) throws SQLException{
 		Double saldoR = c.getContaCorrente().getSaldo();
 		if(t.getDescricao().equals(""))
 		t.setDescricao("Transf. p/ cliente " + dest.getNome());
-				
+			
 		saldoD += t.getValor();
 		saldoR -= t.getValor();
 		
@@ -124,14 +146,18 @@ public Cliente transfToPoupanca(Cliente c, Transacao t) throws SQLException{
 	
 	public void gravarHist(Transacao t) throws SQLException{
 		Connection conn = ConnectionFactory.getConnection();
+		String sql = "";
 		
-		String sql = "INSERT into historico(data, tipoTransacao, descricao, valor, idR, contaR, agenciaR, saldoR, idD, contaD, agenciaD, saldoD) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+		if(!t.getTipoTransacao().equals("Payment"))
+			sql = "INSERT into historico(data, tipoTransacao, descricao, valor, idR, contaR, agenciaR, saldoR, idD, contaD, agenciaD, saldoD) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+		else
+			sql = "INSERT into historico(data, tipoTransacao, descricao, valor, idR, contaR, agenciaR, saldoR) VALUES(?,?,?,?,?,?,?,?)";
 		
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		
 		java.util.Date data = t.getData();
 		java.sql.Date datasql = new java.sql.Date(data.getTime());
-		
+				
 		stmt.setDate(1, datasql);
 		stmt.setString(2, t.getTipoTransacao());
 		stmt.setString(3, t.getDescricao());
@@ -140,11 +166,13 @@ public Cliente transfToPoupanca(Cliente c, Transacao t) throws SQLException{
 		stmt.setInt(6, t.getContaR());
 		stmt.setInt(7, t.getAgenciaR());
 		stmt.setDouble(8, t.getSaldoR());
-		stmt.setInt(9, t.getIdD());
-		stmt.setInt(10, t.getContaD());
-		stmt.setInt(11, t.getAgenciaD());
-		stmt.setDouble(12, t.getSaldoD());
 		
+		if(!t.getTipoTransacao().equals("Payment")){
+			stmt.setInt(9, t.getIdD());
+			stmt.setInt(10, t.getContaD());
+			stmt.setInt(11, t.getAgenciaD());
+			stmt.setDouble(12, t.getSaldoD());
+		}
 		stmt.executeUpdate();
 		
 		conn.close();
@@ -157,7 +185,7 @@ public Cliente transfToPoupanca(Cliente c, Transacao t) throws SQLException{
 		Connection conn = ConnectionFactory.getConnection();
 		List<Transacao> lista = new ArrayList<Transacao>();
 		
-		String sql = "SELECT * FROM historico WHERE idR = ? or idD = ? AND data BETWEEN ? and ? "; 
+		String sql = "SELECT * FROM historico WHERE (idR = ? or idD = ?) AND data BETWEEN ? and ? "; 
 		
 		PreparedStatement stmt = conn.prepareStatement(sql);
 
@@ -185,12 +213,21 @@ public Cliente transfToPoupanca(Cliente c, Transacao t) throws SQLException{
 			t.setIdD(rs.getInt("idD"));
 			t.setContaD(rs.getInt("contaD"));
 			t.setAgenciaD(rs.getInt("agenciaD"));
+						
+			ClienteDAO dao = new ClienteDAO();
+			Cliente c = dao.getClienteById(id);
 			
-			if(t.getIdR() == id){			
+			if(t.getContaR() == c.getContaCorrente().getConta()){	
 				t.setSaldo(rs.getDouble("SaldoR"));
 			}else
-				if(t.getIdD() == id)
+				if(t.getContaD() == c.getContaCorrente().getConta())
 					t.setSaldo(rs.getDouble("SaldoD"));
+			
+			//if(t.getIdR() == id){	
+			//	t.setSaldo(rs.getDouble("SaldoR"));
+			//}else
+			//	if(t.getIdD() == id)
+			//		t.setSaldo(rs.getDouble("SaldoD"));
 					
 			
 			lista.add(t);

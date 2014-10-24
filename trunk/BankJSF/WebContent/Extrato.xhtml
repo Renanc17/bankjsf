@@ -29,11 +29,11 @@
 	
 	<p:outputLabel for="from" value="#{msg.from}:" />  
 	<p:calendar style="width: 15px" maxlength="10"  id="from" mindate="#{date.dataAtualMenos30}" maxdate="#{date.dataAtual}"
-				value="#{transacaoManagedBean.fromDate}"  pattern="dd-MM-yy"/>
+				value="#{transacaoManagedBean.fromDate}"  pattern="dd/MM/yyyy"/>
 	
 	<p:outputLabel for="until" value="#{msg.until}:" />
 	<p:calendar style="width: 15px" maxlength="10"  id="until" mindate="#{date.dataAtualMenos90}" maxdate="#{date.dataAtual}"
-				value="#{transacaoManagedBean.untilDate}" pattern="dd-MM-yy"/>
+				value="#{transacaoManagedBean.untilDate}" pattern="dd/MM/yyyy"/>
 	    
 	<h:commandButton value="#{msg.submitExtract}" action="#{transacaoManagedBean.listarExtrato}" />
 	

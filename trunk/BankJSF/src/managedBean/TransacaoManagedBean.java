@@ -108,6 +108,7 @@ public class TransacaoManagedBean {
 				transacao.setTipoTransacao(tipoTransacao);
 				transacao.setSaldoR(remetente.getContaCorrente().getSaldo());
 				transacao.setSaldoD(remetente.getContaPoupanca().getSaldo());
+				
 				if(transacao.getDescricao().equals(""))
 					transacao.setDescricao("Transf. de Conta Corrente p/ Conta Poup.");
 				
@@ -134,31 +135,32 @@ public class TransacaoManagedBean {
 			
 			if(remetente.getSenhaCartao() == senhaCartao){	
 				
-					remetente.getContaCorrente().setSaldo(remetente.getContaCorrente().getSaldo() + transacao.getValor());
-					remetente.getContaPoupanca().setSaldo(remetente.getContaPoupanca().getSaldo() - transacao.getValor());
-					
-					//Setar tudo pro proprio cliente - Preparar gravação de Historico
-					transacao.setIdD(remetente.getId());
-					transacao.setAgenciaD(remetente.getAgencia());
-					transacao.setContaD(remetente.getContaCorrente().getConta());
-					transacao.setIdR(remetente.getId());
-					transacao.setAgenciaR(remetente.getAgencia());
-					transacao.setContaR(remetente.getContaPoupanca().getConta());
-					transacao.setData(new java.util.Date());
-					transacao.setTipoTransacao(tipoTransacao);
-					transacao.setSaldoR(remetente.getContaPoupanca().getSaldo());
-					transacao.setSaldoD(remetente.getContaCorrente().getSaldo());
-					if(transacao.getDescricao().equals(""))
+				remetente.getContaCorrente().setSaldo(remetente.getContaCorrente().getSaldo() + transacao.getValor());
+				remetente.getContaPoupanca().setSaldo(remetente.getContaPoupanca().getSaldo() - transacao.getValor());
+				
+				//Setar tudo pro proprio cliente - Preparar gravação de Historico
+				transacao.setIdD(remetente.getId());
+				transacao.setAgenciaD(remetente.getAgencia());
+				transacao.setContaD(remetente.getContaCorrente().getConta());
+				transacao.setIdR(remetente.getId());
+				transacao.setAgenciaR(remetente.getAgencia());
+				transacao.setContaR(remetente.getContaPoupanca().getConta());
+				transacao.setData(new java.util.Date());
+				transacao.setTipoTransacao(tipoTransacao);
+				transacao.setSaldoR(remetente.getContaPoupanca().getSaldo());
+				transacao.setSaldoD(remetente.getContaCorrente().getSaldo());
+				
+				if(transacao.getDescricao().equals(""))
 					transacao.setDescricao("Transf. de Conta Poup. p/ Conta Corrente");
-					
-					TransacaoDAO dao = new TransacaoDAO();
-					try {	
-							remetente = dao.transfToCc(remetente, transacao);
-							pagina = "sucesso";
-					}catch (SQLException e) {
-						pagina = "erro";
-						setMsg("SQL!");
-					}
+				
+				TransacaoDAO dao = new TransacaoDAO();
+				try {	
+						remetente = dao.transfToCc(remetente, transacao);
+						pagina = "sucesso";
+				}catch (SQLException e) {
+					pagina = "erro";
+					setMsg("SQL!");
+				}
 			}else{
 					pagina = "erro";
 					setMsg("Senha incorreta!");
@@ -193,13 +195,56 @@ public class TransacaoManagedBean {
 			}else{
 				pagina = "erro";
 				setMsg("Senha incorreta!");
-			}			
+			}		
 
 			transacao = new Transacao();
 			
 			return pagina + ".faces?faces-redirect=true";
 		}
+		else
+		if (tipoTransacao.equals("Payment")){
+			
+			if(remetente.getSenhaCartao() == senhaCartao){	
 				
+				remetente.getContaCorrente().setSaldo(remetente.getContaCorrente().getSaldo() - transacao.getValor());
+				
+				transacao.setData(new java.util.Date());
+				transacao.setTipoTransacao(tipoTransacao);
+				transacao.setIdR(remetente.getId());
+				transacao.setAgenciaR(remetente.getAgencia());
+				transacao.setContaR(remetente.getContaCorrente().getConta());
+				transacao.setSaldoR(remetente.getContaCorrente().getSaldo());				
+				
+				TransacaoDAO dao = new TransacaoDAO();
+				try {
+					remetente = dao.Pagamento(remetente, transacao);
+					pagina = "sucesso";
+				} catch (SQLException e) {
+					pagina = "erro";
+					setMsg("SQLException!");
+				} catch (NullPointerException e) {
+					pagina = "erro";
+					setMsg("Null Pointer!");
+				}
+				
+				session.setAttribute("cliente", remetente);
+				session.setAttribute("saldototal", remetente.getContaCorrente().getSaldo() + remetente.getContaPoupanca().getSaldo());
+			
+			}else{
+				pagina = "erro";
+				setMsg("Senha incorreta!");
+			}		
+
+			transacao = new Transacao();
+			
+			return pagina + ".faces?faces-redirect=true";
+			
+		}
+		
+		
+		
+		
+		
 		setMsg("Transacao desconhecida!");
 		return pagina + ".faces?faces-redirect=true";	
 	}
