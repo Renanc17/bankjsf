@@ -1,0 +1,17 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+
+<h:form>
+		<center>
+		<p>
+			<h:commandLink id="cadastrarAgendamentos" action="cadastrarAgendamentos.faces?faces-redirect=true" value="#{msg.cadastrarAgendamento}"/>
+			   -   
+			<h:commandLink id="consultarAgendamentos" action="#{agendamentoManagedBean.listarAgenda}" value="#{msg.gerenciarAgendamento}"/>
+		</p>
+		</center>
+		</h:form>
+
+</ui:composition>

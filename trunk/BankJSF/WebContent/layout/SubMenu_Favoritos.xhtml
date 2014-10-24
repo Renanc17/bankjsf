@@ -1,0 +1,17 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+
+<h:form>
+		<center>
+		<p>
+			<h:commandLink id="cadastrarFavoritos" action="cadastrarFavoritos.faces?faces-redirect=true" value="#{msg.cadastrarFavorito}"/>
+			   -   
+			<h:commandLink id="consultarFavoritos" action="#{favoritoManagedBean.listarFavoritos}" value="#{msg.gerenciarFavoritos}"/>
+		</p>
+		</center>
+		</h:form>
+
+</ui:composition>
