@@ -28,19 +28,19 @@
 		*#{msg.tipoAgendamento}<br/><br/><br/>
 		    
 			
-       			<h:commandButton value="#{msg.pagamento}" action="Ag_Payment" >
+       			<h:commandButton value="#{msg.pagamento}" action="Ag_Payment.faces?faces-redirect=true" >
        				<f:setPropertyActionListener target="#{agendamentoManagedBean.a.tipoAgendamento}" value="Payment"/>	         
        			</h:commandButton>
        			  -   
-       			<h:commandButton value="#{msg.transacaoTerceiro}" action="Ag_transfToTerceiro" >
+       			<h:commandButton value="#{msg.transacaoTerceiro}" action="Ag_transfToTerceiro.faces?faces-redirect=true" >
        				<f:setPropertyActionListener target="#{agendamentoManagedBean.a.tipoAgendamento}" value="TransfToTerceiro"/>	         
        			</h:commandButton>
        			  -   
-       			<h:commandButton value="#{msg.transfToCc}" action="Ag_transfToCc" >
+       			<h:commandButton value="#{msg.transfToCc}" action="Ag_transfToCc.faces?faces-redirect=true" >
        				<f:setPropertyActionListener target="#{agendamentoManagedBean.a.tipoAgendamento}" value="TransfToCc"/>	         
        			</h:commandButton>
        			  -   
-       			<h:commandButton value="#{msg.transfToPoupanca}" action="Ag_transfToPoupanca" >
+       			<h:commandButton value="#{msg.transfToPoupanca}" action="Ag_transfToPoupanca.faces?faces-redirect=true" >
        				<f:setPropertyActionListener target="#{agendamentoManagedBean.a.tipoAgendamento}" value="TransfToPoupanca"/>	         
        			</h:commandButton>
        			

@@ -22,7 +22,7 @@
 </style>
   
        
-<title>#{msg.listaFavoritos}</title>
+<title>#{msg.listaAgendamentos}</title>
 
 	<ui:include src="/layout/Header.xhtml" />
 </h:head>
@@ -33,10 +33,10 @@
 <center>
 
 	<div style="width:50%">
-	<p:dataTable var="i" value="#{favoritoManagedBean.listaFavoritos}">
+	<p:dataTable var="i" value="#{agendamentoManagedBean.listaAgenda}">
 	    <p:column headerText="#{msg.nome}">
-	        <h:commandLink id="selecionar" value="#{i.nome}" action="#{transacaoManagedBean.selecionarFavorito}" >
-				<f:setPropertyActionListener target="#{transacaoManagedBean.favorito}" value="#{i}"/>
+	        <h:commandLink id="selecionar" value="#{i.nome}" action="#{agendamentoManagedBean.selecionarAgendamento}" >
+				<f:setPropertyActionListener target="#{agendamentoManagedBean.a}" value="#{a}"/>
 			</h:commandLink>
 	    </p:column>
 	 
