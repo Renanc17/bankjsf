@@ -31,7 +31,7 @@ public class DateController {
     }
 	
 	public Date getDataAtualMais1(){
-        dataAtualMais1.setDate(dataAtualMais1.getDate() + 1);		
+        dataAtualMais1.setDate(dataAtualMais1.getDate() + 1);	
 		return dataAtualMais1;
     }
 	

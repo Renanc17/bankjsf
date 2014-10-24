@@ -67,10 +67,10 @@
 	</tr>
 	<tr>
 		<td>
-			<p:outputLabel for="data" value="#{msg.data}:" /> 
+			#{msg.data}: 
         </td>
         <td>
-        	<p:calendar style="width: 15px" maxlength="10"  size="11" id="data" mindate="#{date.dataAtualMais1}"
+        	<p:calendar style="width: 15px" maxlength="10"  size="11" id="data" mindate="#{date.dataAtual}"
         	value="#{agendamentoManagedBean.a.data}"  pattern="dd/MM/yyyy"/>
         </td>
 	</tr>
