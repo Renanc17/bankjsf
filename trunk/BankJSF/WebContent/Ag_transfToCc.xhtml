@@ -12,7 +12,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <style type="text/css">  
            .ui-widget {  
-               font-size: 10px !important;  
+               font-size: 14px !important;  
            }  
 </style>
 
@@ -26,9 +26,9 @@
 
 	<p></p><p></p>
 	<center>
-	
+			<h4>#{msg.ag_transfToCc}</h4>
 			#{msg.preenchaAgendamento}<br/>
-	<br/><br/><br/>
+	<br/>
 	<h:form id="submit">
 	<table>
 	<tr>
@@ -64,7 +64,8 @@
 			#{msg.data}:
         </td>
         <td>
-        	<p:calendar style="width: 15px" maxlength="10"  size="11" id="data" mindate="#{date.dataAtualMais1}" maxdate="#{date.dataAtualMais45}" />
+        	<p:calendar style="width: 15px" maxlength="10"  size="11" id="data" mindate="#{date.dataAtual}"
+        	value="#{agendamentoManagedBean.a.data}"  pattern="dd/MM/yyyy"/>
         </td>
 	</tr>
 	<tr>
