@@ -4,21 +4,21 @@ import java.util.Date;
 
 public class Agendamento {
 
-	private Integer id;
-	private Integer idUsuario;
+	private int id;
+	private int idUsuario;
 	private Date data; //Data da transação
 	private String tipoAgendamento;
 	private String descricao;
 	private Double valor;
-	private Integer idD;	
-	private Integer contaD; //Numero da conta do destinatario
-	private Integer agenciaD; //Agencia do destinatario
+	private int idD;	
+	private int contaD; //Numero da conta do destinatario
+	private int agenciaD; //Agencia do destinatario
 	
 	
-	public Integer getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public Date getData() {
@@ -45,28 +45,28 @@ public class Agendamento {
 	public void setValor(Double valor) {
 		this.valor = valor;
 	}
-	public Integer getIdD() {
+	public int getIdD() {
 		return idD;
 	}
-	public void setIdD(Integer idD) {
+	public void setIdD(int idD) {
 		this.idD = idD;
 	}
-	public Integer getContaD() {
+	public int getContaD() {
 		return contaD;
 	}
-	public void setContaD(Integer contaD) {
+	public void setContaD(int contaD) {
 		this.contaD = contaD;
 	}
-	public Integer getAgenciaD() {
+	public int getAgenciaD() {
 		return agenciaD;
 	}
-	public void setAgenciaD(Integer agenciaD) {
+	public void setAgenciaD(int agenciaD) {
 		this.agenciaD = agenciaD;
 	}
-	public Integer getIdUsuario() {
+	public int getIdUsuario() {
 		return idUsuario;
 	}
-	public void setIdUsuario(Integer idUsuario) {
+	public void setIdUsuario(int idUsuario) {
 		this.idUsuario = idUsuario;
 	}
 	 

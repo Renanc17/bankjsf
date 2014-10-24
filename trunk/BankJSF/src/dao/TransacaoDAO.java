@@ -180,7 +180,7 @@ public class TransacaoDAO {
 		
 	}
 	
-	public List<Transacao> historico(Integer id, Date fromDate, Date untilDate) throws SQLException{
+	public List<Transacao> historico(int id, Date fromDate, Date untilDate) throws SQLException{
 		
 		Connection conn = ConnectionFactory.getConnection();
 		List<Transacao> lista = new ArrayList<Transacao>();
@@ -222,13 +222,13 @@ public class TransacaoDAO {
 			}else
 				if(t.getContaD() == c.getContaCorrente().getConta())
 					t.setSaldo(rs.getDouble("SaldoD"));
-			
-			//if(t.getIdR() == id){	
-			//	t.setSaldo(rs.getDouble("SaldoR"));
-			//}else
-			//	if(t.getIdD() == id)
-			//		t.setSaldo(rs.getDouble("SaldoD"));
-					
+			/*
+			if(t.getIdR() == id){	
+				t.setSaldo(rs.getDouble("SaldoR"));
+			}else
+				if(t.getIdD() == id)
+					t.setSaldo(rs.getDouble("SaldoD"));
+			*/		
 			
 			lista.add(t);
 			

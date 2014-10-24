@@ -90,7 +90,7 @@ public class AgendamentoManagedBean {
 		a.setIdUsuario(usuario.getId());	
 		
 		try{			
-			if(a.getContaD()!= null && a.getAgenciaD() != null){ //Só seta ID quando já tiver Ag e CC
+			if(a.getContaD()!= 0 && a.getAgenciaD() != 0){ //Só seta ID quando já tiver Ag e CC
 				ClienteDAO tempDAO = new ClienteDAO();
 				Cliente c= tempDAO.getCliente(a.getContaD(), a.getAgenciaD());
 				a.setIdD(c.getId());

@@ -75,7 +75,7 @@ public class ClienteDAO {
 	}
 	
 
-	public Cliente getClienteById(Integer id) throws SQLException {
+	public Cliente getClienteById(int id) throws SQLException {
 
 		Cliente cl = null;
 
@@ -111,7 +111,7 @@ public class ClienteDAO {
 
 	}
 	
-	public Cliente getCliente (Integer contac, Integer agencia) throws SQLException {
+	public Cliente getCliente (int contac, int agencia) throws SQLException {
 
 		Cliente cl = null;
 

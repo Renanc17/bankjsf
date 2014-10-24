@@ -5,10 +5,10 @@ import java.sql.Date;
 
 public class Cliente {
 	
-	private Integer id;
+	private int id;
 	private String nome;
 	private Long cpf;
-	private Integer agencia;
+	private int agencia;
 	private String senha;
 	private String tipoCliente;
 	private ContaCorrente ContaCorrente = new ContaCorrente(); 
@@ -49,11 +49,11 @@ public class Cliente {
 		this.data = data;
 	}
 
-	public Integer getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -73,11 +73,11 @@ public class Cliente {
 		this.cpf = cpf;
 	}
 
-	public Integer getAgencia() {
+	public int getAgencia() {
 		return agencia;
 	}
 
-	public void setAgencia(Integer agencia) {
+	public void setAgencia(int agencia) {
 		this.agencia = agencia;
 	}
 
