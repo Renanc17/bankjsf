@@ -18,6 +18,41 @@ public class AgendamentoDAO {
 		Connection conn = ConnectionFactory.getConnection();
 		String sql = "";
 		
+		if(verificaExistencia(a) != null){
+			alterarAgendamento(a);
+			conn.close();
+		}else{
+			
+			if(a.getIdD() != 0 && a.getContaD() != 0 && a.getAgenciaD() != 0)
+				sql = "INSERT INTO agendamento (idUsuario, data, tipoAgendamento, descricao, valor, idD, contaD, agenciaD) values(?,?,?,?,?,?,?,?)";
+			else
+				sql = "INSERT INTO agendamento (idUsuario, data, tipoAgendamento, descricao, valor) values(?,?,?,?,?)";
+					
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			
+			java.util.Date data = a.getData();
+			java.sql.Date datasql = new java.sql.Date(data.getTime());
+			
+			stmt.setInt(1, a.getIdUsuario());
+			stmt.setDate(2, datasql);
+			stmt.setString(3, a.getTipoAgendamento());
+			stmt.setString(4, a.getDescricao());
+			stmt.setDouble(5, a.getValor());
+			if(a.getIdD() != 0 && a.getContaD() != 0 && a.getAgenciaD() != 0){
+				stmt.setInt(6, a.getIdD());
+				stmt.setInt(7, a.getContaD());
+				stmt.setInt(8, a.getAgenciaD());
+			}
+			
+			stmt.executeUpdate();
+			conn.close();
+		}
+	}
+	
+	public ResultSet verificaExistencia(Agendamento a) throws SQLException{
+		Connection conn = ConnectionFactory.getConnection();
+		String sql = "";
+		
 		sql="SELECT * FROM agendamento WHERE id=?";
 		
 		PreparedStatement stmt = conn.prepareStatement(sql);
@@ -26,34 +61,8 @@ public class AgendamentoDAO {
 		
 		ResultSet rs = stmt.executeQuery();
 		
-		if(rs != null){
-			alterarAgendamento(a);
-			conn.close();
-		}else{
-		if(a.getIdD() != 0 && a.getContaD() != 0 && a.getAgenciaD() != 0)
-			sql = "INSERT INTO agendamento (idUsuario, data, tipoAgendamento, descricao, valor, idD, contaD, agenciaD) values(?,?,?,?,?,?,?,?)";
-		else
-			sql = "INSERT INTO agendamento (idUsuario, data, tipoAgendamento, descricao, valor) values(?,?,?,?,?)";
-				
-		stmt = conn.prepareStatement(sql);
+		return rs;
 		
-		java.util.Date data = a.getData();
-		java.sql.Date datasql = new java.sql.Date(data.getTime());
-		
-		stmt.setInt(1, a.getIdUsuario());
-		stmt.setDate(2, datasql);
-		stmt.setString(3, a.getTipoAgendamento());
-		stmt.setString(4, a.getDescricao());
-		stmt.setDouble(5, a.getValor());
-		if(a.getIdD() != 0 && a.getContaD() != 0 && a.getAgenciaD() != 0){
-			stmt.setInt(6, a.getIdD());
-			stmt.setInt(7, a.getContaD());
-			stmt.setInt(8, a.getAgenciaD());
-		}
-		
-		stmt.executeUpdate();
-		conn.close();
-		}
 	}
 	
 	public void alterarAgendamento(Agendamento a) throws SQLException{

@@ -39,12 +39,12 @@
 	        <h:outputText value="#{a.data}" />
 	    </p:column> 
 	 
-	    <p:column headerText="#{msg.tipoAgendamento}">
+	    <p:column headerText="#{msg.tipoAgenda}">
 	        <h:outputText value="#{a.tipoAgendamento}" />
 	    </p:column>
 	 	 
-	    <p:column headerText="#{msg.descricao}">
-	        <h:outputText value="#{a.descricao}" />
+	    <p:column headerText="#{msg.valor}">
+	        <h:outputText value="#{a.valor}" />
 	    </p:column>
 	    
 	    <p:column headerText="#{msg.descricao}">
@@ -52,13 +52,13 @@
 	    </p:column>
 	    
 	    <p:column>
-	    	<h:commandLink id="alterar" value="#{msg.alterar}" action="#{agendamentoMManagedBean.alterarAgendamento}" >
+	    	<h:commandLink id="alterar" value="#{msg.alterar}" action="#{agendamentoManagedBean.alterarAgendamento}" >
 				<f:setPropertyActionListener target="#{agendamentoManagedBean.a}" value="#{a}"/>
 			</h:commandLink>	
 	    </p:column>
 	    
 	    <p:column>
-	   	 	<h:commandLink id="excluir" value="#{msg.excluir}" onclick="return confirm('#{msg.confirmDelete}')" action="#{agendamentoManagedBean.excluir}" >
+	   	 	<h:commandLink id="excluir" value="#{msg.excluir}" onclick="return confirm('#{msg.confirmDeleteAgendamento}')" action="#{agendamentoManagedBean.excluir}" >
 				<f:setPropertyActionListener target="#{agendamentoManagedBean.a}" value="#{a}"/>
 			</h:commandLink>	
 	    </p:column>
