@@ -79,7 +79,7 @@ public class AgendamentoManagedBean {
 		return pagina + ".faces?faces-redirect=true";
 	}
 	
-	public String alterar(){
+	public String alterarLALALA(){ //Não está sendo utilizado! ;D
 		String pagina = "";
 		
 		FacesContext facesContext = FacesContext.getCurrentInstance();
@@ -119,7 +119,7 @@ public class AgendamentoManagedBean {
 		
 		try {
 			listaAgenda = dao.pegarAgenda(usuario.getId());
-			pagina = "listarAgenda";
+			pagina = "consultarAgendamentos";
 		} catch (SQLException e) {
 			pagina = "erro";
 			msg += e;
