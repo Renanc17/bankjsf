@@ -32,32 +32,36 @@
 <h:form>
 <center>
 
-	<div style="width:50%">
+	<div style="width:75%">
 	<p:dataTable var="a" value="#{agendamentoManagedBean.listaAgenda}">
 	    
-	    <p:column headerText="#{msg.data}">
-	        <h:outputText value="#{a.data}" />
+	    <p:column headerText="#{msg.data}" style="width:9%">
+	        <h:outputText value="#{a.data}" >
+	        	<f:convertDateTime pattern="dd/MM/yyyy" />
+	        </h:outputText>
 	    </p:column> 
+	    
+	    <p:column headerText="#{msg.valor}" style="width:12%">
+	        R$ <h:outputText value="#{a.valor}" >
+	        	<f:convertNumber minFractionDigits="2" />
+	        </h:outputText>
+	    </p:column>
 	 
-	    <p:column headerText="#{msg.tipoAgenda}">
+	    <p:column headerText="#{msg.tipoAgenda}">	    
 	        <h:outputText value="#{a.tipoAgendamento}" />
-	    </p:column>
-	 	 
-	    <p:column headerText="#{msg.valor}">
-	        <h:outputText value="#{a.valor}" />
-	    </p:column>
+	    </p:column>	    
 	    
 	    <p:column headerText="#{msg.descricao}">
 	        <h:outputText value="#{a.descricao}" />
 	    </p:column>
 	    
-	    <p:column>
+	    <p:column style="width:8%">
 	    	<h:commandLink id="alterar" value="#{msg.alterar}" action="#{agendamentoManagedBean.alterarAgendamento}" >
 				<f:setPropertyActionListener target="#{agendamentoManagedBean.a}" value="#{a}"/>
 			</h:commandLink>	
 	    </p:column>
 	    
-	    <p:column>
+	    <p:column style="width:8%">
 	   	 	<h:commandLink id="excluir" value="#{msg.excluir}" onclick="return confirm('#{msg.confirmDeleteAgendamento}')" action="#{agendamentoManagedBean.excluir}" >
 				<f:setPropertyActionListener target="#{agendamentoManagedBean.a}" value="#{a}"/>
 			</h:commandLink>	

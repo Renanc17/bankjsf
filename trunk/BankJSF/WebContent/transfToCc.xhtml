@@ -26,9 +26,9 @@
 
 	<p></p><p></p>
 	<center>
-	
+			<h4>#{msg.transacaoToCc}</h4>
 			#{msg.preenchaValor}<br/>
-	<br/><br/><br/>
+	<br/>
 	<h:form id="submit">
 	<table>
 	<tr>
@@ -54,7 +54,7 @@
 			#{msg.valorToTransf}:
 		</td>
 		<td>
-			R$ <h:inputText id="valor" value="#{transacaoManagedBean.transacao.valor}" size="7" >
+			R$ <h:inputText id="valor" value="#{transacaoManagedBean.transacao.valor}" size="7" maxlength="9">
 			<f:validateDoubleRange minimum="1.0" />
 			</h:inputText>
 		</td>

@@ -34,7 +34,7 @@
 	<p></p>
 	<h:form>
 			<p>#{msg.passConfirm}</p>
-			#{msg.senha}: <h:inputSecret name="passConfirm" value="#{clienteManagedBean.cliente.senha}" readonly="false"/> 
+			#{msg.senha}: <h:inputSecret name="passConfirm" value="#{clienteManagedBean.cliente.senha}" maxlength="8" /> 
 			<h:commandButton value="#{msg.entrar}" action="#{clienteManagedBean.passConfirm}" />
 	<br/><br/><br/>
 	</h:form>
