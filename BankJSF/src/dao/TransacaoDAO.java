@@ -17,7 +17,7 @@ import factory.ConnectionFactory;
 
 public class TransacaoDAO {
 	
-public Cliente transfToPoupanca(Cliente c, Transacao t) throws SQLException{		
+	public Cliente transfToPoupanca(Cliente c, Transacao t) throws SQLException{		
 		
 		Connection conn = ConnectionFactory.getConnection();
 		String sql = "UPDATE cliente SET saldoc=?, saldop=? where id=?";

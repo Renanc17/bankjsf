@@ -32,7 +32,7 @@
   </listener>
   
 	<session-config>
-  		<session-timeout>999</session-timeout>
+  		<session-timeout>3</session-timeout>
 	</session-config>
   
 	<error-page>    
@@ -41,7 +41,7 @@
 	</error-page>
    
 	<welcome-file-list>  
-		<welcome-file>/Login.jsf</welcome-file>  
+		<welcome-file>Login.jsf</welcome-file>  
 	</welcome-file-list> 
    
 </web-app>

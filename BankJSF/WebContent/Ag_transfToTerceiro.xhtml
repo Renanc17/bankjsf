@@ -20,15 +20,16 @@
            }  
 </style>
 
-<title>#{msg.pagamentos}</title>
+<title>#{msg.transfTerceiro}</title>
 
 	<ui:include src="/layout/Header.xhtml" />
 </h:head>
 
 <h:body>
+	<ui:include src="/layout/SubMenu_Agendamentos.xhtml" />
 <center>	
 	
-			#{msg.preenchaPagamento}<br/>
+			#{msg.preenchaAgendamento}<br/>
 	<br/><br/><br/>
 	<h:form id="submit">
 	
@@ -46,44 +47,51 @@
 	<tr></tr>
 	<tr>
 		<td>
-			#{msg.barcode}:
+			#{msg.agencia}:
 		</td>
 		<td>
-			<h:inputText size="12" maxlength="12"/>&nbsp;
-			<h:inputText size="12" maxlength="12"/>&nbsp;
-			<h:inputText size="12" maxlength="12"/>&nbsp;
+			<h:inputText value="#{agendamentoManagedBean.a.agenciaD}" size="11" />
 		</td>
 	</tr>
 	<tr>
-		
+		<td>
+			#{msg.cc}:	
+		</td>
+		<td>
+			<h:inputText value="#{agendamentoManagedBean.a.ContaD}" size="11" />
+		</td>
 	</tr>
 	<tr>
 		<td>
-			#{msg.valorPagamento}:
+			#{msg.valor}:
 		</td>
 		<td>
-			R$ <h:inputText value="#{transacaoManagedBean.transacao.valor}" size="7" >
-				
+			R$ <h:inputText id="valor" value="#{agendamentoManagedBean.a.valor}" size="7" >
+			<f:validateDoubleRange minimum="1.0" />
 			</h:inputText>
-			
 		</td>
+	</tr>
+	<tr>
+		<td>
+			#{msg.data}:
+        </td>
+        <td>
+        	<p:calendar style="width: 15px" maxlength="10"  size="11" id="data" mindate="#{date.dataAtualMais1}" maxdate="#{date.dataAtualMais45}" />
+        </td>
 	</tr>
 	<tr>
 		<td valign="top">
 			#{msg.descricao}:
 		</td>
 		<td>
-			 <p:inputTextarea value="#{transacaoManagedBean.transacao.descricao}" rows="5" cols="30" counter="display" maxlength="50" counterTemplate="{0} #{msg.charRemain}" autoResize="false" />
+			 <p:inputTextarea value="#{agendamentoManagedBean.a.descricao}" rows="5" cols="30" counter="display" maxlength="50" counterTemplate="{0} #{msg.charRemain}" autoResize="false" />
    			 <br/><h:outputText id="display" />
 		</td>
 	</tr>
 	</table>
 	
 	<p></p>
-	<h:commandButton id="transferir" value="#{msg.transferir}" action="transacaoConfirm" >
-		<f:setPropertyActionListener target="#{transacaoManagedBean.tipoTransacao}" value="Payment"></f:setPropertyActionListener>
-	</h:commandButton>
-	<br/><br/>
+	<h:commandButton id="continuar" value="#{msg.continuar}" action="agendamentoConfirm" />
 	
 	</h:form>
 	

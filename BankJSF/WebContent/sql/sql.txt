@@ -30,14 +30,24 @@ CREATE TABLE bankjsf.historico (
   idR INT(11) NULL,
   contaR INT(11) NULL DEFAULT NULL,
   agenciaR INT(11) NULL DEFAULT NULL,
+  saldoR DOUBLE NULL,
   idD INT(11) NULL DEFAULT NULL,
   contaD INT(11) NULL DEFAULT NULL,
   agenciaD INT(11) NULL,
+  saldoD DOUBLE NULL,
   PRIMARY KEY (id));
 
-ALTER TABLE bankjsf.historico 
-ADD COLUMN saldoR DOUBLE NULL AFTER agenciaR,
-ADD COLUMN saldoD DOUBLE NULL AFTER agenciaD;
+CREATE TABLE bankjsf.agendamento (
+  id INT NOT NULL AUTO_INCREMENT,
+  idUsuario INT NOT NULL,
+  data DATE NOT NULL,
+  tipoAgendamento VARCHAR(45) NOT NULL,
+  descricao VARCHAR(255) NULL,
+  valor DOUBLE NOT NULL,
+  idD INT NULL,
+  contaD INT NULL,
+  agenciaD INT NULL,
+  PRIMARY KEY (id));
 
 
 

@@ -8,15 +8,19 @@
 <f:view locale="#{switcher.currentLocale}">	  
 
 <h:head>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+</script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 
-<title>#{msg.agendamentos}</title>
+<title>#{msg.favoritos}</title>
 
 	<ui:include src="/layout/Header.xhtml" />
 </h:head>
 
 <h:body>
-	<ui:include src="/layout/SubMenu_Agendamentos.xhtml" />
+	<ui:include src="/layout/SubMenu_Favoritos.xhtml" />
 		
 		<p></p><p></p><center>#{msg.selectAbove}</center>
 </h:body>
