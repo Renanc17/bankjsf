@@ -30,7 +30,7 @@ public class FavoritoDAO {
 		
 	}
 	
-	public List<Favorito> listarFavoritos(Integer idCliente) throws SQLException{
+	public List<Favorito> listarFavoritos(int idCliente) throws SQLException{
 		
 		Connection conn = ConnectionFactory.getConnection();
 		

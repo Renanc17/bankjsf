@@ -18,7 +18,7 @@ public class AgendamentoDAO {
 		Connection conn = ConnectionFactory.getConnection();
 		String sql = "";
 		
-		if(a.getIdD() != null && a.getContaD() != null && a.getAgenciaD() != null)
+		if(a.getIdD() != 0 && a.getContaD() != 0 && a.getAgenciaD() != 0)
 			sql = "INSERT INTO agendamento (idUsuario, data, tipoAgendamento, descricao, valor, idD, contaD, agenciaD) values(?,?,?,?,?,?,?,?)";
 		else
 			sql = "INSERT INTO agendamento (idUsuario, data, tipoAgendamento, descricao, valor) values(?,?,?,?,?)";
@@ -33,7 +33,7 @@ public class AgendamentoDAO {
 		stmt.setString(3, a.getTipoAgendamento());
 		stmt.setString(4, a.getDescricao());
 		stmt.setDouble(5, a.getValor());
-		if(a.getIdD() != null && a.getContaD() != null && a.getAgenciaD() != null){
+		if(a.getIdD() != 0 && a.getContaD() != 0 && a.getAgenciaD() != 0){
 			stmt.setInt(6, a.getIdD());
 			stmt.setInt(7, a.getContaD());
 			stmt.setInt(8, a.getAgenciaD());
