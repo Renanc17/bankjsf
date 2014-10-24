@@ -18,7 +18,7 @@ public class AgendamentoDAO {
 		Connection conn = ConnectionFactory.getConnection();
 		String sql = "";
 		
-		if(verificaExistencia(a) != null){
+		if(a.getId() != 0){
 			alterarAgendamento(a);
 			conn.close();
 		}else{

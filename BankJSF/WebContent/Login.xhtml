@@ -22,8 +22,8 @@
 	<center>
 	<p></p>
 	<h:form>
-			#{msg.ag}: <h:inputText value="#{clienteManagedBean.cliente.agencia}" size="3" /> 
-			#{msg.cc}: <h:inputText value="#{clienteManagedBean.cliente.contaCorrente.conta}" /> 
+			#{msg.ag}: <h:inputText value="#{clienteManagedBean.cliente.agencia}" size="3" maxlength="4" /> 
+			#{msg.cc}: <h:inputText value="#{clienteManagedBean.cliente.contaCorrente.conta}" maxlength="4" /> 
 			<h:commandButton value="#{msg.entrar}" action="#{clienteManagedBean.logar}" />
 	<br/><br/><br/>
 	</h:form>
