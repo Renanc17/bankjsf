@@ -139,7 +139,7 @@ public class AgendamentoManagedBean {
 		
 		try{
 			dao.excluirAgendamento(a.getId());
-			pagina = "listarAgenda";
+			listarAgenda();
 		}catch(SQLException e){
 			pagina="erro";
 			msg = e.getMessage();
