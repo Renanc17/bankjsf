@@ -75,6 +75,7 @@ public class AgendamentoManagedBean {
 			msg = "Senha incorreta";
 		}
 		
+		a = new Agendamento();
 		return pagina + ".faces?faces-redirect=true";
 	}
 	
@@ -103,6 +104,7 @@ public class AgendamentoManagedBean {
 			msg = e.getMessage();
 		}
 		
+		a = new Agendamento();
 		return pagina + ".faces?faces-redirect=true";
 	}
 	
