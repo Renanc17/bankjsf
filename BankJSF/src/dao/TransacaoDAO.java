@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
@@ -199,6 +200,12 @@ public class TransacaoDAO {
 		
 		ResultSet rs = stmt.executeQuery();
 		
+		ResourceBundle bundle = ResourceBundle.getBundle("language_" + FacesContext.getCurrentInstance().getViewRoot().getLocale());
+		String transfToCc = bundle.getString("transfToCc");
+		String transfToPoupanca = bundle.getString("transfToPoupanca");
+		String transfTerceiro = bundle.getString("transfTerceiro");
+		String Payment = bundle.getString("payment");
+		
 		while(rs.next()){
 			
 			Transacao t = new Transacao();
@@ -222,6 +229,15 @@ public class TransacaoDAO {
 			}else
 				if(t.getContaD().equals(c.getContaCorrente().getConta()))
 					t.setSaldo(rs.getDouble("SaldoD"));
+			
+			if(t.getDescricao().equals("Payment"))
+				t.setDescricao(Payment);
+			else if(t.getDescricao().equals("transfToCc"))
+				t.setDescricao(transfToCc);
+			else if(t.getDescricao().equals("transfToPoupanca"))
+				t.setDescricao(transfToPoupanca);
+			else if(t.getDescricao().equals("transfToTerc"))
+				t.setDescricao(transfTerceiro);
 			
 			lista.add(t);
 			

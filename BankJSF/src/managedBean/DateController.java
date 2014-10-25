@@ -11,6 +11,7 @@ import javax.faces.bean.SessionScoped;
 public class DateController {
 
 	private Date dataAtual = new Date();
+	private Date dataAtualMenos7 = new Date();
 	private Date dataAtualMenos30 = new Date();
 	private Date dataAtualMenos90 = new Date();
 	private Date dataAtualMais1 = new Date();
@@ -18,6 +19,11 @@ public class DateController {
 	
 	public Date getDataAtual(){
         return dataAtual;
+    }
+	
+	public Date getDataAtualMenos7(){
+		dataAtualMenos7.setDate(dataAtualMenos7.getDate() - 7);
+        return dataAtualMenos30;
     }
 	
 	public Date getDataAtualMenos30(){
