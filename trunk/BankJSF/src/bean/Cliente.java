@@ -8,7 +8,7 @@ public class Cliente {
 	private int id;
 	private String nome;
 	private Long cpf;
-	private int agencia;
+	private Integer agencia;
 	private String senha;
 	private String tipoCliente;
 	private ContaCorrente ContaCorrente = new ContaCorrente(); 
@@ -73,11 +73,11 @@ public class Cliente {
 		this.cpf = cpf;
 	}
 
-	public int getAgencia() {
+	public Integer getAgencia() {
 		return agencia;
 	}
 
-	public void setAgencia(int agencia) {
+	public void setAgencia(Integer agencia) {
 		this.agencia = agencia;
 	}
 

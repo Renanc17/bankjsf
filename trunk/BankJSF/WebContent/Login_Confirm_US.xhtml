@@ -4,14 +4,8 @@
 	  xmlns:h="http://java.sun.com/jsf/html"
 	  xmlns:f="http://java.sun.com/jsf/core">
 	  
-<f:view locale="pt_BR">
+<f:view locale="en_US">
 <h:head>
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script type="text/javascript">
-
-	
-
-</script>
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>#{msg.banco}</title>
@@ -22,9 +16,9 @@
 	<tr>
 		<th width="90%" align="center">
 			<h:form>
-		    	<h:commandLink value="Português" />
+		    	<h:commandLink value="Português" action="Login_Confirm.faces?faces-redirect=true" />
 		    	   -   
-		    	<h:commandLink value="English" action="Login_Confirm_US" />
+		    	<h:commandLink value="English" />
 			</h:form>	   
 		</th>
 	</tr>

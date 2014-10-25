@@ -2,14 +2,14 @@ package bean;
 
 public class ContaCorrente {
 	
-	private int conta;
+	private Integer conta;
 	private Double saldo;
 	
 	
-	public int getConta() {
+	public Integer getConta() {
 		return conta;
 	}
-	public void setConta(int conta) {
+	public void setConta(Integer conta) {
 		this.conta = conta;
 	}
 	public Double getSaldo() {
