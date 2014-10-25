@@ -237,7 +237,7 @@ public List<Transacao> ultimosLanc(int id) throws SQLException{
 		Connection conn = ConnectionFactory.getConnection();
 		List<Transacao> lista = new ArrayList<Transacao>();
 		
-		String sql = "SELECT * FROM historico WHERE (idR = ? or idD = ?) ORDER BY data DESC"; 
+		String sql = "SELECT * FROM historico WHERE (idR = ? or idD = ?) ORDER BY id DESC"; 
 		
 		PreparedStatement stmt = conn.prepareStatement(sql);
 
