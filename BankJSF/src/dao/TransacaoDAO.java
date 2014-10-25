@@ -222,13 +222,54 @@ public class TransacaoDAO {
 			}else
 				if(t.getContaD() == c.getContaCorrente().getConta())
 					t.setSaldo(rs.getDouble("SaldoD"));
-			/*
-			if(t.getIdR() == id){	
+			
+			lista.add(t);
+			
+		}
+		
+		conn.close();
+		return lista;
+		
+	}
+	
+public List<Transacao> ultimosLanc(int id) throws SQLException{
+		
+		Connection conn = ConnectionFactory.getConnection();
+		List<Transacao> lista = new ArrayList<Transacao>();
+		
+		String sql = "SELECT * FROM historico WHERE (idR = ? or idD = ?) ORDER BY data DESC;"; 
+		
+		PreparedStatement stmt = conn.prepareStatement(sql);
+
+
+		stmt.setInt(1, id);
+		stmt.setInt(2, id);
+		
+		ResultSet rs = stmt.executeQuery();
+		
+		for(int i = 0; i < 5 ; rs.next()){
+			
+			Transacao t = new Transacao();
+			
+			t.setData(rs.getDate("data"));
+			t.setTipoTransacao(rs.getString("tipoTransacao"));
+			t.setDescricao(rs.getString("descricao"));
+			t.setValor(rs.getDouble("valor"));
+			t.setIdR(rs.getInt("idR"));
+			t.setContaR(rs.getInt("contaR"));
+			t.setAgenciaR(rs.getInt("agenciaR"));
+			t.setIdD(rs.getInt("idD"));
+			t.setContaD(rs.getInt("contaD"));
+			t.setAgenciaD(rs.getInt("agenciaD"));
+						
+			ClienteDAO dao = new ClienteDAO();
+			Cliente c = dao.getClienteById(id);
+			
+			if(t.getContaR() == c.getContaCorrente().getConta()){	
 				t.setSaldo(rs.getDouble("SaldoR"));
 			}else
-				if(t.getIdD() == id)
+				if(t.getContaD() == c.getContaCorrente().getConta())
 					t.setSaldo(rs.getDouble("SaldoD"));
-			*/		
 			
 			lista.add(t);
 			
