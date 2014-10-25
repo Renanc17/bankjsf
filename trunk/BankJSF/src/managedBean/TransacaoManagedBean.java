@@ -28,6 +28,7 @@ public class TransacaoManagedBean {
 	private Date fromDate = new Date();
 	private Date untilDate = new Date();
 	private List<Transacao> listaExtrato = new ArrayList<Transacao>();
+	private List<Transacao> listaUltimosLanc = new ArrayList<Transacao>();
 	
 	public Transacao getTransacao() {
 		return transacao;
@@ -83,6 +84,15 @@ public class TransacaoManagedBean {
 	public void setUntilDate(Date untilDate) {
 		this.untilDate = untilDate;
 	}
+	public List<Transacao> getListaUltimosLanc() {
+		return listaUltimosLanc;
+	}
+	public void setListaUltimosLanc(List<Transacao> listaUltimosLanc) {
+		this.listaUltimosLanc = listaUltimosLanc;
+	}
+	
+	
+	
 	
 	public String transacao(){
 		String pagina = "";
@@ -280,6 +290,27 @@ public class TransacaoManagedBean {
 		
 		return pagina + ".faces?faces-redirect=true";
 	}
+	
+	public String listarUltimosLanc(){
+		String pagina = "";
+		
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
+		remetente = (Cliente) session.getAttribute("cliente");
+			
+		TransacaoDAO dao = new TransacaoDAO();
+		try {
+			listaUltimosLanc = dao.ultimosLanc(remetente.getId());
+			pagina = "Extrato";
+		} catch (SQLException e) {
+			pagina = "erro";
+			msg += e;
+		}
+		
+		
+		return pagina + ".faces?faces-redirect=true";
+	}
+	
 	
 
 }
