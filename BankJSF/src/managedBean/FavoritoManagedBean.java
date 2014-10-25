@@ -2,6 +2,7 @@ package managedBean;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -141,9 +142,13 @@ public class FavoritoManagedBean {
 									throws ValidatorException{
 		FavoritoDAO dao = new FavoritoDAO();
 		
+		ResourceBundle bundle = ResourceBundle.getBundle(msg,
+	    FacesContext.getCurrentInstance().getViewRoot().getLocale());
+		String mensagem = bundle.getString("favoritoExistente");
+		
 		try {
 			if(dao.verificaExistencia(f)){
-				FacesMessage message= new FacesMessage("Você não pode repetir o cadastro de um Favorito");
+				FacesMessage message = new FacesMessage(mensagem);
 				throw new ValidatorException(message);
 			}
 		} catch (SQLException e) {
