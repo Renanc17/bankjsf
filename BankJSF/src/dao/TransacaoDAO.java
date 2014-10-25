@@ -217,7 +217,7 @@ public class TransacaoDAO {
 			ClienteDAO dao = new ClienteDAO();
 			Cliente c = dao.getClienteById(id);
 			
-			if(t.getContaR() == c.getContaCorrente().getConta()){	
+			if(t.getContaR() == c.getContaCorrente().getConta() || t.getIdR() == t.getIdD()){	
 				t.setSaldo(rs.getDouble("SaldoR"));
 			}else
 				if(t.getContaD() == c.getContaCorrente().getConta())
@@ -268,7 +268,7 @@ public List<Transacao> ultimosLanc(int id) throws SQLException{
 			ClienteDAO dao = new ClienteDAO();
 			Cliente c = dao.getClienteById(id);
 			
-			if(t.getContaR() == c.getContaCorrente().getConta()){	
+			if(t.getContaR() == c.getContaCorrente().getConta() || t.getIdR() == t.getIdD()){	
 				t.setSaldo(rs.getDouble("SaldoR"));
 			}else
 				if(t.getContaD() == c.getContaCorrente().getConta())
