@@ -8,6 +8,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import dao.ClienteDAO;
+import dao.TransacaoDAO;
 import bean.Cliente;
 
 @SessionScoped
@@ -72,6 +73,7 @@ public class ClienteManagedBean {
 			
 		ClienteDAO dao = new ClienteDAO();
 		Cliente user = null;
+		TransacaoDAO tdao = new TransacaoDAO();
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 				
 		try{
@@ -81,6 +83,7 @@ public class ClienteManagedBean {
 				HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
 				session.setAttribute("cliente", cliente);
 				saldoTotal();
+				session.setAttribute("listaUltimosLanc", tdao.ultimosLanc(cliente.getId()));
 				resultado = "Home";
 			}
 			

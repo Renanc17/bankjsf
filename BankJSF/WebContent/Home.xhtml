@@ -10,7 +10,11 @@
 <f:view locale="#{switcher.currentLocale}">	  
 <h:head>
 
-
+<style type="text/css">  
+           .ui-widget {  
+               font-size: 13px !important;  
+           }  
+</style>
 
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script type="text/javascript">
@@ -66,6 +70,57 @@ $(document).ready(function () {
 		</td>
 	</tr>	
 	</table>
+	<br /><br /><br />
+	<h:form>
+	<div style="width:85%">
+	<p:dataTable var="i" value="#{listaUltimosLanc}">
+	
+	    <p:column headerText="#{msg.data}" style="width:8%">
+	        <h:outputText value="#{i.data}" >
+	        	<f:convertDateTime pattern="dd/MM/yyyy" />
+	        </h:outputText>
+	    </p:column>
+	 
+	    <p:column headerText="#{msg.tipoTransacao}" style="width:15%">
+	        <h:outputText value="#{i.tipoTransacao}" />
+	    </p:column>
+	 	 
+	    <p:column headerText="#{msg.descricao}">
+	        <h:outputText value="#{i.descricao}" />
+	    </p:column>
+	    
+	    <p:column headerText="#{msg.agenciaR}" style="width:8%">
+	        <h:outputText value="#{i.agenciaR}" />
+	    </p:column>
+	    
+	    <p:column headerText="#{msg.contaR}" style="width:8%">
+	        <h:outputText value="#{i.contaR}" />
+	    </p:column>
+	    
+	    <p:column headerText="#{msg.agenciaD}" style="width:8%">
+	        <h:outputText value="#{i.agenciaD}" />
+	    </p:column>
+	    
+	    <p:column headerText="#{msg.contaD}" style="width:8%">
+	        <h:outputText value="#{i.contaD}" />
+	    </p:column>
+	    
+	    <p:column headerText="#{msg.valor}" style="width:10%">
+	        R$ <h:outputText value="#{i.valor}" >
+	        	<f:convertNumber minFractionDigits="2" />
+	        </h:outputText>
+	    </p:column>
+	    
+	    <p:column headerText="#{msg.saldo}" style="width:10%">
+	        R$ <h:outputText value="#{i.saldo}" >
+	        	<f:convertNumber minFractionDigits="2" />
+	        </h:outputText>
+	    </p:column>
+	    
+	</p:dataTable>
+	</div>
+	
+	</h:form>
 	</center>
 </h:body>
 </f:view>
