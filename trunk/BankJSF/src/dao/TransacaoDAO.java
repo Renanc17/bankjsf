@@ -247,7 +247,8 @@ public List<Transacao> ultimosLanc(int id) throws SQLException{
 		
 		ResultSet rs = stmt.executeQuery();
 		
-		for(int i = 0; i < 5 ; rs.next()){
+		for(int i = 0; i < 5 ; i++){
+			rs.next();
 			
 			Transacao t = new Transacao();
 			
