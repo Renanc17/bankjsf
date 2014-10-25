@@ -39,7 +39,7 @@
 			required="true"
 			requiredMessage="#{msg.cc}: #{msg.campoObrigatorio}"
 			validatorMessage="#{msg.cc}: #{msg.valorNegativo}"
-			converterMessage="#{msg.cc}: #{msg.valorInvalido}">
+			converterMessage="#{msg.cc}: #{msg.valorInvalido}" >
 				<f:validateLongRange minimum="0"/>
 			</h:inputText> 
 			<h:commandButton value="#{msg.entrar}" action="#{clienteManagedBean.logar}" />

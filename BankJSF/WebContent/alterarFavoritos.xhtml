@@ -24,11 +24,35 @@
 	<center>
 	<h:form>
 	<table>
-			<tr><td>#{msg.nome}: </td><td><h:inputText value="#{favoritoManagedBean.f.nome}" /></td></tr>
-			<tr><td>#{msg.ag}: </td><td><h:inputText value="#{favoritoManagedBean.f.agencia}" /></td></tr>
-			<tr><td>#{msg.cc}: </td><td><h:inputText value="#{favoritoManagedBean.f.contaC}" /></td></tr>
+			<tr>
+				<td>
+					#{msg.nome}: 
+				</td>
+				<td>
+					<h:inputText value="#{favoritoManagedBean.f.nome}" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					#{msg.ag}: 
+				</td>
+				<td>
+					<h:inputText id="ag" value="#{favoritoManagedBean.f.agencia}" 
+					validator="#{favoritoManagedBean.verificarExistencia}"/>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					#{msg.cc}: 
+				</td>
+				<td>
+					<h:inputText id="cc" value="#{favoritoManagedBean.f.contaC}" />
+				</td>
+			</tr>
 	</table>
 		<h:commandButton value="#{msg.alterar}" onclick="alert('#{msg.favoritoAlterado}')" action="#{favoritoManagedBean.alterarFavorito}" />
+		<br/><br/>
+		<h:message for="ag" style="color:red" /> <br/>
 	</h:form>
 	</center>		
 </h:body>

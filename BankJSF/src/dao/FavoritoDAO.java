@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import bean.Agendamento;
 import bean.Favorito;
 import factory.ConnectionFactory;
 
@@ -90,6 +91,27 @@ public class FavoritoDAO {
 		stmt.setInt(1, pk);
 		stmt.executeUpdate();
 		conn.close();
+	}
+	
+	public boolean verificaExistencia(Favorito f) throws SQLException{
+		Connection conn = ConnectionFactory.getConnection();
+		String sql = "";
+		
+		sql="SELECT * FROM favorito WHERE idCliente=? and agencia=? and contaC=?";
+		
+		PreparedStatement stmt = conn.prepareStatement(sql);
+
+		stmt.setInt(1, f.getIdCliente());
+		stmt.setInt(2, f.getAgencia());
+		stmt.setInt(3, f.getContaC());
+		
+		ResultSet rs = stmt.executeQuery();
+		
+		if(rs != null)
+			return true;
+		else
+			return false;
+		
 	}
 
 }
