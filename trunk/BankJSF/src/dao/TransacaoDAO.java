@@ -229,15 +229,15 @@ public class TransacaoDAO {
 			}else
 				if(t.getContaD().equals(c.getContaCorrente().getConta()))
 					t.setSaldo(rs.getDouble("SaldoD"));
-			
-			if(t.getDescricao().equals("Payment"))
-				t.setDescricao(Payment);
-			else if(t.getDescricao().equals("transfToCc"))
-				t.setDescricao(transfToCc);
-			else if(t.getDescricao().equals("transfToPoupanca"))
-				t.setDescricao(transfToPoupanca);
-			else if(t.getDescricao().equals("transfToTerc"))
-				t.setDescricao(transfTerceiro);
+					
+			if(t.getTipoTransacao().equals("Payment"))
+				t.setTipoTransacao(Payment);
+			else if(t.getTipoTransacao().equals("transfToCc"))
+				t.setTipoTransacao(transfToCc);
+			else if(t.getTipoTransacao().equals("transfToPoupanca"))
+				t.setTipoTransacao(transfToPoupanca);
+			else if(t.getTipoTransacao().equals("transfToTerc"))
+				t.setTipoTransacao(transfTerceiro);
 			
 			lista.add(t);
 			
@@ -262,6 +262,12 @@ public List<Transacao> ultimosLanc(int id) throws SQLException{
 		stmt.setInt(2, id);
 		
 		ResultSet rs = stmt.executeQuery();
+		
+		ResourceBundle bundle = ResourceBundle.getBundle("language_" + FacesContext.getCurrentInstance().getViewRoot().getLocale());
+		String transfToCc = bundle.getString("transfToCc");
+		String transfToPoupanca = bundle.getString("transfToPoupanca");
+		String transfTerceiro = bundle.getString("transfTerceiro");
+		String Payment = bundle.getString("payment");
 		
 		for(int i = 0; i < 5 ; i++){
 			
@@ -289,6 +295,15 @@ public List<Transacao> ultimosLanc(int id) throws SQLException{
 			}else
 				if(t.getContaD().equals(c.getContaCorrente().getConta()))
 					t.setSaldo(rs.getDouble("SaldoD"));
+			
+			if(t.getTipoTransacao().equals("Payment"))
+				t.setTipoTransacao(Payment);
+			else if(t.getTipoTransacao().equals("transfToCc"))
+				t.setTipoTransacao(transfToCc);
+			else if(t.getTipoTransacao().equals("transfToPoupanca"))
+				t.setTipoTransacao(transfToPoupanca);
+			else if(t.getTipoTransacao().equals("transfToTerc"))
+				t.setTipoTransacao(transfTerceiro);
 			
 			lista.add(t);
 
