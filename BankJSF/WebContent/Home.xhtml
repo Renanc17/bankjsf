@@ -35,6 +35,9 @@ $(document).ready(function () {
 	<table>	
 	<tr>
 		<th align="center">
+			#{msg.conta}
+		</th>
+		<th align="center">
 			#{msg.tipoSaldo}
 		</th>
 		<th align="center">
@@ -43,7 +46,10 @@ $(document).ready(function () {
 	</tr>
 	<tr>
 		<td>
-			#{msg.saldoEmCC}:
+			#{cliente.contaCorrente.conta} 
+		</td>
+		<td>
+			#{msg.CC}
 		</td>
 		<td>R$ <h:outputText value="#{cliente.contaCorrente.saldo}" >
 					<f:convertNumber minFractionDigits="2" />
@@ -52,7 +58,10 @@ $(document).ready(function () {
 	</tr>
 	<tr>
 		<td>
-			#{msg.saldoEmCP}:
+			#{cliente.contaPoupanca.conta} 
+		</td>
+		<td>
+			#{msg.CP}
 		</td>
 		<td>R$ <h:outputText value="#{cliente.contaPoupanca.saldo}" >
 					<f:convertNumber minFractionDigits="2" />
@@ -60,8 +69,9 @@ $(document).ready(function () {
 		</td>
 	</tr>
 	<tr>
+		<td></td>
 		<td>
-			#{msg.saldoTotal}:
+			#{msg.Total}
 		</td>
 
 		<td> R$ <h:outputText value="#{saldototal}" >
@@ -70,9 +80,11 @@ $(document).ready(function () {
 		</td>
 	</tr>	
 	</table>
-	<br /><br /><br />
+	<br /><br />
+		<h4>#{msg.ultimosLancamentos}</h4>
+	<br />
 	<h:form>
-	<div style="width:85%">
+	<div style="width:75%">
 	<p:dataTable var="i" value="#{listaUltimosLanc}">
 	
 	    <p:column headerText="#{msg.data}" style="width:8%">
@@ -88,19 +100,7 @@ $(document).ready(function () {
 	    <p:column headerText="#{msg.descricao}">
 	        <h:outputText value="#{i.descricao}" />
 	    </p:column>
-	    
-	    <p:column headerText="#{msg.agenciaR}" style="width:8%">
-	        <h:outputText value="#{i.agenciaR}" />
-	    </p:column>
-	    
-	    <p:column headerText="#{msg.contaR}" style="width:8%">
-	        <h:outputText value="#{i.contaR}" />
-	    </p:column>
-	    
-	    <p:column headerText="#{msg.agenciaD}" style="width:8%">
-	        <h:outputText value="#{i.agenciaD}" />
-	    </p:column>
-	    
+	    	    
 	    <p:column headerText="#{msg.contaD}" style="width:8%">
 	        <h:outputText value="#{i.contaD}" />
 	    </p:column>
