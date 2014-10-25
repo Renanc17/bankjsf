@@ -142,8 +142,7 @@ public class FavoritoManagedBean {
 									throws ValidatorException{
 		FavoritoDAO dao = new FavoritoDAO();
 		
-		ResourceBundle bundle = ResourceBundle.getBundle(msg,
-	    FacesContext.getCurrentInstance().getViewRoot().getLocale());
+		ResourceBundle bundle = ResourceBundle.getBundle("language_" + FacesContext.getCurrentInstance().getViewRoot().getLocale());
 		String mensagem = bundle.getString("favoritoExistente");
 		
 		try {
