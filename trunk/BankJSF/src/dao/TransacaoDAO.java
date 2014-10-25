@@ -237,7 +237,7 @@ public List<Transacao> ultimosLanc(int id) throws SQLException{
 		Connection conn = ConnectionFactory.getConnection();
 		List<Transacao> lista = new ArrayList<Transacao>();
 		
-		String sql = "SELECT * FROM historico WHERE (idR = ? or idD = ?) ORDER BY data DESC;"; 
+		String sql = "SELECT * FROM historico WHERE (idR = ? or idD = ?)"; 
 		
 		PreparedStatement stmt = conn.prepareStatement(sql);
 
@@ -248,7 +248,9 @@ public List<Transacao> ultimosLanc(int id) throws SQLException{
 		ResultSet rs = stmt.executeQuery();
 		
 		for(int i = 0; i < 5 ; i++){
-			rs.next();
+			
+			if(!rs.next())
+				break;
 			
 			Transacao t = new Transacao();
 			
@@ -273,7 +275,7 @@ public List<Transacao> ultimosLanc(int id) throws SQLException{
 					t.setSaldo(rs.getDouble("SaldoD"));
 			
 			lista.add(t);
-			
+
 		}
 		
 		conn.close();
