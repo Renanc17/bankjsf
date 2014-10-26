@@ -28,7 +28,7 @@ public class TransacaoManagedBean {
 	private String msg;
 	private Date fromDate = new Date();
 	private Date untilDate = new Date();
-	private List<Transacao> listaExtrato = new ArrayList<Transacao>();
+	//private List<Transacao> listaExtrato = new ArrayList<Transacao>();
 	
 	ResourceBundle bundle = ResourceBundle.getBundle("language_" + FacesContext.getCurrentInstance().getViewRoot().getLocale());
 	String senhaErrada = bundle.getString("senhaErrada");
@@ -69,12 +69,12 @@ public class TransacaoManagedBean {
 	public void setMsg(String msg) {
 		this.msg = msg;
 	}
-	public List<Transacao> getListaExtrato(){
+	/*public List<Transacao> getListaExtrato(){
 		return listaExtrato;
 	}
 	public void setListaExtrato(List<Transacao> listaExtrato){
 		this.listaExtrato = listaExtrato;
-	}
+	}*/
 	public Date getFromDate() {
 		return fromDate;
 	}
@@ -125,7 +125,8 @@ public class TransacaoManagedBean {
 				TransacaoDAO dao = new TransacaoDAO();
 				try {
 					
-					remetente = dao.transfToPoupanca(remetente, transacao);					
+					remetente = dao.transfToPoupanca(remetente, transacao);
+					session.setAttribute("listaUltimosLanc", dao.ultimosLanc(remetente.getId()));
 					pagina = "sucesso";			
 				} catch (SQLException e) {
 					pagina = "erro";
@@ -168,6 +169,7 @@ public class TransacaoManagedBean {
 				TransacaoDAO dao = new TransacaoDAO();
 				try {	
 						remetente = dao.transfToCc(remetente, transacao);
+						session.setAttribute("listaUltimosLanc", dao.ultimosLanc(remetente.getId()));
 						pagina = "sucesso";
 				}catch (SQLException e) {
 					pagina = "erro";
@@ -192,6 +194,7 @@ public class TransacaoManagedBean {
 				TransacaoDAO dao = new TransacaoDAO();
 				try {
 					remetente = dao.transferencia(remetente, transacao);
+					session.setAttribute("listaUltimosLanc", dao.ultimosLanc(remetente.getId()));
 					pagina = "sucesso";
 				} catch (SQLException e) {
 					pagina = "erro";
@@ -230,6 +233,7 @@ public class TransacaoManagedBean {
 				TransacaoDAO dao = new TransacaoDAO();
 				try {
 					remetente = dao.Pagamento(remetente, transacao);
+					session.setAttribute("listaUltimosLanc", dao.ultimosLanc(remetente.getId()));
 					pagina = "sucesso";
 				} catch (SQLException e) {
 					pagina = "erro";
@@ -241,7 +245,7 @@ public class TransacaoManagedBean {
 				
 				session.setAttribute("cliente", remetente);
 				session.setAttribute("saldototal", remetente.getContaCorrente().getSaldo() + remetente.getContaPoupanca().getSaldo());
-			
+				
 			}else{
 				pagina = "erro";
 				setMsg(senhaErrada);
@@ -282,7 +286,8 @@ public class TransacaoManagedBean {
 			
 		TransacaoDAO dao = new TransacaoDAO();
 		try {
-			listaExtrato = dao.historico(remetente.getId(), fromDate, untilDate);
+			//listaExtrato = dao.historico(remetente.getId(), fromDate, untilDate);
+			session.setAttribute("listaExtrato", dao.historico(remetente.getId(), fromDate, untilDate));
 			pagina = "Extrato";
 		} catch (SQLException e) {
 			pagina = "erro";
