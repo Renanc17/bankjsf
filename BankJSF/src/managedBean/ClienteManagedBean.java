@@ -1,6 +1,7 @@
 package managedBean;
 
 import java.sql.SQLException;
+import java.util.ResourceBundle;
 
 import javax.servlet.http.HttpSession;
 import javax.faces.bean.ManagedBean;
@@ -18,6 +19,9 @@ public class ClienteManagedBean {
 	private Cliente cliente = new Cliente();
 	private Double saldoTotal;
 	private String msg = "";
+	
+	ResourceBundle bundle = ResourceBundle.getBundle("language_" + FacesContext.getCurrentInstance().getViewRoot().getLocale());
+	String senhaErrada = bundle.getString("senhaErrada");
 
 	public Double getSaldoTotal() {
 		return saldoTotal;
@@ -75,6 +79,8 @@ public class ClienteManagedBean {
 		Cliente user = null;
 		TransacaoDAO tdao = new TransacaoDAO();
 		FacesContext facesContext = FacesContext.getCurrentInstance();
+		
+		
 				
 		try{
 			user = dao.passConfirm(cliente);
@@ -89,7 +95,7 @@ public class ClienteManagedBean {
 			
 			else{
 				resultado = "erro";
-				msg += "Senha incorreta.";
+				msg = senhaErrada;
 			}
 		}catch(SQLException e){
 			resultado = "erro";

@@ -10,9 +10,11 @@ public class Transacao {
 	private String descricao;
 	private Double valor;
 	private Integer idR;	
+	private String nomeR;	
 	private Integer contaR; //Numero da conta do remetente
 	private Integer agenciaR; //Agencia do remetente
-	private Integer idD;	
+	private Integer idD;
+	private String nomeD;		
 	private Integer contaD; //Numero da conta do destinatario
 	private Integer agenciaD; //Agencia do destinatario
 	private Double saldoR;
@@ -103,6 +105,17 @@ public class Transacao {
 	public void setSaldoD(Double saldoD) {
 		this.saldoD = saldoD;
 	}
-	
+	public String getNomeR() {
+		return nomeR;
+	}
+	public void setNomeR(String nomeR) {
+		this.nomeR = nomeR;
+	}
+	public String getNomeD() {
+		return nomeD;
+	}
+	public void setNomeD(String nomeD) {
+		this.nomeD = nomeD;
+	}
 	
 }
