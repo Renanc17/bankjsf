@@ -44,7 +44,7 @@
 	<h:form>	
 	<br/>
 	<div style="width:85%">
-	<p:dataTable var="i" value="#{transacaoManagedBean.listaExtrato}">
+	<p:dataTable var="i" value="#{listaExtrato}">
 	
 	    <p:column headerText="#{msg.data}" style="width:8%">
 	        <h:outputText value="#{i.data}" >
@@ -56,7 +56,7 @@
 	        <h:outputText value="#{i.tipoTransacao}" />
 	    </p:column>
 	 	 
-	    <p:column headerText="#{msg.descricao}">
+	    <p:column headerText="#{msg.descricao}" style="width:22%">
 	        <h:outputText value="#{i.descricao}" />
 	    </p:column>
 	    

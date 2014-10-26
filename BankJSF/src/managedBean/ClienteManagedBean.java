@@ -1,6 +1,7 @@
 package managedBean;
 
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 import javax.servlet.http.HttpSession;
@@ -22,6 +23,7 @@ public class ClienteManagedBean {
 	
 	ResourceBundle bundle = ResourceBundle.getBundle("language_" + FacesContext.getCurrentInstance().getViewRoot().getLocale());
 	String senhaErrada = bundle.getString("senhaErrada");
+
 
 	public Double getSaldoTotal() {
 		return saldoTotal;
@@ -49,6 +51,7 @@ public class ClienteManagedBean {
 
 	public String logar() {
 		String resultado = "";
+		
 
 		ClienteDAO dao = new ClienteDAO();
 		boolean user;
@@ -74,6 +77,8 @@ public class ClienteManagedBean {
 
 		String resultado = "";
 		msg = "";
+		Date fromDate = new Date();
+		Date untilDate = new Date();
 			
 		ClienteDAO dao = new ClienteDAO();
 		Cliente user = null;
@@ -88,8 +93,9 @@ public class ClienteManagedBean {
 				cliente = user;
 				HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
 				session.setAttribute("cliente", cliente);
-				saldoTotal();
+				session.setAttribute("saldototal", cliente.getContaCorrente().getSaldo()+cliente.getContaPoupanca().getSaldo());
 				session.setAttribute("listaUltimosLanc", tdao.ultimosLanc(cliente.getId()));
+				session.setAttribute("listaExtrato", tdao.historico(cliente.getId(), fromDate, untilDate));
 				resultado = "Home";
 			}
 			
@@ -106,15 +112,6 @@ public class ClienteManagedBean {
 		
 	}
 		
-	public void saldoTotal(){
-		
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-		HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
-		
-		Cliente clienteAtualizado = (Cliente) session.getAttribute("cliente");
-		
-		session.setAttribute("saldototal", clienteAtualizado.getContaCorrente().getSaldo()+clienteAtualizado.getContaPoupanca().getSaldo());
-	}
 	
 	public String logout(){
 		String pagina = "Login";
