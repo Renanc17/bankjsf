@@ -141,6 +141,8 @@ public class TransacaoDAO {
 		t.setIdD(dest.getId());
 		t.setSaldoR(saldoR);
 		t.setSaldoD(saldoD);
+		t.setNomeR(rem.getNome());
+		t.setNomeD(dest.getNome());
 		
 		return t;
 	}
@@ -150,7 +152,7 @@ public class TransacaoDAO {
 		String sql = "";
 		
 		if(!t.getTipoTransacao().equals("Payment"))
-			sql = "INSERT into historico(data, tipoTransacao, descricao, valor, idR, contaR, agenciaR, saldoR, idD, contaD, agenciaD, saldoD) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+			sql = "INSERT into historico(data, tipoTransacao, descricao, valor, idR, contaR, agenciaR, saldoR, idD, contaD, agenciaD, saldoD, nomeR, nomeD) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		else
 			sql = "INSERT into historico(data, tipoTransacao, descricao, valor, idR, contaR, agenciaR, saldoR) VALUES(?,?,?,?,?,?,?,?)";
 		
@@ -172,7 +174,9 @@ public class TransacaoDAO {
 			stmt.setInt(9, t.getIdD());
 			stmt.setInt(10, t.getContaD());
 			stmt.setInt(11, t.getAgenciaD());
-			stmt.setDouble(12, t.getSaldoD());
+			stmt.setDouble(12, t.getSaldoD());		
+			stmt.setString(13, t.getNomeR());
+			stmt.setString(14, t.getNomeD());
 		}
 		stmt.executeUpdate();
 		

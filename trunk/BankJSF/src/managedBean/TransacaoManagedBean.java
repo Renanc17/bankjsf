@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -28,6 +29,9 @@ public class TransacaoManagedBean {
 	private Date fromDate = new Date();
 	private Date untilDate = new Date();
 	private List<Transacao> listaExtrato = new ArrayList<Transacao>();
+	
+	ResourceBundle bundle = ResourceBundle.getBundle("language_" + FacesContext.getCurrentInstance().getViewRoot().getLocale());
+	String senhaErrada = bundle.getString("senhaErrada");
 	
 	public Transacao getTransacao() {
 		return transacao;
@@ -112,6 +116,8 @@ public class TransacaoManagedBean {
 				transacao.setTipoTransacao(tipoTransacao);
 				transacao.setSaldoR(remetente.getContaCorrente().getSaldo());
 				transacao.setSaldoD(remetente.getContaPoupanca().getSaldo());
+				transacao.setNomeR(remetente.getNome());
+				transacao.setNomeD(remetente.getNome());
 				
 				if(transacao.getDescricao().equals(""))
 					transacao.setDescricao("Transf. de Conta Corrente p/ Conta Poup.");
@@ -126,7 +132,7 @@ public class TransacaoManagedBean {
 				}
 			}else{
 				pagina = "erro";
-				setMsg("Senha incorreta!");
+				setMsg(senhaErrada);
 			}
 			
 				session.setAttribute("cliente", remetente);	
@@ -153,6 +159,8 @@ public class TransacaoManagedBean {
 				transacao.setTipoTransacao(tipoTransacao);
 				transacao.setSaldoR(remetente.getContaPoupanca().getSaldo());
 				transacao.setSaldoD(remetente.getContaCorrente().getSaldo());
+				transacao.setNomeR(remetente.getNome());
+				transacao.setNomeD(remetente.getNome());
 				
 				if(transacao.getDescricao().equals(""))
 					transacao.setDescricao("Transf. de Conta Poup. p/ Conta Corrente");
@@ -167,7 +175,7 @@ public class TransacaoManagedBean {
 				}
 			}else{
 					pagina = "erro";
-					setMsg("Senha incorreta!");
+					setMsg(senhaErrada);
 			}
 					
 			session.setAttribute("cliente", remetente);							
@@ -198,7 +206,7 @@ public class TransacaoManagedBean {
 			
 			}else{
 				pagina = "erro";
-				setMsg("Senha incorreta!");
+				setMsg(senhaErrada);
 			}		
 
 			transacao = new Transacao();
@@ -236,7 +244,7 @@ public class TransacaoManagedBean {
 			
 			}else{
 				pagina = "erro";
-				setMsg("Senha incorreta!");
+				setMsg(senhaErrada);
 			}		
 
 			transacao = new Transacao();
@@ -303,6 +311,9 @@ public class TransacaoManagedBean {
 		
 		
 		return pagina + ".faces?faces-redirect=true";
+	}
+	public String teste(){
+		return "Home";
 	}
 	
 	

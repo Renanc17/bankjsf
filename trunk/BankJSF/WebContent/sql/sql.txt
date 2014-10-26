@@ -31,11 +31,14 @@ CREATE TABLE bankjsf.historico (
   contaR INT(11) NULL DEFAULT NULL,
   agenciaR INT(11) NULL DEFAULT NULL,
   saldoR DOUBLE NULL,
+  nomeR VARCHAR(45) NULL,
   idD INT(11) NULL DEFAULT NULL,
   contaD INT(11) NULL DEFAULT NULL,
   agenciaD INT(11) NULL,
   saldoD DOUBLE NULL,
+  nomeD VARCHAR(45) NULL,
   PRIMARY KEY (id));
+  
 
 CREATE TABLE bankjsf.agendamento (
   id INT NOT NULL AUTO_INCREMENT,
