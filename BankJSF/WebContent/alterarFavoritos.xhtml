@@ -29,7 +29,8 @@
 					#{msg.nome}: 
 				</td>
 				<td>
-					<h:inputText value="#{favoritoManagedBean.f.nome}" />
+					<h:inputText value="#{favoritoManagedBean.f.nome}" 
+					validator="#{favoritoManagedBean.verificarExistencia}"/>
 				</td>
 			</tr>
 			<tr>
@@ -37,8 +38,7 @@
 					#{msg.ag}: 
 				</td>
 				<td>
-					<h:inputText id="ag" value="#{favoritoManagedBean.f.agencia}" 
-					validator="#{favoritoManagedBean.verificarExistencia}"/>
+					<h:inputText id="ag" value="#{favoritoManagedBean.f.agencia}" />
 				</td>
 			</tr>
 			<tr>
@@ -46,7 +46,9 @@
 					#{msg.cc}: 
 				</td>
 				<td>
-					<h:inputText id="cc" value="#{favoritoManagedBean.f.contaC}" />
+					<h:inputText id="cc" value="#{favoritoManagedBean.f.contaC}">
+						<f:validateLongRange minimum="4" maximum="4"/>
+					</h:inputText>
 				</td>
 			</tr>
 	</table>

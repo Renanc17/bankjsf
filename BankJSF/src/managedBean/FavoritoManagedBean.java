@@ -140,23 +140,52 @@ public class FavoritoManagedBean {
 		
 	}
 	
-	public void verificarExistencia(FacesContext context,
+	public void verificarExistenciaCadastrar(FacesContext context,
 									UIComponent componentToValidate,
 									Object value)
 									throws ValidatorException{
 		FavoritoDAO dao = new FavoritoDAO();
 		
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
+		user = (Cliente) session.getAttribute("cliente");
+		
 		ResourceBundle bundle = ResourceBundle.getBundle("language_" + FacesContext.getCurrentInstance().getViewRoot().getLocale());
 		String mensagem = bundle.getString("favoritoExistente");
 		
 		try {
-			if(dao.verificaExistencia(f)){
+			if(dao.verificaExistenciaCadastra(value.toString(), user.getId())){
 				FacesMessage message = new FacesMessage(mensagem);
 				throw new ValidatorException(message);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}	
+	}
+	
+	public void verificarExistenciaAlterar(FacesContext context,
+											UIComponent componentToValidate,
+											Object value)
+											throws ValidatorException{
+		FavoritoDAO dao = new FavoritoDAO();
+
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		HttpSession session = (HttpSession) facesContext.getExternalContext()
+				.getSession(true);
+		user = (Cliente) session.getAttribute("cliente");
+
+		ResourceBundle bundle = ResourceBundle.getBundle("language_"
+				+ FacesContext.getCurrentInstance().getViewRoot().getLocale());
+		String mensagem = bundle.getString("favoritoExistente");
+
+		try {
+			if (dao.verificaExistenciaAltera(value.toString(), user.getId())) {
+				FacesMessage message = new FacesMessage(mensagem);
+				throw new ValidatorException(message);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 
