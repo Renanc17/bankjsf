@@ -25,7 +25,7 @@ public class TransacaoManagedBean {
 	private int senhaCartao;
 	private String tipoTransacao;
 	private String msg;
-	private Date fromDate = new Date();
+	private Date fromDate;
 	private Date untilDate = new Date();
 	
 	ResourceBundle bundle = ResourceBundle.getBundle("language_" + FacesContext.getCurrentInstance().getViewRoot().getLocale());

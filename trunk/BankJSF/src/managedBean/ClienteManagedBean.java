@@ -10,6 +10,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import dao.ClienteDAO;
+import dao.FavoritoDAO;
 import dao.TransacaoDAO;
 import bean.Cliente;
 
@@ -83,6 +84,7 @@ public class ClienteManagedBean {
 		ClienteDAO dao = new ClienteDAO();
 		Cliente user = null;
 		TransacaoDAO tdao = new TransacaoDAO();
+		FavoritoDAO fdao = new FavoritoDAO();
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		
 		
@@ -97,6 +99,7 @@ public class ClienteManagedBean {
 				session.setAttribute("listaUltimosLanc", tdao.ultimosLanc(cliente.getId()));
 				session.setAttribute("listaExtrato", tdao.historico(cliente.getId(), fromDate, untilDate));
 				session.setAttribute("comprovantes", tdao.comprovantes(cliente.getId()));
+				session.setAttribute("listaFavoritos", fdao.listarFavoritos(user.getId()));;
 				resultado = "Home";
 			}
 			
