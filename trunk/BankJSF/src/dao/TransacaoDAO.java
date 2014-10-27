@@ -252,7 +252,7 @@ public class TransacaoDAO {
 		
 	}
 	
-public List<Transacao> ultimosLanc(int id) throws SQLException{
+	public List<Transacao> ultimosLanc(int id) throws SQLException{
 		
 		Connection conn = ConnectionFactory.getConnection();
 		List<Transacao> lista = new ArrayList<Transacao>();
@@ -318,6 +318,59 @@ public List<Transacao> ultimosLanc(int id) throws SQLException{
 		
 	}
 	
+	public Transacao getTransacaoById(int id) throws SQLException{
+		
+		Connection conn = ConnectionFactory.getConnection();
+		Transacao t = null;
+		String sql = "SELECT * FROM historico WHERE id = ?";
+		
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setInt(1, id);
+		ResultSet rs = stmt.executeQuery();
+		
+		ResourceBundle bundle = ResourceBundle.getBundle("language_" + FacesContext.getCurrentInstance().getViewRoot().getLocale());
+		String transfToCc = bundle.getString("transfToCc");
+		String transfToPoupanca = bundle.getString("transfToPoupanca");
+		String transfTerceiro = bundle.getString("transfTerceiro");
+		String Payment = bundle.getString("payment");
+		
+		if(rs.next()){
+			t = new Transacao();
+			
+			t.setData(rs.getDate("data"));
+			t.setTipoTransacao(rs.getString("tipoTransacao"));
+			t.setDescricao(rs.getString("descricao"));
+			t.setValor(rs.getDouble("valor"));
+			t.setIdR(rs.getInt("idR"));
+			t.setContaR(rs.getInt("contaR"));
+			t.setAgenciaR(rs.getInt("agenciaR"));
+			t.setIdD(rs.getInt("idD"));
+			t.setContaD(rs.getInt("contaD"));
+			t.setAgenciaD(rs.getInt("agenciaD"));
+						
+			ClienteDAO dao = new ClienteDAO();
+			Cliente c = dao.getClienteById(id);
+			
+			if(t.getContaR().equals(c.getContaCorrente().getConta())){	
+				t.setSaldo(rs.getDouble("SaldoR"));
+			}else
+				if(t.getContaD().equals(c.getContaCorrente().getConta()))
+					t.setSaldo(rs.getDouble("SaldoD"));
+					
+			if(t.getTipoTransacao().equals("Payment"))
+				t.setTipoTransacao(Payment);
+			else if(t.getTipoTransacao().equals("transfToCc"))
+				t.setTipoTransacao(transfToCc);
+			else if(t.getTipoTransacao().equals("transfToPoupanca"))
+				t.setTipoTransacao(transfToPoupanca);
+			else if(t.getTipoTransacao().equals("transfToTerc"))
+				t.setTipoTransacao(transfTerceiro);
+		}
+		
+		
+		conn.close();
+		return t;
+	}
 	
 
 }
