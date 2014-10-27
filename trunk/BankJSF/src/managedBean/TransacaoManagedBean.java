@@ -1,9 +1,7 @@
 package managedBean;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.ResourceBundle;
 
 import javax.faces.bean.ManagedBean;
@@ -23,12 +21,12 @@ public class TransacaoManagedBean {
 	private Transacao transacao = new Transacao();
 	private Cliente remetente;
 	private Favorito favorito;
+	private Transacao comprovante;
 	private int senhaCartao;
 	private String tipoTransacao;
 	private String msg;
 	private Date fromDate = new Date();
 	private Date untilDate = new Date();
-	//private List<Transacao> listaExtrato = new ArrayList<Transacao>();
 	
 	ResourceBundle bundle = ResourceBundle.getBundle("language_" + FacesContext.getCurrentInstance().getViewRoot().getLocale());
 	String senhaErrada = bundle.getString("senhaErrada");
@@ -47,6 +45,12 @@ public class TransacaoManagedBean {
 	}
 	public void setFavorito(Favorito favorito) {
 		this.favorito = favorito;
+	}
+	public Transacao getComprovante() {
+		return comprovante;
+	}
+	public void setComprovante(Transacao comprovante) {
+		this.comprovante = comprovante;
 	}
 	public void setRemetente(Cliente remetente) {
 		this.remetente = remetente;
@@ -69,12 +73,6 @@ public class TransacaoManagedBean {
 	public void setMsg(String msg) {
 		this.msg = msg;
 	}
-	/*public List<Transacao> getListaExtrato(){
-		return listaExtrato;
-	}
-	public void setListaExtrato(List<Transacao> listaExtrato){
-		this.listaExtrato = listaExtrato;
-	}*/
 	public Date getFromDate() {
 		return fromDate;
 	}
@@ -127,6 +125,7 @@ public class TransacaoManagedBean {
 					
 					remetente = dao.transfToPoupanca(remetente, transacao);
 					session.setAttribute("listaUltimosLanc", dao.ultimosLanc(remetente.getId()));
+					session.setAttribute("comprovantes", dao.comprovantes(remetente.getId()));
 					pagina = "sucesso";			
 				} catch (SQLException e) {
 					pagina = "erro";
@@ -195,6 +194,7 @@ public class TransacaoManagedBean {
 				try {
 					remetente = dao.transferencia(remetente, transacao);
 					session.setAttribute("listaUltimosLanc", dao.ultimosLanc(remetente.getId()));
+					session.setAttribute("comprovantes", dao.comprovantes(remetente.getId()));
 					pagina = "sucesso";
 				} catch (SQLException e) {
 					pagina = "erro";
@@ -234,6 +234,7 @@ public class TransacaoManagedBean {
 				try {
 					remetente = dao.Pagamento(remetente, transacao);
 					session.setAttribute("listaUltimosLanc", dao.ultimosLanc(remetente.getId()));
+					session.setAttribute("comprovantes", dao.comprovantes(remetente.getId()));
 					pagina = "sucesso";
 				} catch (SQLException e) {
 					pagina = "erro";
@@ -286,7 +287,6 @@ public class TransacaoManagedBean {
 			
 		TransacaoDAO dao = new TransacaoDAO();
 		try {
-			//listaExtrato = dao.historico(remetente.getId(), fromDate, untilDate);
 			session.setAttribute("listaExtrato", dao.historico(remetente.getId(), fromDate, untilDate));
 			pagina = "Extrato";
 		} catch (SQLException e) {

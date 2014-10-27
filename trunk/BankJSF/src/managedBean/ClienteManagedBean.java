@@ -96,6 +96,7 @@ public class ClienteManagedBean {
 				session.setAttribute("saldototal", cliente.getContaCorrente().getSaldo()+cliente.getContaPoupanca().getSaldo());
 				session.setAttribute("listaUltimosLanc", tdao.ultimosLanc(cliente.getId()));
 				session.setAttribute("listaExtrato", tdao.historico(cliente.getId(), fromDate, untilDate));
+				session.setAttribute("comprovantes", tdao.comprovantes(cliente.getId()));
 				resultado = "Home";
 			}
 			
