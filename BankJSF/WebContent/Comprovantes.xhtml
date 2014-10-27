@@ -31,16 +31,16 @@
 <h:form>
 <center>
 	
-	<div style="width:60%">
+	<div style="width:67%">
 	<p:dataTable var="i" value="#{comprovantes}">
 	
-	    <p:column headerText="#{msg.data}" style="width:8%">
+	    <p:column headerText="#{msg.data}" style="width:9%">
 	        <h:outputText value="#{i.data}" >
 	        	<f:convertDateTime pattern="dd/MM/yyyy" />
 	        </h:outputText>
 	    </p:column>
 	 
-	    <p:column headerText="#{msg.tipoTransacao}" style="width:22%">
+	    <p:column headerText="#{msg.tipoTransacao}" style="width:26%">
 	        <h:commandLink id="selecionar" value="#{i.tipoTransacao}" action="exibirComprovante" >
 				<f:setPropertyActionListener target="#{transacaoManagedBean.comprovante}" value="#{i}"/>
 			</h:commandLink>
@@ -50,15 +50,15 @@
 	        <h:outputText value="#{i.descricao}" />
 	    </p:column>
 
-	    <p:column headerText="#{msg.contaR}" style="width:8%">
+	    <p:column headerText="#{msg.contaR}" style="width:9%">
 	        <h:outputText value="#{i.contaR}" />
 	    </p:column>
 	    
-	    <p:column headerText="#{msg.contaD}" style="width:8%">
+	    <p:column headerText="#{msg.contaD}" style="width:9%">
 	        <h:outputText value="#{i.contaD}" />
 	    </p:column>
 	    
-	    <p:column headerText="#{msg.valor}" style="width:10%">
+	    <p:column headerText="#{msg.valor}" style="width:12%">
 	        R$ <h:outputText value="#{i.valor}" >
 	        	<f:convertNumber minFractionDigits="2" />
 	        </h:outputText>
@@ -66,9 +66,6 @@
 	    
 	</p:dataTable>
 	</div>
-	
-	<br/><br/><br/> 	
-	*#{msg.clickToTransf}
 	
 </center>	
 </h:form>

@@ -70,6 +70,7 @@ public class FavoritoManagedBean {
 		try {
 			f.setIdCliente(user.getId());
 			dao.cadastrarFavorito(f);
+			session.setAttribute("listaFavoritos", dao.listarFavoritos(user.getId()));
 			pagina = "sucesso";
 		}catch(SQLException e){
 			msg = "Erro ao cadastrar o favorito";
@@ -88,7 +89,8 @@ public class FavoritoManagedBean {
 		user = (Cliente) session.getAttribute("cliente");
 		
 		try{
-			listaFavoritos = dao.listarFavoritos(user.getId());
+			//listaFavoritos = dao.listarFavoritos(user.getId());
+			session.setAttribute("listaFavoritos", dao.listarFavoritos(user.getId()));
 			pagina = "consultarFavoritos";
 		}catch(SQLException e){
 			pagina = "erro";
@@ -106,8 +108,9 @@ public class FavoritoManagedBean {
 		HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
 		user = (Cliente) session.getAttribute("cliente");
 		
-		try{
+		try{			
 			dao.alterarFavorito(f);
+			session.setAttribute("listaFavoritos", dao.listarFavoritos(user.getId()));
 			pagina = "consultarFavoritos";
 		}catch(SQLException e){
 			pagina="erro";
@@ -125,8 +128,9 @@ public class FavoritoManagedBean {
 		HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
 		user = (Cliente) session.getAttribute("cliente");
 		
-		try{
+		try{			
 			dao.excluirFavorito(pk);
+			session.setAttribute("listaFavoritos", dao.listarFavoritos(user.getId()));
 			listarFavoritos();
 		}catch(SQLException e){
 			pagina = "erro";
@@ -138,7 +142,7 @@ public class FavoritoManagedBean {
 	
 	public void verificarExistencia(FacesContext context,
 									UIComponent componentToValidate,
-									Object value)
+									Favorito f)
 									throws ValidatorException{
 		FavoritoDAO dao = new FavoritoDAO();
 		

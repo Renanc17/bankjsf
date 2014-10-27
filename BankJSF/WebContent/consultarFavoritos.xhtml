@@ -33,7 +33,7 @@
 <center>
 
 	<div style="width:50%">
-	<p:dataTable var="i" value="#{favoritoManagedBean.listaFavoritos}">
+	<p:dataTable var="i" value="#{listaFavoritos}">
 	    <p:column headerText="#{msg.nome}">
 	        <h:commandLink id="selecionar" value="#{i.nome}" action="#{transacaoManagedBean.selecionarFavorito}" >
 				<f:setPropertyActionListener target="#{transacaoManagedBean.favorito}" value="#{i}"/>
@@ -49,7 +49,7 @@
 	    </p:column>
 	    
 	    <p:column>
-	    	<h:commandLink id="alterar" value="#{msg.alterar}" action="alterarFavoritos" >
+	    	<h:commandLink id="alterar" value="#{msg.alterar}" action="alterarFavoritos.faces?faces-redirect=true" >
 				<f:setPropertyActionListener target="#{favoritoManagedBean.f}" value="#{i}"/>
 			</h:commandLink>	
 	    </p:column>

@@ -26,17 +26,21 @@
 
 	<h:form>
 	<br/>
-	
-	<p:outputLabel for="from" value="#{msg.from}:" />  
-	<p:calendar style="width: 15px" maxlength="10"  id="from" mindate="#{date.dataAtualMenos30}" maxdate="#{date.dataAtual}"
+	<table><tr>
+	<td>
+		<p:outputLabel for="from" value="#{msg.from}:" />  
+		<p:calendar style="width: 15px" maxlength="10"  id="from" mindate="#{date.dataAtualMenos90}" maxdate="#{date.dataAtual}"
 				value="#{transacaoManagedBean.fromDate}"  pattern="dd/MM/yyyy"/>
-	
-	<p:outputLabel for="until" value="#{msg.until}:" />
-	<p:calendar style="width: 15px" maxlength="10"  id="until" mindate="#{date.dataAtualMenos90}" maxdate="#{date.dataAtual}"
+	</td>
+	<td>
+		<p:outputLabel for="until" value="#{msg.until}:" />
+		<p:calendar style="width: 15px" maxlength="10"  id="until" mindate="#{date.dataAtualMenos30}" maxdate="#{date.dataAtual}"
 				value="#{transacaoManagedBean.untilDate}" pattern="dd/MM/yyyy"/>
-	    
-	<h:commandButton value="#{msg.submitExtract}" action="#{transacaoManagedBean.listarExtrato}" />
-	
+	</td>
+	<td>
+		<h:commandButton value="#{msg.submitExtract}" action="#{transacaoManagedBean.listarExtrato}" />
+	</td> 
+	</tr></table>
 	</h:form>
 	
 	
@@ -68,11 +72,11 @@
 	        <h:outputText value="#{i.contaR}" />
 	    </p:column>
 	    
-	    <p:column headerText="#{msg.agenciaD}" style="width:8%">
+	    <p:column headerText="#{msg.agenciaD}" style="width:7%">
 	        <h:outputText value="#{i.agenciaD}" />
 	    </p:column>
 	    
-	    <p:column headerText="#{msg.contaD}" style="width:8%">
+	    <p:column headerText="#{msg.contaD}" style="width:7%">
 	        <h:outputText value="#{i.contaD}" />
 	    </p:column>
 	    
@@ -91,7 +95,7 @@
 	</p:dataTable>
 	</div>
 	
-	<br/><br/><br/> 	
+	<br/>
 	*#{msg.selectPeriodo}
 	</h:form>
 </center>	
