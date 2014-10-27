@@ -142,7 +142,7 @@ public class FavoritoManagedBean {
 	
 	public void verificarExistencia(FacesContext context,
 									UIComponent componentToValidate,
-									Favorito f)
+									Object value)
 									throws ValidatorException{
 		FavoritoDAO dao = new FavoritoDAO();
 		
