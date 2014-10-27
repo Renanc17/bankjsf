@@ -318,14 +318,19 @@ public class TransacaoDAO {
 		
 	}
 	
-	public Transacao getTransacaoById(int id) throws SQLException{
+public List<Transacao> comprovantes(int id) throws SQLException{
 		
 		Connection conn = ConnectionFactory.getConnection();
-		Transacao t = null;
-		String sql = "SELECT * FROM historico WHERE id = ?";
+		List<Transacao> lista = new ArrayList<Transacao>();
+		
+		String sql = "SELECT * FROM historico WHERE (idR = ? or idD = ?) ORDER BY id DESC"; 
 		
 		PreparedStatement stmt = conn.prepareStatement(sql);
+
+
 		stmt.setInt(1, id);
+		stmt.setInt(2, id);
+		
 		ResultSet rs = stmt.executeQuery();
 		
 		ResourceBundle bundle = ResourceBundle.getBundle("language_" + FacesContext.getCurrentInstance().getViewRoot().getLocale());
@@ -334,8 +339,9 @@ public class TransacaoDAO {
 		String transfTerceiro = bundle.getString("transfTerceiro");
 		String Payment = bundle.getString("payment");
 		
-		if(rs.next()){
-			t = new Transacao();
+		while(rs.next()){
+			
+			Transacao t = new Transacao();
 			
 			t.setData(rs.getDate("data"));
 			t.setTipoTransacao(rs.getString("tipoTransacao"));
@@ -356,7 +362,7 @@ public class TransacaoDAO {
 			}else
 				if(t.getContaD().equals(c.getContaCorrente().getConta()))
 					t.setSaldo(rs.getDouble("SaldoD"));
-					
+			
 			if(t.getTipoTransacao().equals("Payment"))
 				t.setTipoTransacao(Payment);
 			else if(t.getTipoTransacao().equals("transfToCc"))
@@ -365,12 +371,14 @@ public class TransacaoDAO {
 				t.setTipoTransacao(transfToPoupanca);
 			else if(t.getTipoTransacao().equals("transfToTerc"))
 				t.setTipoTransacao(transfTerceiro);
+			
+			lista.add(t);
+
 		}
 		
-		
 		conn.close();
-		return t;
+		return lista;
+		
 	}
-	
 
 }
