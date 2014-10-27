@@ -198,10 +198,13 @@ public class TransacaoManagedBean {
 					pagina = "sucesso";
 				} catch (SQLException e) {
 					pagina = "erro";
-					setMsg("SQLException!");
+					setMsg("Erro de comunicação com o banco de dados!");
 				} catch (NullPointerException e) {
 					pagina = "erro";
-					setMsg("Null Pointer!");
+					setMsg("Destinatário inexistente!");
+				} catch(IllegalArgumentException e){
+					pagina = "erro";
+					setMsg("Não é possível realizar uma transação para si mesmo!");
 				}
 				
 				session.setAttribute("cliente", remetente);
