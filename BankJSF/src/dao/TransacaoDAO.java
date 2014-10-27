@@ -97,6 +97,9 @@ public class TransacaoDAO {
 		Double saldoR = c.getContaCorrente().getSaldo();
 		if(t.getDescricao().equals(""))
 		t.setDescricao("Transf. p/ cliente " + dest.getNome());
+		
+		if(c.getId() == dest.getId())
+			throw new IllegalArgumentException();
 			
 		saldoD += t.getValor();
 		saldoR -= t.getValor();
