@@ -93,8 +93,10 @@
 		<f:setPropertyActionListener target="#{transacaoManagedBean.tipoTransacao}" value="transfToTerc"></f:setPropertyActionListener>
 	</h:commandButton>
 	<br/><br/>
-	<h:commandButton id="buscarFavorito" value="#{msg.buscarFavorito}" action="#{favoritoManagedBean.listarFavoritos}" />
+	</h:form>
 	
+	<h:form>
+	<h:commandButton id="buscarFavorito" value="#{msg.buscarFavorito}" action="consultarFavoritos.faces?faces-redirect=true" />
 	</h:form>
 	
 </center>

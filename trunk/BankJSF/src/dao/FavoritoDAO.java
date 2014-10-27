@@ -92,21 +92,41 @@ public class FavoritoDAO {
 		conn.close();
 	}
 	
-	public boolean verificaExistencia(Favorito f) throws SQLException{
+	public boolean verificaExistenciaCadastra(String nome, int id) throws SQLException{
 		Connection conn = ConnectionFactory.getConnection();
 		String sql = "";
 		
-		sql="SELECT * FROM favorito WHERE idCliente=? and agencia=? and contaC=?";
+		sql="SELECT * FROM favorito WHERE idCliente=? and nome=?";
 		
 		PreparedStatement stmt = conn.prepareStatement(sql);
 
-		stmt.setInt(1, f.getIdCliente());
-		stmt.setInt(2, f.getAgencia());
-		stmt.setInt(3, f.getContaC());
+		stmt.setInt(1, id);
+		stmt.setString(2, nome);
 		
 		ResultSet rs = stmt.executeQuery();
 		
-		if(rs != null)
+		if(rs.next())
+			return true; //Já Existe - Não pode!
+		else
+			return false; // Não Existe - Pode cadastrar
+
+		
+	}
+	
+	public boolean verificaExistenciaAltera(String nome, int id) throws SQLException{
+		Connection conn = ConnectionFactory.getConnection();
+		String sql = "";
+		
+		sql="SELECT * FROM favorito WHERE idCliente=? and nome=?";
+		
+		PreparedStatement stmt = conn.prepareStatement(sql);
+
+		stmt.setInt(1, id);
+		stmt.setString(2, nome);
+		
+		ResultSet rs = stmt.executeQuery();
+		
+		if(rs.next())
 			return true;
 		else
 			return false;
