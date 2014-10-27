@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import bean.Agendamento;
 import bean.Favorito;
 import factory.ConnectionFactory;
 
