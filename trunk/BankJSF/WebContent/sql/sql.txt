@@ -37,6 +37,7 @@ CREATE TABLE bankjsf.historico (
   agenciaD INT(11) NULL,
   saldoD DOUBLE NULL,
   nomeD VARCHAR(45) NULL,
+  codBarras VARCHAR(16) NULL,
   PRIMARY KEY (id));
   
 
@@ -50,6 +51,7 @@ CREATE TABLE bankjsf.agendamento (
   idD INT NULL,
   contaD INT NULL,
   agenciaD INT NULL,
+  codBarras VARCHAR(16) NULL,
   PRIMARY KEY (id));
 
 

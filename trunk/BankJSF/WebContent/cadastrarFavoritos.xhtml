@@ -37,8 +37,10 @@
 					#{msg.ag}: 
 				</td>
 				<td>
-					<h:inputText id="ag" value="#{favoritoManagedBean.f.agencia}" 
-					validator="#{favoritoManagedBean.verificarExistencia}"/>
+					<h:inputText id="ag" maxlength="4" value="#{favoritoManagedBean.f.agencia}" 
+					validator="#{validator.verificadorGuardarAg}">
+						<f:validateLongRange minimum="0000" maximum="9999"/>
+					</h:inputText>
 				</td>
 			</tr>
 			<tr>
@@ -46,13 +48,17 @@
 					#{msg.cc}: 
 				</td>
 				<td>
-					<h:inputText id="cc" value="#{favoritoManagedBean.f.contaC}" />
+					<h:inputText id="cc" maxlength="4" value="#{favoritoManagedBean.f.contaC}"
+					validator="#{validator.verificarExistenciaFavorito}">
+						<f:validateLongRange minimum="0000" maximum="9999"/>
+					</h:inputText>
 				</td>
 			</tr>
 	</table>
 		<h:commandButton value="#{msg.cadastrar}" action="#{favoritoManagedBean.cadastrarFavorito}" />
-		<br/><br/>
-		<h:message for="ag" style="color:red" /> <br/>
+		<br/>
+		
+		<h:message for="cc" style="color:red" /> <br/>
 			
 		
 	</h:form>

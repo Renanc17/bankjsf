@@ -40,27 +40,49 @@
 				</h:outputText>
 		</td>
 	</tr>
-	<tr></tr>
 	<tr>
 		<td>
 			#{msg.barcode}:
 		</td>
 		<td>
-			<h:inputText size="12" maxlength="12"/>&nbsp;
-			<h:inputText size="12" maxlength="12"/>&nbsp;
-			<h:inputText size="12" maxlength="12"/>&nbsp;
+			<h:inputText value="#{agendamentoManagedBean.codBarras1}" validator="#{validator.verificador4Digitos}" 
+						 id="bc1" size="3" maxlength="4" required="true"
+						 requiredMessage="#{msg.primeiro}: #{msg.campoObrigatorio}"
+						 validatorMessage="#{msg.primeiro}: #{msg.quatroDigitos}">
+				<f:validateLongRange minimum="0"/>
+			</h:inputText>
+			
+			<h:inputText value="#{agendamentoManagedBean.codBarras2}" validator="#{validator.verificador4Digitos}" 
+						 id="bc2" size="3" maxlength="4" required="true"
+						 requiredMessage="#{msg.segundo}: #{msg.campoObrigatorio}"
+						 validatorMessage="#{msg.segundo}: #{msg.quatroDigitos}">
+				<f:validateLongRange minimum="0"/>
+			</h:inputText>
+			
+			<h:inputText value="#{agendamentoManagedBean.codBarras3}" validator="#{validator.verificador4Digitos}"
+						 id="bc3" size="3" maxlength="4" required="true"
+						 requiredMessage="#{msg.terceiro}: #{msg.campoObrigatorio}"
+						 validatorMessage="#{msg.terceiro}: #{msg.quatroDigitos}">
+				<f:validateLongRange minimum="0"/>
+			</h:inputText>
+			
+			<h:inputText value="#{agendamentoManagedBean.codBarras4}" validator="#{validator.verificador4Digitos}" 
+						 id="bc4" size="3" maxlength="4" required="true"
+						 requiredMessage="#{msg.quarto}: #{msg.campoObrigatorio}"
+						 validatorMessage="#{msg.quarto}: #{msg.quatroDigitos}">
+				<f:validateLongRange minimum="0"/>
+			</h:inputText>
 		</td>
-	</tr>
-	<tr>
-		
 	</tr>
 	<tr>
 		<td>
 			#{msg.valor}:
 		</td>
 		<td>
-			R$ <h:inputText value="#{agendamentoManagedBean.a.valor}" size="8" >
-				
+			R$ <h:inputText id="valor" value="#{agendamentoManagedBean.a.valor}" size="8" required="true" maxlength="9"
+				requiredMessage="#{msg.valor}: #{msg.campoObrigatorio}"
+				converterMessage="#{msg.valor}: #{msg.valorInvalido}" >
+					<f:validateDoubleRange minimum="0.05" />
 			</h:inputText>
 			
 		</td>
@@ -70,8 +92,12 @@
 			#{msg.data}: 
         </td>
         <td>
-        	<p:calendar style="width: 15px" maxlength="10"  size="11" id="data" mindate="#{date.dataAtual}"
-        	value="#{agendamentoManagedBean.a.data}"  pattern="dd/MM/yyyy"/>
+        	<p:calendar id="data" style="width: 15px" maxlength="10"  size="11" mindate="#{date.dataAtual}"
+        	value="#{agendamentoManagedBean.a.data}"  pattern="dd/MM/yyyy" required="true"
+        	requiredMessage="#{msg.data}: #{msg.campoObrigatorio}"
+        	converterMessage="#{msg.data}: #{msg.valorInvalido}" >
+        		<f:convertDateTime pattern="dd/MM/yyyy" />
+        	</p:calendar>
         </td>
 	</tr>
 	<tr>
@@ -87,7 +113,13 @@
 	
 	<p></p>
 	<h:commandButton id="continuar" value="#{msg.continuar}" action="agendamentoConfirm.faces?faces-redirect=true" />
-	<br/><br/>
+	<br/>
+			<h:message for="valor" style="color:red" /> <br/>
+			<h:message for="data" style="color:red" /> <br/>
+			<h:message for="bc1" style="color:red" /> <br/>
+			<h:message for="bc2" style="color:red" /> <br/>
+			<h:message for="bc3" style="color:red" /> <br/>
+			<h:message for="bc4" style="color:red" /> <br/>
 	
 	</h:form>
 	

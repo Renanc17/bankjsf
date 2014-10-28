@@ -53,7 +53,10 @@
 			#{msg.valorToTransf}:
 		</td>
 		<td>
-			R$ <h:inputText value="#{transacaoManagedBean.transacao.valor}" size="7" maxlength="9"/>
+			R$ <h:inputText value="#{transacaoManagedBean.transacao.valor}" size="7" maxlength="9"
+				required="true" requiredMessage="#{msg.valorToTransf}: #{msg.campoObrigatorio}" >
+				<f:validateDoubleRange minimum="0.05" />
+			</h:inputText>
 		</td>
 	</tr>
 	<tr>
@@ -69,8 +72,12 @@
 	
 	<p></p>
 	<h:commandButton id="transferir" value="#{msg.transferir}" action="transacaoConfirm" >
-	<f:setPropertyActionListener target="#{transacaoManagedBean.tipoTransacao}" value="transfToPoupanca"></f:setPropertyActionListener>
+		<f:setPropertyActionListener target="#{transacaoManagedBean.tipoTransacao}" value="transfToPoupanca" />
 	</h:commandButton>
+	<br/>
+			<h:message for="valor" style="color:red" /> <br/>
+	
+	
 	</h:form>
 	</center>
 	

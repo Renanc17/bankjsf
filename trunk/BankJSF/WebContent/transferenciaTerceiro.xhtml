@@ -46,7 +46,9 @@
 			#{msg.agencia}:
 		</td>
 		<td>
-			<h:inputText id="ag" value="#{transacaoManagedBean.transacao.agenciaD}" size="11" maxlength="4" required="true" requiredMessage="#{msg.agencia}: #{msg.campoObrigatorio}">
+			<h:inputText id="ag" value="#{transacaoManagedBean.transacao.agenciaD}" size="11" maxlength="4"
+			required="true" requiredMessage="#{msg.agencia}: #{msg.campoObrigatorio}"
+			validator="#{validator.verificadorGuardarAg}" >
 				<f:validateLongRange minimum="0"/>
 			</h:inputText>
 		</td>
@@ -56,7 +58,9 @@
 			#{msg.cc}:	
 		</td>
 		<td>
-			<h:inputText id="cc" value="#{transacaoManagedBean.transacao.contaD}" size="11" maxlength="4" required="true" requiredMessage="#{msg.cc}: #{msg.campoObrigatorio}" >
+			<h:inputText id="cc" value="#{transacaoManagedBean.transacao.contaD}" size="11" maxlength="4"
+			required="true" requiredMessage="#{msg.cc}: #{msg.campoObrigatorio}" 
+			validator="#{validator.verificarExistenciaTerceiro}" >
 				<f:validateLongRange minimum="0"/>
 			</h:inputText>
 		</td>
@@ -66,8 +70,9 @@
 			#{msg.valorToTransf}:
 		</td>
 		<td>
-			R$ <h:inputText id="valor" value="#{transacaoManagedBean.transacao.valor}" size="7" maxlength="9" required="true" requiredMessage="#{msg.valorToTransf}: #{msg.campoObrigatorio}" >
-				<f:validateDoubleRange minimum="0.05" pattern="[1-9]+"/>
+			R$ <h:inputText id="valor" value="#{transacaoManagedBean.transacao.valor}" size="7" maxlength="9"
+			required="true" requiredMessage="#{msg.valorToTransf}: #{msg.campoObrigatorio}" >
+				<f:validateDoubleRange minimum="0.05" />
 			</h:inputText>
 			
 		</td>
@@ -81,23 +86,21 @@
    			 <br/><h:outputText id="display" />
 		</td>
 	</tr>
-	</table>
+	</table>	
 	
-	<p>
-	<h:message for="ag" style="color:red" /> <br/>
-	<h:message for="cc" style="color:red" /> <br/>
-	<h:message for="valor" style="color:red" /> <br/>
-	
-	</p>
 	<h:commandButton id="transferir" value="#{msg.transferir}" action="transacaoConfirm" >
 		<f:setPropertyActionListener target="#{transacaoManagedBean.tipoTransacao}" value="transfToTerc"></f:setPropertyActionListener>
-	</h:commandButton>
-	<br/><br/>
+	</h:commandButton>	
 	</h:form>
 	
 	<h:form>
 	<h:commandButton id="buscarFavorito" value="#{msg.buscarFavorito}" action="consultarFavoritos.faces?faces-redirect=true" />
 	</h:form>
+	
+	<h:message for="ag" style="color:red" /> <br/>
+	<h:message for="cc" style="color:red" /> <br/>
+	<h:message for="valor" style="color:red" /> <br/>
+	
 	
 </center>
 </h:body>

@@ -23,13 +23,24 @@ public class AgendamentoManagedBean {
 	private Cliente usuario = new Cliente();
 	private List<Agendamento> listaAgenda = new ArrayList<Agendamento>();
 	private int senhaCartao;
+	private String codBarras1;
+	private String codBarras2;
+	private String codBarras3;
+	private String codBarras4;
 	private String msg;
+	
 	
 	public Agendamento getA() {
 		return a;
 	}
 	public void setA(Agendamento a) {
 		this.a = a;
+	}
+	public Cliente getUsuario() {
+		return usuario;
+	}
+	public void setUsuario(Cliente usuario) {
+		this.usuario = usuario;
 	}
 	public List<Agendamento> getListaAgenda() {
 		return listaAgenda;
@@ -49,7 +60,32 @@ public class AgendamentoManagedBean {
 	public void setMsg(String msg) {
 		this.msg = msg;
 	}
-		
+	public String getCodBarras1() {
+		return codBarras1;
+	}
+	public void setCodBarras1(String codBarras1) {
+		this.codBarras1 = codBarras1;
+	}
+	public String getCodBarras2() {
+		return codBarras2;
+	}
+	public void setCodBarras2(String codBarras2) {
+		this.codBarras2 = codBarras2;
+	}
+	public String getCodBarras3() {
+		return codBarras3;
+	}
+	public void setCodBarras3(String codBarras3) {
+		this.codBarras3 = codBarras3;
+	}
+	public String getCodBarras4() {
+		return codBarras4;
+	}
+	public void setCodBarras4(String codBarras4) {
+		this.codBarras4 = codBarras4;
+	}
+	
+	
 	public String agendar(){
 		String pagina = "";
 		
@@ -79,7 +115,7 @@ public class AgendamentoManagedBean {
 		return pagina + ".faces?faces-redirect=true";
 	}
 	
-	public String alterarLALALA(){ //Não está sendo utilizado! ;D
+	/*public String alterar(){
 		String pagina = "";
 		
 		FacesContext facesContext = FacesContext.getCurrentInstance();
@@ -106,7 +142,7 @@ public class AgendamentoManagedBean {
 		
 		a = new Agendamento();
 		return pagina + ".faces?faces-redirect=true";
-	}
+	}*/
 	
 	public String listarAgenda(){
 		String pagina = "";
@@ -149,8 +185,8 @@ public class AgendamentoManagedBean {
 	}
 	
 	public String alterarAgendamento(){
-		String pagina = "Ag_" + a.getTipoAgendamento();		
 		
+		String pagina = "Ag_" + a.getTipoAgendamento();		
 		
 		return pagina + ".faces?faces-redirect=true";
 		

@@ -13,6 +13,7 @@ public class Agendamento {
 	private int idD;	
 	private int contaD; //Numero da conta do destinatario
 	private int agenciaD; //Agencia do destinatario
+	private String codBarras;
 	
 	
 	public int getId() {
@@ -68,6 +69,12 @@ public class Agendamento {
 	}
 	public void setIdUsuario(int idUsuario) {
 		this.idUsuario = idUsuario;
+	}
+	public String getCodBarras() {
+		return codBarras;
+	}
+	public void setCodBarras(String codBarras) {
+		this.codBarras = codBarras;
 	}
 	 
 

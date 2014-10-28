@@ -43,27 +43,49 @@
 				</h:outputText>
 		</td>
 	</tr>
-	<tr></tr>
 	<tr>
 		<td>
 			#{msg.barcode}:
 		</td>
 		<td>
-			<h:inputText size="12" maxlength="12"/>&nbsp;
-			<h:inputText size="12" maxlength="12"/>&nbsp;
-			<h:inputText size="12" maxlength="12"/>&nbsp;
+			<h:inputText value="#{transacaoManagedBean.codBarras1}" validator="#{validator.verificador4Digitos}" 
+						 id="bc1" size="3" maxlength="4" required="true"
+						 requiredMessage="#{msg.primeiro}: #{msg.campoObrigatorio}"
+						 validatorMessage="#{msg.primeiro}: #{msg.quatroDigitos}">
+				<f:validateLongRange minimum="0"/>
+			</h:inputText>
+			
+			<h:inputText value="#{transacaoManagedBean.codBarras2}" validator="#{validator.verificador4Digitos}" 
+						 id="bc2" size="3" maxlength="4" required="true"
+						 requiredMessage="#{msg.segundo}: #{msg.campoObrigatorio}"
+						 validatorMessage="#{msg.segundo}: #{msg.quatroDigitos}">
+				<f:validateLongRange minimum="0"/>
+			</h:inputText>
+			
+			<h:inputText value="#{transacaoManagedBean.codBarras3}" validator="#{validator.verificador4Digitos}"
+						 id="bc3" size="3" maxlength="4" required="true"
+						 requiredMessage="#{msg.terceiro}: #{msg.campoObrigatorio}"
+						 validatorMessage="#{msg.terceiro}: #{msg.quatroDigitos}">
+				<f:validateLongRange minimum="0"/>
+			</h:inputText>
+			
+			<h:inputText value="#{transacaoManagedBean.codBarras4}" validator="#{validator.verificador4Digitos}" 
+						 id="bc4" size="3" maxlength="4" required="true"
+						 requiredMessage="#{msg.quarto}: #{msg.campoObrigatorio}"
+						 validatorMessage="#{msg.quarto}: #{msg.quatroDigitos}">
+				<f:validateLongRange minimum="0"/>
+			</h:inputText>
 		</td>
-	</tr>
-	<tr>
-		
 	</tr>
 	<tr>
 		<td>
 			#{msg.valorPagamento}:
 		</td>
 		<td>
-			R$ <h:inputText value="#{transacaoManagedBean.transacao.valor}" size="7" >
-				
+			R$ <h:inputText id="valor" value="#{transacaoManagedBean.transacao.valor}" size="8" required="true" maxlength="9"
+				requiredMessage="#{msg.valor}: #{msg.campoObrigatorio}"
+				converterMessage="#{msg.valor}: #{msg.valorInvalido}" >
+					<f:validateDoubleRange minimum="0.05" />
 			</h:inputText>
 			
 		</td>
@@ -83,7 +105,12 @@
 	<h:commandButton id="transferir" value="#{msg.transferir}" action="transacaoConfirm" >
 		<f:setPropertyActionListener target="#{transacaoManagedBean.tipoTransacao}" value="Payment"></f:setPropertyActionListener>
 	</h:commandButton>
-	<br/><br/>
+	<br/>
+			<h:message for="valor" style="color:red" /> <br/>
+			<h:message for="bc1" style="color:red" /> <br/>
+			<h:message for="bc2" style="color:red" /> <br/>
+			<h:message for="bc3" style="color:red" /> <br/>
+			<h:message for="bc4" style="color:red" /> <br/>
 	
 	</h:form>
 	
