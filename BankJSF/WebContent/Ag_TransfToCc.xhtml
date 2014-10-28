@@ -54,8 +54,10 @@
 			#{msg.valor}:
 		</td>
 		<td>
-			R$ <h:inputText id="valor" value="#{agendamentoManagedBean.a.valor}" size="7" >
-			<f:validateDoubleRange minimum="1.0" />
+			R$ <h:inputText id="valor" value="#{agendamentoManagedBean.a.valor}" size="7"  required="true" maxlength="9"
+				requiredMessage="#{msg.valor}: #{msg.campoObrigatorio}"
+				converterMessage="#{msg.valor}: #{msg.valorInvalido}" >
+				<f:validateDoubleRange minimum="0.05" />
 			</h:inputText>
 		</td>
 	</tr>
@@ -64,8 +66,12 @@
 			#{msg.data}:
         </td>
         <td>
-        	<p:calendar style="width: 15px" maxlength="10"  size="11" id="data" mindate="#{date.dataAtual}"
-        	value="#{agendamentoManagedBean.a.data}"  pattern="dd/MM/yyyy"/>
+        	<p:calendar id="data" style="width: 15px" maxlength="10"  size="11" mindate="#{date.dataAtual}"
+        	value="#{agendamentoManagedBean.a.data}"  pattern="dd/MM/yyyy" required="true"
+        	requiredMessage="#{msg.data}: #{msg.campoObrigatorio}"
+        	converterMessage="#{msg.data}: #{msg.valorInvalido}" >
+        		<f:convertDateTime pattern="dd/MM/yyyy" />
+        	</p:calendar>
         </td>
 	</tr>
 	<tr>
@@ -81,7 +87,10 @@
 	
 	<p></p>
 	<h:commandButton id="continuar" value="#{msg.continuar}" action="agendamentoConfirm.faces?faces-redirect=true" />
-	
+	<br/>
+			<h:message for="valor" style="color:red" /> <br/>
+			<h:message for="data" style="color:red" /> <br/>
+			
 	
 	</h:form>
 	</center>

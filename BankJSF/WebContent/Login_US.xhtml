@@ -7,7 +7,7 @@
 <f:view locale="en_US">
 <h:head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<title>Credit JSF</title>
+<title>#{msg.banco}</title>
 </h:head>
 
 <h:body>
@@ -24,13 +24,13 @@
 	</table>
 	
 	<center>
-	<p></p>
+	<p><h4>#{msg.banco}</h4></p><br/><br/><br/><br/><br/><br/>
 	<h:form>
 			#{msg.ag}: <h:inputText id="ag" value="#{clienteManagedBean.cliente.agencia}" size="3" maxlength="4" 
 			required="true"
 			requiredMessage="#{msg.ag}: #{msg.campoObrigatorio}"
 			validatorMessage="#{msg.ag}: #{msg.valorNegativo}"
-			converterMessage="#{msg.ag}: #{msg.valorInvalido}">
+			converterMessage="#{msg.ag}: #{msg.valorInvalido}" >
 				<f:validateLongRange minimum="0" />
 			</h:inputText>
 			
@@ -38,7 +38,7 @@
 			required="true"
 			requiredMessage="#{msg.cc}: #{msg.campoObrigatorio}"
 			validatorMessage="#{msg.cc}: #{msg.valorNegativo}"
-			converterMessage="#{msg.cc}: #{msg.valorInvalido}">
+			converterMessage="#{msg.cc}: #{msg.valorInvalido}" >
 				<f:validateLongRange minimum="0"/>
 			</h:inputText> 
 			<h:commandButton value="#{msg.entrar}" action="#{clienteManagedBean.logar}" />

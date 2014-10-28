@@ -92,7 +92,7 @@ public class FavoritoDAO {
 		conn.close();
 	}
 	
-	public boolean verificaExistenciaCadastra(String nome, int id) throws SQLException{
+	/*public boolean verificaExistenciaCadastra(String nome, int id) throws SQLException{
 		Connection conn = ConnectionFactory.getConnection();
 		String sql = "";
 		
@@ -130,6 +130,27 @@ public class FavoritoDAO {
 			return true;
 		else
 			return false;
+		
+	}*/
+	
+	public boolean verificaExistencia(int ag, int cc, int id) throws SQLException{
+		Connection conn = ConnectionFactory.getConnection();
+		String sql = "";
+		
+		sql="SELECT * FROM favorito WHERE idCliente=? and agencia=? and contaC=?";
+		
+		PreparedStatement stmt = conn.prepareStatement(sql);
+
+		stmt.setInt(1, id);
+		stmt.setInt(2, ag);
+		stmt.setInt(3, cc);
+		
+		ResultSet rs = stmt.executeQuery();
+				
+		if(rs.next())
+			return true; //Já existe 
+		else
+			return false; //Não existe
 		
 	}
 

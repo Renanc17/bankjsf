@@ -20,6 +20,7 @@ public class Transacao {
 	private Double saldoR;
 	private Double saldoD;
 	private Double saldo;
+	private String codBarras;
 	
 	public int getId() {
 		return id;
@@ -116,6 +117,12 @@ public class Transacao {
 	}
 	public void setNomeD(String nomeD) {
 		this.nomeD = nomeD;
+	}
+	public String getCodBarras() {
+		return codBarras;
+	}
+	public void setCodBarras(String codBarras) {
+		this.codBarras = codBarras;
 	}
 	
 }
