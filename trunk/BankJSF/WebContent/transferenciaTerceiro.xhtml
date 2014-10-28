@@ -60,7 +60,7 @@
 		<td>
 			<h:inputText id="cc" value="#{transacaoManagedBean.transacao.contaD}" size="11" maxlength="4"
 			required="true" requiredMessage="#{msg.cc}: #{msg.campoObrigatorio}" 
-			validator="#{validator.verificarExistenciaTerceiro}" >
+			validator="#{validator.verificarTerceiro}" >
 				<f:validateLongRange minimum="0"/>
 			</h:inputText>
 		</td>

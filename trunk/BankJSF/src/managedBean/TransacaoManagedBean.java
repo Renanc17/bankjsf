@@ -27,6 +27,11 @@ public class TransacaoManagedBean {
 	private String msg;
 	private Date fromDate;
 	private Date untilDate = new Date();
+	private String codBarras1 = "";
+	private String codBarras2 = "";
+	private String codBarras3 = "";
+	private String codBarras4 = "";
+	
 	
 	ResourceBundle bundle = ResourceBundle.getBundle("language_" + FacesContext.getCurrentInstance().getViewRoot().getLocale());
 	String senhaErrada = bundle.getString("senhaErrada");
@@ -85,7 +90,30 @@ public class TransacaoManagedBean {
 	public void setUntilDate(Date untilDate) {
 		this.untilDate = untilDate;
 	}
-
+	public String getCodBarras1() {
+		return codBarras1;
+	}
+	public void setCodBarras1(String codBarras1) {
+		this.codBarras1 = codBarras1;
+	}
+	public String getCodBarras2() {
+		return codBarras2;
+	}
+	public void setCodBarras2(String codBarras2) {
+		this.codBarras2 = codBarras2;
+	}
+	public String getCodBarras3() {
+		return codBarras3;
+	}
+	public void setCodBarras3(String codBarras3) {
+		this.codBarras3 = codBarras3;
+	}
+	public String getCodBarras4() {
+		return codBarras4;
+	}
+	public void setCodBarras4(String codBarras4) {
+		this.codBarras4 = codBarras4;
+	}
 	
 	
 	
@@ -172,7 +200,7 @@ public class TransacaoManagedBean {
 						pagina = "sucesso";
 				}catch (SQLException e) {
 					pagina = "erro";
-					setMsg("SQL!");
+					setMsg("Erro de comunicação com o banco de dados!");
 				}
 			}else{
 					pagina = "erro";
@@ -198,13 +226,13 @@ public class TransacaoManagedBean {
 					pagina = "sucesso";
 				} catch (SQLException e) {
 					pagina = "erro";
-					setMsg("Erro de comunicação com o banco de dados!");
+					setMsg("SQLException!");
 				} catch (NullPointerException e) {
 					pagina = "erro";
 					setMsg("Destinatário inexistente!");
 				} catch(IllegalArgumentException e){
 					pagina = "erro";
-					setMsg("Não é possível realizar uma transação para si mesmo!");
+					setMsg("Não foi possível realizar esta transação!");
 				}
 				
 				session.setAttribute("cliente", remetente);
@@ -231,17 +259,20 @@ public class TransacaoManagedBean {
 				transacao.setIdR(remetente.getId());
 				transacao.setAgenciaR(remetente.getAgencia());
 				transacao.setContaR(remetente.getContaCorrente().getConta());
-				transacao.setSaldoR(remetente.getContaCorrente().getSaldo());				
+				transacao.setSaldoR(remetente.getContaCorrente().getSaldo());	
+				transacao.setCodBarras(codBarras1+codBarras2+codBarras3+codBarras4);
+				if(transacao.getDescricao().equals(""))
+					transacao.setDescricao("Pagamento de Conta (Final" + codBarras4 + ")");
 				
 				TransacaoDAO dao = new TransacaoDAO();
 				try {
-					remetente = dao.Pagamento(remetente, transacao);
+					remetente = dao.pagamento(remetente, transacao);
 					session.setAttribute("listaUltimosLanc", dao.ultimosLanc(remetente.getId()));
 					session.setAttribute("comprovantes", dao.comprovantes(remetente.getId()));
 					pagina = "sucesso";
 				} catch (SQLException e) {
 					pagina = "erro";
-					setMsg("SQLException!");
+					setMsg("Erro de comunicação com o banco de dados!");
 				} catch (NullPointerException e) {
 					pagina = "erro";
 					setMsg("Null Pointer!");

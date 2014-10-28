@@ -28,8 +28,9 @@ public class CustomValidator{
 	String favoritoExistente = "";
 	String alteracaoInvalida = "";
 	String terceiroNaoEncontrado = "";
+	String transferenciaInvalida = "";
 	String quatroDigitos = bundle.getString("quatroDigitos");
-
+	
 
 	public int getTempAg() {
 		return tempAg;
@@ -63,17 +64,31 @@ public class CustomValidator{
 		}
 	}
 	
-	public void verificarExistenciaTerceiro(FacesContext context, UIComponent componentToValidate, Object value)
+	public void verificarTerceiro(FacesContext context, UIComponent componentToValidate, Object value)
 					throws ValidatorException{
 		ClienteDAO dao = new ClienteDAO();
 		
 		int contaDest = (int) value;
 		
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
+		user = (Cliente) session.getAttribute("cliente");		
+		
+		
 		try{
-			if(dao.getCliente(contaDest, tempAg) == null){
+			//Verifica se o terceiro Existe.
+			if(dao.getCliente(contaDest, tempAg) == null){ 
 				terceiroNaoEncontrado = bundle.getString("terceiroNaoEncontrado");
 				FacesMessage message = new FacesMessage(terceiroNaoEncontrado);
 				throw new ValidatorException(message);
+			}
+			//Verifica se o Destinatário setado é a conta corrente ou poupança do próprio usuário ou não.
+			if((tempAg == user.getAgencia() && contaDest == user.getContaCorrente().getConta()) ||
+				tempAg == user.getAgencia() && contaDest == user.getContaPoupanca().getConta()){ 
+				transferenciaInvalida = bundle.getString("transferenciaInvalida");
+				FacesMessage message = new FacesMessage(transferenciaInvalida);
+				throw new ValidatorException(message);
+				
 			}
 			
 		} catch (SQLException e){

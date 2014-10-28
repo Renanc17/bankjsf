@@ -66,7 +66,7 @@ public class TransacaoDAO {
 	
 	}
 	
-	public Cliente Pagamento(Cliente c, Transacao t) throws SQLException{
+	public Cliente pagamento(Cliente c, Transacao t) throws SQLException{
 			
 			Connection conn = ConnectionFactory.getConnection();
 			ClienteDAO dao = new ClienteDAO();
@@ -96,10 +96,7 @@ public class TransacaoDAO {
 		Double saldoD = dest.getContaCorrente().getSaldo();
 		Double saldoR = c.getContaCorrente().getSaldo();
 		if(t.getDescricao().equals(""))
-		t.setDescricao("Transf. p/ cliente " + dest.getNome());
-		
-		if(c.getId() == dest.getId())
-			throw new IllegalArgumentException();
+			t.setDescricao("Transf. p/ cliente " + dest.getNome());
 			
 		saldoD += t.getValor();
 		saldoR -= t.getValor();
@@ -157,7 +154,7 @@ public class TransacaoDAO {
 		if(!t.getTipoTransacao().equals("Payment"))
 			sql = "INSERT into historico(data, tipoTransacao, descricao, valor, idR, contaR, agenciaR, saldoR, idD, contaD, agenciaD, saldoD, nomeR, nomeD) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		else
-			sql = "INSERT into historico(data, tipoTransacao, descricao, valor, idR, contaR, agenciaR, saldoR) VALUES(?,?,?,?,?,?,?,?)";
+			sql = "INSERT into historico(data, tipoTransacao, descricao, valor, idR, contaR, agenciaR, saldoR, codBarras, nomeR) VALUES(?,?,?,?,?,?,?,?,?,?)";
 		
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		
@@ -172,8 +169,11 @@ public class TransacaoDAO {
 		stmt.setInt(6, t.getContaR());
 		stmt.setInt(7, t.getAgenciaR());
 		stmt.setDouble(8, t.getSaldoR());
-		
-		if(!t.getTipoTransacao().equals("Payment")){
+			
+		if(t.getTipoTransacao().equals("Payment")){
+			stmt.setString(9, t.getCodBarras());
+			stmt.setString(10, t.getNomeR());
+		}else{
 			stmt.setInt(9, t.getIdD());
 			stmt.setInt(10, t.getContaD());
 			stmt.setInt(11, t.getAgenciaD());
@@ -264,7 +264,6 @@ public class TransacaoDAO {
 		
 		PreparedStatement stmt = conn.prepareStatement(sql);
 
-
 		stmt.setInt(1, id);
 		stmt.setInt(2, id);
 		
@@ -303,9 +302,10 @@ public class TransacaoDAO {
 				if(t.getContaD().equals(c.getContaCorrente().getConta()))
 					t.setSaldo(rs.getDouble("SaldoD"));
 			
-			if(t.getTipoTransacao().equals("Payment"))
+			if(t.getTipoTransacao().equals("Payment")){
 				t.setTipoTransacao(Payment);
-			else if(t.getTipoTransacao().equals("transfToCc"))
+				t.setCodBarras(rs.getString("codBarras"));
+			}else if(t.getTipoTransacao().equals("transfToCc"))
 				t.setTipoTransacao(transfToCc);
 			else if(t.getTipoTransacao().equals("transfToPoupanca"))
 				t.setTipoTransacao(transfToPoupanca);
