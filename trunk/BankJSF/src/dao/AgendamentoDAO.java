@@ -118,7 +118,7 @@ public class AgendamentoDAO {
 			a.setContaD(rs.getInt("contaD"));
 			a.setAgenciaD(rs.getInt("agenciaD"));
 			
-			if(!rs.getString("codBarras").equals(""))
+			if(rs.getString("codBarras") != null)
 				a.setCodBarras(rs.getString("codBarras"));
 			
 			agendamentos.add(a);

@@ -2,14 +2,10 @@ package managedBean;
 
 import java.sql.SQLException;
 import java.util.List;
-import java.util.ResourceBundle;
 
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
-import javax.faces.validator.ValidatorException;
 import javax.servlet.http.HttpSession;
 
 import dao.FavoritoDAO;

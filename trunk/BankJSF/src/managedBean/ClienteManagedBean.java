@@ -9,6 +9,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
+import dao.AgendamentoDAO;
 import dao.ClienteDAO;
 import dao.FavoritoDAO;
 import dao.TransacaoDAO;
@@ -85,6 +86,7 @@ public class ClienteManagedBean {
 		Cliente user = null;
 		TransacaoDAO tdao = new TransacaoDAO();
 		FavoritoDAO fdao = new FavoritoDAO();
+		AgendamentoDAO adao = new AgendamentoDAO();
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		
 		
@@ -99,7 +101,8 @@ public class ClienteManagedBean {
 				session.setAttribute("listaUltimosLanc", tdao.ultimosLanc(cliente.getId()));
 				session.setAttribute("listaExtrato", tdao.historico(cliente.getId(), fromDate, untilDate));
 				session.setAttribute("comprovantes", tdao.comprovantes(cliente.getId()));
-				session.setAttribute("listaFavoritos", fdao.listarFavoritos(user.getId()));;
+				session.setAttribute("listaFavoritos", fdao.listarFavoritos(cliente.getId()));
+				session.setAttribute("listaAgenda", adao.pegarAgenda(cliente.getId()));
 				resultado = "Home";
 			}
 			
@@ -120,11 +123,12 @@ public class ClienteManagedBean {
 	public String logout(){
 		String pagina = "Login";
 		cliente = null;
-		try{
-		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-		pagina = "Login";
-		}finally{
-		pagina ="Login";
+				
+		try {
+			FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+			pagina = "Login";
+		} finally {
+			pagina = "Login";
 		}
 		return pagina + ".faces?faces-redirect=true";
 	}

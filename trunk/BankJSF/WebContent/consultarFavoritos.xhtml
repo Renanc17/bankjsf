@@ -34,6 +34,9 @@
 
 	<div style="width:50%">
 	<p:dataTable var="i" value="#{listaFavoritos}">
+	    <f:facet name="header">
+           #{msg.favoritos}
+       	 </f:facet>
 	    <p:column headerText="#{msg.nome}">
 	        <h:commandLink id="selecionar" value="#{i.nome}" action="#{transacaoManagedBean.selecionarFavorito}" >
 				<f:setPropertyActionListener target="#{transacaoManagedBean.favorito}" value="#{i}"/>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	  xmlns:p="http://primefaces.org/ui">
+	  
+<f:view locale="#{switcher.currentLocale}">	  
+<h:head>
+
+<style type="text/css">  
+           .ui-widget {  
+               font-size: 13px !important;  
+           }  
+</style>
+
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+
+<title>#{msg.comprovante}</title>
+	<ui:include src="/layout/Header.xhtml" />
+</h:head>
+
+<h:body>
+	<center>
+	<table width="60%">	
+	<tr>
+		<th align="center" width="25%">
+			#{msg.nome}:  #{cliente.nome}
+		</th>
+		&nbsp;
+		<th align="center" width="25%">
+			#{msg.conta}: #{cliente.contaCorrente.conta}
+		</th>
+		&nbsp;
+		<th align="center" width="25%">
+			#{msg.ag}: #{cliente.agencia}
+		</th>	
+	</tr>
+	</table>
+	<table>	
+	<tr>
+		<td>
+			#{msg.barcode}: 
+		</td>
+		<td>
+			#{transacaoManagedBean.comprovante.codBarras}
+		</td>
+		<td>R$ <h:outputText value="#{cliente.contaCorrente.saldo}" >
+					<f:convertNumber minFractionDigits="2" />
+				</h:outputText>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			#{cliente.contaPoupanca.conta} 
+		</td>
+		<td>
+			#{msg.CP}
+		</td>
+		<td>R$ <h:outputText value="#{cliente.contaPoupanca.saldo}" >
+					<f:convertNumber minFractionDigits="2" />
+				</h:outputText> 
+		</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td>
+			#{msg.Total}
+		</td>
+
+		<td> R$ <h:outputText value="#{saldototal}" >
+					<f:convertNumber minFractionDigits="2" />
+				</h:outputText> 
+		</td>
+	</tr>	
+	</table>
+	</center>
+</h:body>
+</f:view>
+</html>

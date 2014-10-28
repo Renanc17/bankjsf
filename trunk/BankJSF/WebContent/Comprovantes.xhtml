@@ -22,7 +22,7 @@
 </style>
   
        
-<title>#{msg.listaFavoritos}</title>
+<title>#{msg.comprovantes}</title>
 
 	<ui:include src="/layout/Header.xhtml" />
 </h:head>
@@ -33,7 +33,9 @@
 	
 	<div style="width:67%">
 	<p:dataTable var="i" value="#{comprovantes}">
-	
+		<f:facet name="header">
+           #{msg.comprovantes}
+       	 </f:facet>
 	    <p:column headerText="#{msg.data}" style="width:9%">
 	        <h:outputText value="#{i.data}" >
 	        	<f:convertDateTime pattern="dd/MM/yyyy" />
@@ -41,7 +43,7 @@
 	    </p:column>
 	 
 	    <p:column headerText="#{msg.tipoTransacao}" style="width:26%">
-	        <h:commandLink id="selecionar" value="#{i.tipoTransacao}" action="exibirComprovante" >
+	        <h:commandLink id="abrir" value="#{i.tipoTransacao}" action="exibirComprovante.faces?faces-redirect=true" >
 				<f:setPropertyActionListener target="#{transacaoManagedBean.comprovante}" value="#{i}"/>
 			</h:commandLink>
 	    </p:column>
