@@ -21,11 +21,11 @@ public class TransacaoManagedBean {
 	private Transacao transacao = new Transacao();
 	private Cliente remetente;
 	private Favorito favorito;
-	private Transacao comprovante;
+	private Transacao comprovante = new Transacao();
 	private int senhaCartao;
 	private String tipoTransacao;
 	private String msg;
-	private Date fromDate;
+	private Date fromDate = new Date();
 	private Date untilDate = new Date();
 	private String codBarras1 = "";
 	private String codBarras2 = "";
@@ -291,9 +291,6 @@ public class TransacaoManagedBean {
 			return pagina + ".faces?faces-redirect=true";
 			
 		}
-		
-		
-		
 		
 		
 		setMsg("Transacao desconhecida!");

@@ -10,7 +10,6 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
 import dao.AgendamentoDAO;
-import dao.ClienteDAO;
 import bean.Agendamento;
 import bean.Cliente;
 
@@ -100,7 +99,9 @@ public class AgendamentoManagedBean {
 			a.setIdUsuario(usuario.getId());
 			
 			try {			
-				dao.setarAgendamento(a);					
+				dao.setarAgendamento(a);
+				listaAgenda = dao.pegarAgenda(usuario.getId());
+				session.setAttribute("listaAgenda", listaAgenda);
 				pagina = "sucesso";			
 			} catch (SQLException e) {
 				pagina = "erro";
@@ -155,6 +156,7 @@ public class AgendamentoManagedBean {
 		
 		try {
 			listaAgenda = dao.pegarAgenda(usuario.getId());
+			session.setAttribute("listaAgenda", listaAgenda);
 			pagina = "consultarAgendamentos";
 		} catch (SQLException e) {
 			pagina = "erro";

@@ -33,8 +33,10 @@
 <center>
 
 	<div style="width:75%">
-	<p:dataTable var="a" value="#{agendamentoManagedBean.listaAgenda}">
-	    
+	<p:dataTable var="a" value="#{listaAgenda}">
+	    <f:facet name="header">
+           #{msg.agendamentos}
+       	 </f:facet>
 	    <p:column headerText="#{msg.data}" style="width:9%">
 	        <h:outputText value="#{a.data}" >
 	        	<f:convertDateTime pattern="dd/MM/yyyy" />

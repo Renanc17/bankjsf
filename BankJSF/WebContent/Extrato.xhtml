@@ -17,7 +17,7 @@
            }  
 </style>
        
-<title>#{msg.listaFavoritos}</title>
+<title>#{msg.extrato}</title>
 
 	<ui:include src="/layout/Header.xhtml" />
 </h:head>
@@ -30,12 +30,20 @@
 	<td>
 		<p:outputLabel for="from" value="#{msg.from}:" />  
 		<p:calendar style="width: 15px" maxlength="10"  id="from" mindate="#{date.dataAtualMenos90}" maxdate="#{date.dataAtual}"
-				value="#{transacaoManagedBean.fromDate}"  pattern="dd/MM/yyyy"/>
+				value="#{transacaoManagedBean.fromDate}"  pattern="dd/MM/yyyy" required="true"
+        	requiredMessage="#{msg.data}: #{msg.campoObrigatorio}"
+        	converterMessage="#{msg.data}: #{msg.valorInvalido}" >
+        		<f:convertDateTime pattern="dd/MM/yyyy" />
+        	</p:calendar>
 	</td>
 	<td>
 		<p:outputLabel for="until" value="#{msg.until}:" />
 		<p:calendar style="width: 15px" maxlength="10"  id="until" mindate="#{date.dataAtualMenos30}" maxdate="#{date.dataAtual}"
-				value="#{transacaoManagedBean.untilDate}" pattern="dd/MM/yyyy"/>
+				value="#{transacaoManagedBean.untilDate}" pattern="dd/MM/yyyy" required="true"
+        	requiredMessage="#{msg.data}: #{msg.campoObrigatorio}"
+        	converterMessage="#{msg.data}: #{msg.valorInvalido}" >
+        		<f:convertDateTime pattern="dd/MM/yyyy" />
+        	</p:calendar>
 	</td>
 	<td>
 		<h:commandButton value="#{msg.submitExtract}" action="#{transacaoManagedBean.listarExtrato}" />
@@ -49,7 +57,9 @@
 	<br/>
 	<div style="width:85%">
 	<p:dataTable var="i" value="#{listaExtrato}">
-	
+		 <f:facet name="header">
+           #{msg.extrato}
+       	 </f:facet>
 	    <p:column headerText="#{msg.data}" style="width:8%">
 	        <h:outputText value="#{i.data}" >
 	        	<f:convertDateTime pattern="dd/MM/yyyy" />
