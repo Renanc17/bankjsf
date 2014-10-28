@@ -22,7 +22,7 @@ public class TransacaoManagedBean {
 	private Cliente remetente;
 	private Favorito favorito;
 	private Transacao comprovante = new Transacao();
-	private int senhaCartao;
+	private String senhaCartao;
 	private String tipoTransacao;
 	private String msg;
 	private Date fromDate = new Date();
@@ -60,10 +60,10 @@ public class TransacaoManagedBean {
 	public void setRemetente(Cliente remetente) {
 		this.remetente = remetente;
 	}
-	public int getSenhaCartao() {
+	public String getSenhaCartao() {
 		return senhaCartao;
 	}
-	public void setSenhaCartao(int senhaCartao) {
+	public void setSenhaCartao(String senhaCartao) {
 		this.senhaCartao = senhaCartao;
 	}
 	public String getTipoTransacao() {

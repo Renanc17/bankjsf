@@ -14,7 +14,7 @@ public class Cliente {
 	private ContaCorrente ContaCorrente = new ContaCorrente(); 
 	private ContaPoupanca ContaPoupanca = new ContaPoupanca();	
 	private Date data;
-	private int senhaCartao;
+	private String senhaCartao;
 	
 	
 	public ContaCorrente getContaCorrente() {
@@ -89,11 +89,11 @@ public class Cliente {
 		this.senha = senha;
 	}
 
-	public int getSenhaCartao() {
+	public String getSenhaCartao() {
 		return senhaCartao;
 	}
 
-	public void setSenhaCartao(int senhaCartao) {
+	public void setSenhaCartao(String senhaCartao) {
 		this.senhaCartao = senhaCartao;
 	}
 	

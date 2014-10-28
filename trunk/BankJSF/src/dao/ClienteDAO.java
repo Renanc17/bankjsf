@@ -66,7 +66,7 @@ public class ClienteDAO {
 				cp.setConta(rs.getInt("contap"));
 				cp.setSaldo(rs.getDouble("saldop"));
 				cl.setContaPoupanca(cp);
-				cl.setSenhaCartao(rs.getInt("senhaCartao"));
+				cl.setSenhaCartao(rs.getString("senhaCartao"));
 		}
 		
 		conn.close();
@@ -103,7 +103,7 @@ public class ClienteDAO {
 			cp.setConta(rs.getInt("contap"));
 			cp.setSaldo(rs.getDouble("saldop"));
 			cl.setContaPoupanca(cp);
-			cl.setSenhaCartao(rs.getInt("senhaCartao"));
+			cl.setSenhaCartao(rs.getString("senhaCartao"));
 		}
 		
 		conn.close();
@@ -140,7 +140,7 @@ public class ClienteDAO {
 			cp.setConta(rs.getInt("contap"));
 			cp.setSaldo(rs.getDouble("saldop"));
 			cl.setContaPoupanca(cp);
-			cl.setSenhaCartao(rs.getInt("senhaCartao"));
+			cl.setSenhaCartao(rs.getString("senhaCartao"));
 		}
 		
 		conn.close();

@@ -21,7 +21,7 @@ public class AgendamentoManagedBean {
 	private Agendamento a = new Agendamento();
 	private Cliente usuario = new Cliente();
 	private List<Agendamento> listaAgenda = new ArrayList<Agendamento>();
-	private int senhaCartao;
+	private String senhaCartao;
 	private String codBarras1;
 	private String codBarras2;
 	private String codBarras3;
@@ -47,10 +47,10 @@ public class AgendamentoManagedBean {
 	public void setListaAgenda(List<Agendamento> listaAgenda) {
 		this.listaAgenda = listaAgenda;
 	}
-	public int getSenhaCartao() {
+	public String getSenhaCartao() {
 		return senhaCartao;
 	}
-	public void setSenhaCartao(int senhaCartao) {
+	public void setSenhaCartao(String senhaCartao) {
 		this.senhaCartao = senhaCartao;
 	}
 	public String getMsg() {
@@ -92,7 +92,7 @@ public class AgendamentoManagedBean {
 		HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
 		usuario = (Cliente) session.getAttribute("cliente");
 		
-		if(usuario.getSenhaCartao() == senhaCartao){	
+		if(usuario.getSenhaCartao().equals(senhaCartao)){	
 		
 			AgendamentoDAO dao = new AgendamentoDAO();
 			
