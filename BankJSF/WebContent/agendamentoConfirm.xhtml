@@ -23,7 +23,7 @@
 
 		<p>#{msg.agendamentoConfirm}</p>
 		<br/>
-		#{msg.senha}: <h:inputSecret name="passConfirm" value="#{agendamentoManagedBean.senhaCartao}" />
+		#{msg.senha}: <h:inputSecret name="passConfirm" value="#{agendamentoManagedBean.senhaCartao}" maxlength="4"/>
 		
 		<h:commandButton value="#{msg.concluirAgendamento}" action="#{agendamentoManagedBean.agendar}" />
 		

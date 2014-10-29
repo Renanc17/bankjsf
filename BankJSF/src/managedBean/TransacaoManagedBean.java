@@ -253,6 +253,7 @@ public class TransacaoManagedBean {
 				transacao.setData(new java.util.Date());
 				transacao.setTipoTransacao(tipoTransacao);
 				transacao.setIdR(remetente.getId());
+				transacao.setNomeR(remetente.getNome());
 				transacao.setAgenciaR(remetente.getAgencia());
 				transacao.setContaR(remetente.getContaCorrente().getConta());
 				transacao.setSaldoR(remetente.getContaCorrente().getSaldo());	
