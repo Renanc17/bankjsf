@@ -29,7 +29,8 @@
 					#{msg.nome}: 
 				</td>
 				<td>
-					<h:inputText value="#{favoritoManagedBean.f.nome}" />
+					<h:inputText value="#{favoritoManagedBean.f.nome}" required="true"
+								 requiredMessage="#{msg.nome}: #{msg.campoObrigatorio}"/>
 				</td>
 			</tr>
 			<tr>
@@ -37,8 +38,11 @@
 					#{msg.ag}: 
 				</td>
 				<td>
-					<h:inputText id="ag" maxlength="4" value="#{favoritoManagedBean.f.agencia}" 
-					validator="#{validator.verificadorGuardarAg}">
+					<h:inputText id="ag" maxlength="4" value="#{favoritoManagedBean.f.agencia}" required="true"
+					requiredMessage="#{msg.ag}: #{msg.campoObrigatorio}"
+					validator="#{validator.verificadorGuardarAg}"
+					converterMessage="#{msg.ag}: #{msg.valorInvalido}" >
+			
 						<f:validateLongRange minimum="0000" maximum="9999"/>
 					</h:inputText>
 				</td>
@@ -49,7 +53,10 @@
 				</td>
 				<td>
 					<h:inputText id="cc" maxlength="4" value="#{favoritoManagedBean.f.contaC}"
-					validator="#{validator.verificarExistenciaFavorito}">
+					requiredMessage="#{msg.cc}: #{msg.campoObrigatorio}"
+					validator="#{validator.verificarExistenciaFavorito}"
+					converterMessage="#{msg.cc}: #{msg.valorInvalido}" >
+				
 						<f:validateLongRange minimum="0000" maximum="9999"/>
 					</h:inputText>
 				</td>
@@ -58,6 +65,8 @@
 		<h:commandButton value="#{msg.cadastrar}" action="#{favoritoManagedBean.cadastrarFavorito}" />
 		<br/>
 		
+		<h:message for="nome" style="color:red" /> <br/>
+		<h:message for="ag" style="color:red" /> <br/>
 		<h:message for="cc" style="color:red" /> <br/>
 			
 		

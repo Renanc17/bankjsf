@@ -37,7 +37,8 @@
 					#{msg.ag}: 
 				</td>
 				<td>
-					<h:inputText id="ag" maxlength="4" value="#{favoritoManagedBean.f.agencia}" 
+					<h:inputText id="ag" maxlength="4" value="#{favoritoManagedBean.f.agencia}"  required="true"
+					requiredMessage="#{msg.ag}: #{msg.campoObrigatorio}"
 					validator="#{validator.verificadorGuardarAg}"
 					converterMessage="#{msg.ag}: #{msg.valorInvalido}" >
 						<f:validateLongRange minimum="0000" maximum="9999"/>
@@ -49,7 +50,8 @@
 					#{msg.cc}: 
 				</td>
 				<td>
-					<h:inputText id="cc" maxlength="4" value="#{favoritoManagedBean.f.contaC}"
+					<h:inputText id="cc" maxlength="4" value="#{favoritoManagedBean.f.contaC}" required="true"
+					requiredMessage="#{msg.cc}: #{msg.campoObrigatorio}"
 					validator="#{validator.verificarExistenciaFavorito}"
 					converterMessage="#{msg.cc}: #{msg.valorInvalido}" >
 						<f:validateLongRange minimum="0000" maximum="9999"/>
@@ -62,6 +64,7 @@
 		<input value="#{msg.cancelar}" type="button" onclick="window.location='consultarFavoritos.jsf'" /> 
 		
 		<br/>
+		<h:message for="ag" style="color:red" /> <br/>
 		<h:message for="cc" style="color:red" /> <br/>
 	</h:form>
 	</center>		

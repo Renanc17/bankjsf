@@ -23,8 +23,8 @@ public class ConnectionFactory {
 		
 		String server = "localhost";
 		String database = "bankjsf";
-		String usuario = "root";
-		String senha = "1234";
+		String usuario = "codsnake";
+		String senha = "codsnake";
 
 		String url = "jdbc:mysql://" + server + "/" + database;
 

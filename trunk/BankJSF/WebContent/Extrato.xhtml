@@ -31,8 +31,8 @@
 		<p:outputLabel for="from" value="#{msg.from}:" />  
 		<p:calendar style="width: 15px" maxlength="10"  id="from" mindate="#{date.dataAtualMenos90}" maxdate="#{date.dataAtual}"
 				value="#{transacaoManagedBean.fromDate}"  pattern="dd/MM/yyyy" required="true"
-        	requiredMessage="#{msg.data}: #{msg.campoObrigatorio}"
-        	converterMessage="#{msg.data}: #{msg.valorInvalido}" >
+        	requiredMessage="#{msg.data} (#{msg.from}): #{msg.campoObrigatorio}"
+        	converterMessage="#{msg.data} (#{msg.from}): #{msg.valorInvalido}" >
         		<f:convertDateTime pattern="dd/MM/yyyy" />
         	</p:calendar>
 	</td>
@@ -40,8 +40,8 @@
 		<p:outputLabel for="until" value="#{msg.until}:" />
 		<p:calendar style="width: 15px" maxlength="10"  id="until" mindate="#{date.dataAtualMenos30}" maxdate="#{date.dataAtual}"
 				value="#{transacaoManagedBean.untilDate}" pattern="dd/MM/yyyy" required="true"
-        	requiredMessage="#{msg.data}: #{msg.campoObrigatorio}"
-        	converterMessage="#{msg.data}: #{msg.valorInvalido}" >
+        	requiredMessage="#{msg.data} (#{msg.until}): #{msg.campoObrigatorio}"
+        	converterMessage="#{msg.data} (#{msg.until}): #{msg.valorInvalido}" >
         		<f:convertDateTime pattern="dd/MM/yyyy" />
         	</p:calendar>
 	</td>
@@ -51,6 +51,8 @@
 	</tr></table>
 	</h:form>
 	
+		<h:message for="from" style="color:red" /> <br/>
+		<h:message for="until" style="color:red" /> <br/>
 	
 	
 	<h:form>	

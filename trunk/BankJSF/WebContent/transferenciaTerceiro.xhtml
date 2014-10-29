@@ -49,7 +49,8 @@
 			<h:inputText id="ag" value="#{transacaoManagedBean.transacao.agenciaD}" size="11" maxlength="4"
 			required="true" requiredMessage="#{msg.agencia}: #{msg.campoObrigatorio}"
 			validator="#{validator.verificadorGuardarAg}" 
-			converterMessage="#{msg.ag}: #{msg.valorInvalido}" >
+			converterMessage="#{msg.ag}: #{msg.valorInvalido}" 
+			validatorMessage="#{msg.ag}: #{msg.valorInvalido}" >
 				<f:validateLongRange minimum="0"/>
 			</h:inputText>
 		</td>
@@ -74,7 +75,7 @@
 		<td>
 			R$ <h:inputText id="valor" value="#{transacaoManagedBean.transacao.valor}" size="7" maxlength="9"
 			required="true" requiredMessage="#{msg.valorToTransf}: #{msg.campoObrigatorio}" 
-			converterMessage="#{msg.valor}: #{msg.valorInvalido}" >
+			converterMessage="#{msg.valorToTransf}: #{msg.valorInvalido}" >
 				<f:validateDoubleRange minimum="0.05" />
 			</h:inputText>
 			

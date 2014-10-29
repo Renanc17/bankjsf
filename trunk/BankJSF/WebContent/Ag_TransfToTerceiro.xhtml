@@ -43,13 +43,14 @@
 	<tr></tr>
 	<tr>
 		<td>
-			#{msg.agencia}:
+			#{msg.ag}:
 		</td>
 		<td>
 			<h:inputText id="ag" value="#{agendamentoManagedBean.a.agenciaD}" size="11" maxlength="4"
 			required="true" requiredMessage="#{msg.agencia}: #{msg.campoObrigatorio}"
 			validator="#{validator.verificadorGuardarAg}"
-			converterMessage="#{msg.ag}: #{msg.valorInvalido}">
+			converterMessage="#{msg.ag}: #{msg.valorInvalido}" 
+			validatorMessage="#{msg.ag}: #{msg.valorInvalido}">
 				<f:validateLongRange minimum="0"/>
 			</h:inputText>
 		</td>
