@@ -26,7 +26,7 @@ public class AgendamentoDAO {
 			if(a.getIdD() != 0 && a.getContaD() != 0 && a.getAgenciaD() != 0) //Tranferencias
 				sql = "INSERT INTO agendamento (idUsuario, data, tipoAgendamento, descricao, valor, idD, contaD, agenciaD) values(?,?,?,?,?,?,?,?)";
 			else //Pagamento
-				sql = "INSERT INTO agendamento (idUsuario, data, tipoAgendamento, descricao, valor) values(?,?,?,?,?,?)";
+				sql = "INSERT INTO agendamento (idUsuario, data, tipoAgendamento, descricao, valor, codBarras) values(?,?,?,?,?,?)";
 					
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			
@@ -43,7 +43,7 @@ public class AgendamentoDAO {
 				stmt.setInt(6, a.getIdD());
 				stmt.setInt(7, a.getContaD());
 				stmt.setInt(8, a.getAgenciaD());
-			}else if(!a.getCodBarras().equals(""))
+			}else// if(!a.getCodBarras().equals(""))
 				stmt.setString(6, a.getCodBarras());
 			
 			stmt.executeUpdate();

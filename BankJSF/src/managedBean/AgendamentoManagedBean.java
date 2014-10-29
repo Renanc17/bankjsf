@@ -98,7 +98,7 @@ public class AgendamentoManagedBean {
 			
 			a.setIdUsuario(usuario.getId());
 			
-			if(a.getTipoAgendamento().equals("Payment"))
+			if(a.getTipoAgendamento().equals("Payment")) //Tem que setar o tipo agendamento
 				a.setCodBarras(codBarras1+codBarras2+codBarras3+codBarras4);
 			
 			try {			
