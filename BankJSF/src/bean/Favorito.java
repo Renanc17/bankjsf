@@ -5,8 +5,8 @@ public class Favorito {
 	private int id;
 	private int idCliente;
 	private String nome;
-	private int agencia;
-	private int contaC;
+	private Integer agencia;
+	private Integer contaC;
 	
 	public int getId() {
 		return id;
@@ -26,16 +26,16 @@ public class Favorito {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public int getAgencia() {
+	public Integer getAgencia() {
 		return agencia;
 	}
-	public void setAgencia(int agencia) {
+	public void setAgencia(Integer agencia) {
 		this.agencia = agencia;
 	}
-	public int getContaC() {
+	public Integer getContaC() {
 		return contaC;
 	}
-	public void setContaC(int contaC) {
+	public void setContaC(Integer contaC) {
 		this.contaC = contaC;
 	}
 		

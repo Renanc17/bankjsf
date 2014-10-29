@@ -29,28 +29,23 @@ public class ClienteManagedBean {
 
 	public Double getSaldoTotal() {
 		return saldoTotal;
-	}
-	
+	}	
 	public void setSaldoTotal(Double saldoTotal) {
 		this.saldoTotal = saldoTotal;
 	}
-
 	public String getMsg() {
 		return msg;
 	}
-
 	public void setMsg(String msg) {
 		this.msg = msg;
 	}
-
 	public Cliente getCliente() {
 		return cliente;
 	}
-
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
-
+	
 	public String logar() {
 		String resultado = "";
 		

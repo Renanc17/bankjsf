@@ -26,7 +26,7 @@
 	<center>
 		<h:form>
 		<p>
-			<h:commandLink id="saldo" action="Home.faces?faces-redirect=true" value="#{msg.saldo}"/>
+			<h:commandLink id="saldo" action="#{transacaoManagedBean.listarUltimosLanc}" value="#{msg.saldo}"/>
 			   -   
 			<h:commandLink id="pagamentos" action="Pagamentos.faces?faces-redirect=true" value="#{msg.pagamentos}"/>
 			   -   
@@ -40,7 +40,7 @@
 			   -   
 			<h:commandLink id="comprovantes" action="Comprovantes.faces?faces-redirect=true" value="#{msg.comprovantes}"/>
 			   -   
-			<h:commandLink id="extrato" action="Extrato.faces?faces-redirect=true" value="#{msg.extrato}"/>
+			<h:commandLink id="extrato" action="#{transacaoManagedBean.listarExtrato}" value="#{msg.extrato}"/>
 		</p>
 		</h:form>
 	</center>

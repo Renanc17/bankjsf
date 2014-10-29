@@ -38,7 +38,8 @@
 				</td>
 				<td>
 					<h:inputText id="ag" maxlength="4" value="#{favoritoManagedBean.f.agencia}" 
-					validator="#{validator.verificadorGuardarAg}">
+					validator="#{validator.verificadorGuardarAg}"
+					converterMessage="#{msg.ag}: #{msg.valorInvalido}" >
 						<f:validateLongRange minimum="0000" maximum="9999"/>
 					</h:inputText>
 				</td>
@@ -49,7 +50,8 @@
 				</td>
 				<td>
 					<h:inputText id="cc" maxlength="4" value="#{favoritoManagedBean.f.contaC}"
-					validator="#{validator.verificarExistenciaFavorito}">
+					validator="#{validator.verificarExistenciaFavorito}"
+					converterMessage="#{msg.cc}: #{msg.valorInvalido}" >
 						<f:validateLongRange minimum="0000" maximum="9999"/>
 					</h:inputText>
 				</td>

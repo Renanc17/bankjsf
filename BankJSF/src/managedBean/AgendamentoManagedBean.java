@@ -1,9 +1,6 @@
 package managedBean;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -21,7 +18,6 @@ public class AgendamentoManagedBean {
 	
 	private Agendamento a = new Agendamento();
 	private Cliente usuario = new Cliente();
-	private List<Agendamento> listaAgenda = new ArrayList<Agendamento>();
 	private String senhaCartao;
 	private String codBarras1;
 	private String codBarras2;
@@ -41,12 +37,6 @@ public class AgendamentoManagedBean {
 	}
 	public void setUsuario(Cliente usuario) {
 		this.usuario = usuario;
-	}
-	public List<Agendamento> getListaAgenda() {
-		return listaAgenda;
-	}
-	public void setListaAgenda(List<Agendamento> listaAgenda) {
-		this.listaAgenda = listaAgenda;
 	}
 	public String getSenhaCartao() {
 		return senhaCartao;
@@ -92,6 +82,9 @@ public class AgendamentoManagedBean {
 		HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
 		usuario = (Cliente) session.getAttribute("cliente");
 		
+		if(usuario == null)
+			return "Login" + ".faces?faces-redirect=true";
+		
 		if(usuario.getSenhaCartao().equals(senhaCartao)){	
 		
 			AgendamentoDAO dao = new AgendamentoDAO();
@@ -103,8 +96,8 @@ public class AgendamentoManagedBean {
 			
 			try {			
 				dao.setarAgendamento(a);
-				listaAgenda = dao.pegarAgenda(usuario.getId());
-				session.setAttribute("listaAgenda", listaAgenda);
+				//listaAgenda = dao.pegarAgenda(usuario.getId());
+				session.setAttribute("listaAgenda", dao.pegarAgenda(usuario.getId()));
 				pagina = "sucesso";			
 			} catch (SQLException e) {
 				pagina = "erro";
@@ -154,12 +147,15 @@ public class AgendamentoManagedBean {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
 		usuario = (Cliente) session.getAttribute("cliente");
-			
+		
+		if(usuario == null)
+			return "Login" + ".faces?faces-redirect=true";
+		
 		AgendamentoDAO dao = new AgendamentoDAO();
 		
 		try {
-			listaAgenda = dao.pegarAgenda(usuario.getId());
-			session.setAttribute("listaAgenda", listaAgenda);
+			//listaAgenda = dao.pegarAgenda(usuario.getId());
+			session.setAttribute("listaAgenda", dao.pegarAgenda(usuario.getId()));
 			pagina = "consultarAgendamentos";
 		} catch (SQLException e) {
 			pagina = "erro";
