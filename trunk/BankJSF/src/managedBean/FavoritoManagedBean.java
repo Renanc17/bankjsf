@@ -1,7 +1,6 @@
 package managedBean;
 
 import java.sql.SQLException;
-import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -18,7 +17,6 @@ public class FavoritoManagedBean {
 	
 	private Favorito f = new Favorito();
 	private Cliente user = new Cliente();
-	private List<Favorito> listaFavoritos;
 	private int pk;
 	private String msg = "";
 
@@ -34,12 +32,6 @@ public class FavoritoManagedBean {
 	}
 	public void setUser(Cliente user) {
 		this.user = user;
-	}
-	public List<Favorito> getListaFavoritos() {
-		return listaFavoritos;
-	}
-	public void setListaFavoritos(List<Favorito> listaFavoritos) {
-		this.listaFavoritos = listaFavoritos;
 	}
 	public String getMsg() {
 		return msg;
@@ -64,6 +56,9 @@ public class FavoritoManagedBean {
 		HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
 		user = (Cliente) session.getAttribute("cliente");
 		
+		if(user == null)
+			return "Login" + ".faces?faces-redirect=true";
+		
 		try {
 			f.setIdCliente(user.getId());
 			dao.cadastrarFavorito(f);
@@ -85,6 +80,9 @@ public class FavoritoManagedBean {
 		HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
 		user = (Cliente) session.getAttribute("cliente");
 		
+		if(user == null)
+			return "Login" + ".faces?faces-redirect=true";
+		
 		try{
 			//listaFavoritos = dao.listarFavoritos(user.getId());
 			session.setAttribute("listaFavoritos", dao.listarFavoritos(user.getId()));
@@ -105,8 +103,12 @@ public class FavoritoManagedBean {
 		HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
 		user = (Cliente) session.getAttribute("cliente");
 		
+		if(user == null)
+			return "Login" + ".faces?faces-redirect=true";
+		
 		try{			
 			dao.alterarFavorito(f);
+			//listaFavoritos = dao.listarFavoritos(user.getId());
 			session.setAttribute("listaFavoritos", dao.listarFavoritos(user.getId()));
 			pagina = "consultarFavoritos";
 		}catch(SQLException e){
@@ -125,8 +127,12 @@ public class FavoritoManagedBean {
 		HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
 		user = (Cliente) session.getAttribute("cliente");
 		
+		if(user == null)
+			return "Login" + ".faces?faces-redirect=true";
+		
 		try{			
 			dao.excluirFavorito(pk);
+			//listaFavoritos = dao.listarFavoritos(user.getId());
 			session.setAttribute("listaFavoritos", dao.listarFavoritos(user.getId()));
 			listarFavoritos();
 		}catch(SQLException e){

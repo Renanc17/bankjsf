@@ -51,28 +51,32 @@
 			<h:inputText value="#{transacaoManagedBean.codBarras1}" validator="#{validator.verificador4Digitos}" 
 						 id="bc1" size="3" maxlength="4" required="true"
 						 requiredMessage="#{msg.primeiro}: #{msg.campoObrigatorio}"
-						 validatorMessage="#{msg.primeiro}: #{msg.quatroDigitos}">
+						 validatorMessage="#{msg.primeiro}: #{msg.quatroDigitos}"
+						 converterMessage="#{msg.barcode}: #{msg.valorInvalido}">
 				<f:validateLongRange minimum="0"/>
 			</h:inputText>
 			
 			<h:inputText value="#{transacaoManagedBean.codBarras2}" validator="#{validator.verificador4Digitos}" 
 						 id="bc2" size="3" maxlength="4" required="true"
 						 requiredMessage="#{msg.segundo}: #{msg.campoObrigatorio}"
-						 validatorMessage="#{msg.segundo}: #{msg.quatroDigitos}">
+						 validatorMessage="#{msg.segundo}: #{msg.quatroDigitos}"
+						 converterMessage="#{msg.barcode}: #{msg.valorInvalido}">
 				<f:validateLongRange minimum="0"/>
 			</h:inputText>
 			
 			<h:inputText value="#{transacaoManagedBean.codBarras3}" validator="#{validator.verificador4Digitos}"
 						 id="bc3" size="3" maxlength="4" required="true"
 						 requiredMessage="#{msg.terceiro}: #{msg.campoObrigatorio}"
-						 validatorMessage="#{msg.terceiro}: #{msg.quatroDigitos}">
+						 validatorMessage="#{msg.terceiro}: #{msg.quatroDigitos}"
+						 converterMessage="#{msg.barcode}: #{msg.valorInvalido}">
 				<f:validateLongRange minimum="0"/>
 			</h:inputText>
 			
 			<h:inputText value="#{transacaoManagedBean.codBarras4}" validator="#{validator.verificador4Digitos}" 
 						 id="bc4" size="3" maxlength="4" required="true"
 						 requiredMessage="#{msg.quarto}: #{msg.campoObrigatorio}"
-						 validatorMessage="#{msg.quarto}: #{msg.quatroDigitos}">
+						 validatorMessage="#{msg.quarto}: #{msg.quatroDigitos}"
+						 converterMessage="#{msg.barcode}: #{msg.valorInvalido}">
 				<f:validateLongRange minimum="0"/>
 			</h:inputText>
 		</td>

@@ -54,7 +54,8 @@
 		</td>
 		<td>
 			R$ <h:inputText value="#{transacaoManagedBean.transacao.valor}" size="7" maxlength="9"
-				required="true" requiredMessage="#{msg.valorToTransf}: #{msg.campoObrigatorio}" >
+				required="true" requiredMessage="#{msg.valorToTransf}: #{msg.campoObrigatorio}"
+				converterMessage="#{msg.valor}: #{msg.valorInvalido}" >
 				<f:validateDoubleRange minimum="0.05" />
 			</h:inputText>
 		</td>

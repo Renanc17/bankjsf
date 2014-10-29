@@ -32,7 +32,6 @@ public class TransacaoManagedBean {
 	private String codBarras3 = "";
 	private String codBarras4 = "";
 	
-	
 	ResourceBundle bundle = ResourceBundle.getBundle("language_" + FacesContext.getCurrentInstance().getViewRoot().getLocale());
 	String senhaErrada = bundle.getString("senhaErrada");
 	
@@ -115,15 +114,16 @@ public class TransacaoManagedBean {
 		this.codBarras4 = codBarras4;
 	}
 	
-	
-	
-	
 	public String transacao(){
 		String pagina = "";
 		
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
 		remetente = (Cliente) session.getAttribute("cliente");
+		
+		if(remetente == null)
+			return "Login" + ".faces?faces-redirect=true";
+			
 		
 		if(tipoTransacao.equals("transfToPoupanca")){
 			
@@ -149,9 +149,10 @@ public class TransacaoManagedBean {
 					transacao.setDescricao("Transf. de Conta Corrente p/ Conta Poup.");
 				
 				TransacaoDAO dao = new TransacaoDAO();
-				try {
-					
+				try {					
 					remetente = dao.transfToPoupanca(remetente, transacao);
+					//setListaUltimosLanc(dao.ultimosLanc(remetente.getId()));
+					//setComprovantes(dao.comprovantes(remetente.getId()));
 					session.setAttribute("listaUltimosLanc", dao.ultimosLanc(remetente.getId()));
 					session.setAttribute("comprovantes", dao.comprovantes(remetente.getId()));
 					pagina = "sucesso";			
@@ -161,12 +162,8 @@ public class TransacaoManagedBean {
 			}else{
 				pagina = "erro";
 				setMsg(senhaErrada);
-			}
-			
+			}			
 				session.setAttribute("cliente", remetente);	
-				transacao = new Transacao();
-				
-				return pagina + ".faces?faces-redirect=true";			
 		}		
 		else 
 		if(tipoTransacao.equals("transfToCc")){
@@ -196,7 +193,10 @@ public class TransacaoManagedBean {
 				TransacaoDAO dao = new TransacaoDAO();
 				try {	
 						remetente = dao.transfToCc(remetente, transacao);
+						//setListaUltimosLanc(dao.ultimosLanc(remetente.getId()));
+						//setComprovantes(dao.comprovantes(remetente.getId()));
 						session.setAttribute("listaUltimosLanc", dao.ultimosLanc(remetente.getId()));
+						session.setAttribute("comprovantes", dao.comprovantes(remetente.getId()));
 						pagina = "sucesso";
 				}catch (SQLException e) {
 					pagina = "erro";
@@ -205,10 +205,8 @@ public class TransacaoManagedBean {
 			}else{
 					pagina = "erro";
 					setMsg(senhaErrada);
-			}
-					
-			session.setAttribute("cliente", remetente);							
-			return pagina + ".faces?faces-redirect=true";			
+			}					
+			session.setAttribute("cliente", remetente);			
 		}		
 		else
 		if(tipoTransacao.equals("transfToTerc")){
@@ -221,6 +219,8 @@ public class TransacaoManagedBean {
 				TransacaoDAO dao = new TransacaoDAO();
 				try {
 					remetente = dao.transferencia(remetente, transacao);
+					//setListaUltimosLanc(dao.ultimosLanc(remetente.getId()));
+					//setComprovantes(dao.comprovantes(remetente.getId()));
 					session.setAttribute("listaUltimosLanc", dao.ultimosLanc(remetente.getId()));
 					session.setAttribute("comprovantes", dao.comprovantes(remetente.getId()));
 					pagina = "sucesso";
@@ -241,13 +241,9 @@ public class TransacaoManagedBean {
 			}else{
 				pagina = "erro";
 				setMsg(senhaErrada);
-			}		
-
-			transacao = new Transacao();
+			}	
 			
-			return pagina + ".faces?faces-redirect=true";
-		}
-		else
+		}else
 		if (tipoTransacao.equals("Payment")){
 			
 			if(remetente.getSenhaCartao() == senhaCartao){	
@@ -267,6 +263,8 @@ public class TransacaoManagedBean {
 				TransacaoDAO dao = new TransacaoDAO();
 				try {
 					remetente = dao.pagamento(remetente, transacao);
+					//setListaUltimosLanc(dao.ultimosLanc(remetente.getId()));
+					//setComprovantes(dao.comprovantes(remetente.getId()));
 					session.setAttribute("listaUltimosLanc", dao.ultimosLanc(remetente.getId()));
 					session.setAttribute("comprovantes", dao.comprovantes(remetente.getId()));
 					pagina = "sucesso";
@@ -284,16 +282,10 @@ public class TransacaoManagedBean {
 			}else{
 				pagina = "erro";
 				setMsg(senhaErrada);
-			}		
-
-			transacao = new Transacao();
-			
-			return pagina + ".faces?faces-redirect=true";
-			
+			}			
 		}
 		
-		
-		setMsg("Transacao desconhecida!");
+		transacao = new Transacao();
 		return pagina + ".faces?faces-redirect=true";	
 	}
 	
@@ -315,9 +307,13 @@ public class TransacaoManagedBean {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
 		remetente = (Cliente) session.getAttribute("cliente");
-			
+		
+		if(remetente == null)
+			return "Login" + ".faces?faces-redirect=true";
+		
 		TransacaoDAO dao = new TransacaoDAO();
 		try {
+			//setListaExtrato(dao.historico(remetente.getId(), fromDate, untilDate));
 			session.setAttribute("listaExtrato", dao.historico(remetente.getId(), fromDate, untilDate));
 			pagina = "Extrato";
 		} catch (SQLException e) {
@@ -335,9 +331,13 @@ public class TransacaoManagedBean {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
 		remetente = (Cliente) session.getAttribute("cliente");
+		
+		if(remetente == null)
+			return "Login" + ".faces?faces-redirect=true";
 			
 		TransacaoDAO dao = new TransacaoDAO();
 		try {
+			//setListaUltimosLanc(dao.ultimosLanc(remetente.getId()));
 			session.setAttribute("listaUltimosLanc", dao.ultimosLanc(remetente.getId()));
 			pagina = "Home";
 		} catch (SQLException e) {
@@ -348,10 +348,6 @@ public class TransacaoManagedBean {
 		
 		return pagina + ".faces?faces-redirect=true";
 	}
-	public String teste(){
-		return "Home";
-	}
 	
 	
-
 }

@@ -9,7 +9,7 @@
 		<p>
 			<h:commandLink id="cadastrarAgendamentos" action="cadastrarAgendamentos.faces?faces-redirect=true" value="#{msg.cadastrarAgendamento}"/>
 			   -   
-			<h:commandLink id="consultarAgendamentos" action="consultarAgendamentos.faces?faces-redirect=true" value="#{msg.gerenciarAgendamento}"/>
+			<h:commandLink id="consultarAgendamentos" action="#{agendamentoManagedBean.listarAgenda}" value="#{msg.gerenciarAgendamento}"/>
 		</p>
 		</center>
 		</h:form>

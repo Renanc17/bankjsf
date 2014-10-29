@@ -48,7 +48,8 @@
 		<td>
 			<h:inputText id="ag" value="#{agendamentoManagedBean.a.agenciaD}" size="11" maxlength="4"
 			required="true" requiredMessage="#{msg.agencia}: #{msg.campoObrigatorio}"
-			validator="#{validator.verificadorGuardarAg}">
+			validator="#{validator.verificadorGuardarAg}"
+			converterMessage="#{msg.ag}: #{msg.valorInvalido}">
 				<f:validateLongRange minimum="0"/>
 			</h:inputText>
 		</td>
@@ -60,7 +61,8 @@
 		<td>
 			<h:inputText id="cc" value="#{agendamentoManagedBean.a.contaD}" size="11" maxlength="4"
 			required="true" requiredMessage="#{msg.cc}: #{msg.campoObrigatorio}" 
-			validator="#{validator.verificarTerceiro}">
+			validator="#{validator.verificarTerceiro}"
+			converterMessage="#{msg.cc}: #{msg.valorInvalido}">
 				<f:validateLongRange minimum="0"/>
 			</h:inputText>
 		</td>
