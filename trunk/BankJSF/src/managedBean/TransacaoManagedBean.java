@@ -246,7 +246,7 @@ public class TransacaoManagedBean {
 		}else
 		if (tipoTransacao.equals("Payment")){
 			
-			if(remetente.getSenhaCartao() == senhaCartao){	
+			if(remetente.getSenhaCartao().equals(senhaCartao)){	
 				
 				remetente.getContaCorrente().setSaldo(remetente.getContaCorrente().getSaldo() - transacao.getValor());
 				
@@ -258,7 +258,7 @@ public class TransacaoManagedBean {
 				transacao.setSaldoR(remetente.getContaCorrente().getSaldo());	
 				transacao.setCodBarras(codBarras1+codBarras2+codBarras3+codBarras4);
 				if(transacao.getDescricao().equals(""))
-					transacao.setDescricao("Pagamento de Conta (Final" + codBarras4 + ")");
+					transacao.setDescricao("Pagamento de Conta (Final " + codBarras4 + ")");
 				
 				TransacaoDAO dao = new TransacaoDAO();
 				try {
@@ -342,12 +342,34 @@ public class TransacaoManagedBean {
 			pagina = "Home";
 		} catch (SQLException e) {
 			pagina = "erro";
-			msg += e;
+			msg = e.toString();
 		}
 		
 		
 		return pagina + ".faces?faces-redirect=true";
 	}
 	
+	public String listarComprovantes(){
+		
+		String pagina = "";
+		
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
+		remetente = (Cliente) session.getAttribute("cliente");
+		
+		if(remetente == null)
+			return "Login" + ".faces?faces-redirect=true";
+		
+		TransacaoDAO dao = new TransacaoDAO();
+		try{
+			session.setAttribute("comprovantes", dao.comprovantes(remetente.getId()));
+			pagina = "Comprovantes";
+		} catch (SQLException e){
+			pagina = "erro";
+			msg = e.toString();
+		}
+			
+		return pagina + ".faces?faces-redirect=true";
+	}
 	
 }

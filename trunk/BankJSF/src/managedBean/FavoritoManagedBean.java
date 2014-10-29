@@ -69,6 +69,7 @@ public class FavoritoManagedBean {
 			pagina = "erro";
 		}	
 		
+		f = new Favorito();
 		return pagina + ".faces?faces-redirect=true";
 	}
 	
@@ -115,6 +116,7 @@ public class FavoritoManagedBean {
 			pagina="erro";
 		}
 		
+		f = new Favorito();
 		return pagina + ".faces?faces-redirect=true";
 	}
 	

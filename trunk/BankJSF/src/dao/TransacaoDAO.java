@@ -330,7 +330,6 @@ public List<Transacao> comprovantes(int id) throws SQLException{
 		
 		PreparedStatement stmt = conn.prepareStatement(sql);
 
-
 		stmt.setInt(1, id);
 		stmt.setInt(2, id);
 		
@@ -346,29 +345,33 @@ public List<Transacao> comprovantes(int id) throws SQLException{
 			
 			Transacao t = new Transacao();
 			
+			t.setId(rs.getInt("id"));
 			t.setData(rs.getDate("data"));
 			t.setTipoTransacao(rs.getString("tipoTransacao"));
 			t.setDescricao(rs.getString("descricao"));
 			t.setValor(rs.getDouble("valor"));
 			t.setIdR(rs.getInt("idR"));
+			t.setNomeR(rs.getString("nomeR"));
 			t.setContaR(rs.getInt("contaR"));
 			t.setAgenciaR(rs.getInt("agenciaR"));
 			t.setIdD(rs.getInt("idD"));
 			t.setContaD(rs.getInt("contaD"));
 			t.setAgenciaD(rs.getInt("agenciaD"));
+			t.setNomeD(rs.getString("nomeD"));
 						
 			ClienteDAO dao = new ClienteDAO();
 			Cliente c = dao.getClienteById(id);
 			
-			if(t.getContaR().equals(c.getContaCorrente().getConta())){	
-				t.setSaldo(rs.getDouble("SaldoR"));
+			if(t.getContaR().equals(c.getContaCorrente().getConta())){	 //Se a conta remetente da transação for a msm do usuário logado
+				t.setSaldo(rs.getDouble("SaldoR"));						 //Pegar o Saldo do Remetente da Transação
 			}else
-				if(t.getContaD().equals(c.getContaCorrente().getConta()))
-					t.setSaldo(rs.getDouble("SaldoD"));
+				if(t.getContaD().equals(c.getContaCorrente().getConta()))//Se a conta destinatária for a mesma do usuário logado
+					t.setSaldo(rs.getDouble("SaldoD"));					 //Pegar o Saldo Destinatário da Transação
 			
-			if(t.getTipoTransacao().equals("Payment"))
+			if(t.getTipoTransacao().equals("Payment")){
 				t.setTipoTransacao(Payment);
-			else if(t.getTipoTransacao().equals("transfToCc"))
+				t.setCodBarras(rs.getString("codBarras"));
+			}else if(t.getTipoTransacao().equals("transfToCc"))
 				t.setTipoTransacao(transfToCc);
 			else if(t.getTipoTransacao().equals("transfToPoupanca"))
 				t.setTipoTransacao(transfToPoupanca);
