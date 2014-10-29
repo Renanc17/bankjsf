@@ -127,7 +127,7 @@ public class TransacaoManagedBean {
 		
 		if(tipoTransacao.equals("transfToPoupanca")){
 			
-			if(remetente.getSenhaCartao() == senhaCartao){	
+			if(remetente.getSenhaCartao().equals(senhaCartao)){	
 				remetente.getContaCorrente().setSaldo(remetente.getContaCorrente().getSaldo() - transacao.getValor());
 				remetente.getContaPoupanca().setSaldo(remetente.getContaPoupanca().getSaldo() + transacao.getValor());
 				
@@ -171,7 +171,7 @@ public class TransacaoManagedBean {
 		else 
 		if(tipoTransacao.equals("transfToCc")){
 			
-			if(remetente.getSenhaCartao() == senhaCartao){	
+			if(remetente.getSenhaCartao().equals(senhaCartao)){	
 				
 				remetente.getContaCorrente().setSaldo(remetente.getContaCorrente().getSaldo() + transacao.getValor());
 				remetente.getContaPoupanca().setSaldo(remetente.getContaPoupanca().getSaldo() - transacao.getValor());
@@ -213,7 +213,7 @@ public class TransacaoManagedBean {
 		else
 		if(tipoTransacao.equals("transfToTerc")){
 
-			if(remetente.getSenhaCartao() == senhaCartao){	
+			if(remetente.getSenhaCartao().equals(senhaCartao)){	
 								
 				transacao.setData(new java.util.Date());
 				transacao.setTipoTransacao(tipoTransacao);

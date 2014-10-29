@@ -27,7 +27,7 @@
 			<h4>#{msg.ag_payment}</h4>
 			#{msg.preenchaAgendamento}<br/>
 	<br/>
-	<h:form id="submit">
+	<h:form>
 	
 	
 	<table>
@@ -79,12 +79,11 @@
 			#{msg.valor}:
 		</td>
 		<td>
-			R$ <h:inputText id="valor" value="#{agendamentoManagedBean.a.valor}" size="8" required="true" maxlength="9"
+			R$ <h:inputText id="valor" value="#{agendamentoManagedBean.a.valor}" size="7"  required="true" maxlength="9"
 				requiredMessage="#{msg.valor}: #{msg.campoObrigatorio}"
 				converterMessage="#{msg.valor}: #{msg.valorInvalido}" >
-					<f:validateDoubleRange minimum="0.05" />
+				<f:validateDoubleRange minimum="0.05" />
 			</h:inputText>
-			
 		</td>
 	</tr>
 	<tr>
@@ -93,7 +92,7 @@
         </td>
         <td>
         	<p:calendar id="data" style="width: 15px" maxlength="10"  size="11" mindate="#{date.dataAtual}"
-        	value="#{agendamentoManagedBean.a.data}"  pattern="dd/MM/yyyy" required="true"  readonly="true"
+        	value="#{agendamentoManagedBean.a.data}"  pattern="dd/MM/yyyy" required="true" readonlyInput="true"
         	requiredMessage="#{msg.data}: #{msg.campoObrigatorio}"
         	converterMessage="#{msg.data}: #{msg.valorInvalido}" >
         		<f:convertDateTime pattern="dd/MM/yyyy" />
@@ -112,7 +111,9 @@
 	</table>
 	
 	<p></p>
-	<h:commandButton id="continuar" value="#{msg.continuar}" action="agendamentoConfirm.faces?faces-redirect=true" />
+	<h:commandButton id="continuar" value="#{msg.continuar}" action="agendamentoConfirm.faces?faces-redirect=true" >
+		<f:setPropertyActionListener target="#{agendamentoManagedBean.a.tipoAgendamento}" value="Payment"/>
+	</h:commandButton>
 	<br/>
 			<h:message for="valor" style="color:red" /> <br/>
 			<h:message for="data" style="color:red" /> <br/>
