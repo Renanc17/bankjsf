@@ -30,7 +30,7 @@
 	<td>
 		<p:outputLabel for="from" value="#{msg.from}:" />  
 		<p:calendar style="width: 15px" maxlength="10"  id="from" mindate="#{date.dataAtualMenos90}" maxdate="#{date.dataAtual}"
-				value="#{transacaoManagedBean.fromDate}"  pattern="dd/MM/yyyy" required="true"
+				value="#{transacaoManagedBean.fromDate}"  pattern="dd/MM/yyyy" required="true" readonly="true"
         	requiredMessage="#{msg.data}: #{msg.campoObrigatorio}"
         	converterMessage="#{msg.data}: #{msg.valorInvalido}" >
         		<f:convertDateTime pattern="dd/MM/yyyy" />
@@ -39,7 +39,7 @@
 	<td>
 		<p:outputLabel for="until" value="#{msg.until}:" />
 		<p:calendar style="width: 15px" maxlength="10"  id="until" mindate="#{date.dataAtualMenos30}" maxdate="#{date.dataAtual}"
-				value="#{transacaoManagedBean.untilDate}" pattern="dd/MM/yyyy" required="true"
+				value="#{transacaoManagedBean.untilDate}" pattern="dd/MM/yyyy" required="true" readonly="true"
         	requiredMessage="#{msg.data}: #{msg.campoObrigatorio}"
         	converterMessage="#{msg.data}: #{msg.valorInvalido}" >
         		<f:convertDateTime pattern="dd/MM/yyyy" />

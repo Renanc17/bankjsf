@@ -9,10 +9,6 @@
 <f:view locale="#{switcher.currentLocale}">	  
 
 <h:head>
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script type="text/javascript">
-
-</script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <style type="text/css">  
            .ui-widget {  
@@ -87,7 +83,7 @@
         </td>
         <td>
         	<p:calendar id="data" style="width: 15px" maxlength="10"  size="11" mindate="#{date.dataAtual}"
-        	value="#{agendamentoManagedBean.a.data}"  pattern="dd/MM/yyyy" required="true"
+        	value="#{agendamentoManagedBean.a.data}"  pattern="dd/MM/yyyy" required="true" readonly="true"
         	requiredMessage="#{msg.data}: #{msg.campoObrigatorio}"
         	converterMessage="#{msg.data}: #{msg.valorInvalido}" >
         		<f:convertDateTime pattern="dd/MM/yyyy" />

@@ -2,6 +2,7 @@ package managedBean;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -84,7 +85,6 @@ public class AgendamentoManagedBean {
 		this.codBarras4 = codBarras4;
 	}
 	
-	
 	public String agendar(){
 		String pagina = "";
 		
@@ -97,6 +97,9 @@ public class AgendamentoManagedBean {
 			AgendamentoDAO dao = new AgendamentoDAO();
 			
 			a.setIdUsuario(usuario.getId());
+			
+			if(a.getTipoAgendamento().equals("Payment"))
+				a.setCodBarras(codBarras1+codBarras2+codBarras3+codBarras4);
 			
 			try {			
 				dao.setarAgendamento(a);
@@ -193,5 +196,6 @@ public class AgendamentoManagedBean {
 		return pagina + ".faces?faces-redirect=true";
 		
 	}
+	
 
 }

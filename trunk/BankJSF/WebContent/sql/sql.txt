@@ -10,7 +10,7 @@ CREATE TABLE bankjsf.cliente (
   saldoc DOUBLE NULL,
   contap INT NOT NULL,
   saldop DOUBLE NULL,
-  senhaCartao INT NOT NULL,
+  senhaCartao  VARCHAR(45) NOT NULL,
   PRIMARY KEY (id));
   
 CREATE TABLE bankjsf.favorito (
