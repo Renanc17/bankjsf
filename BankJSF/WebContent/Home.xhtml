@@ -73,12 +73,14 @@
 	</tr>	
 	</table>
 	<br /><br />
-		<h4>#{msg.ultimosLancamentos}</h4>
+		
 	
 	<h:form>
 	<div style="width:75%">
 	<p:dataTable var="i" value="#{listaUltimosLanc}">
-	
+		 <f:facet name="header">
+           #{msg.ultimosLancamentos}
+       	 </f:facet>
 	    <p:column headerText="#{msg.data}" style="width:8%">
 	        <h:outputText value="#{i.data}" >
 	        	<f:convertDateTime pattern="dd/MM/yyyy" />

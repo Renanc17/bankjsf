@@ -38,7 +38,7 @@
 			  
 			<h:commandLink id="agendamentos" action="Agendamentos.faces?faces-redirect=true" value="#{msg.agendamentos}"/>
 			   -   
-			<h:commandLink id="comprovantes" action="Comprovantes.faces?faces-redirect=true" value="#{msg.comprovantes}"/>
+			<h:commandLink id="comprovantes" action="#{transacaoManagedBean.listarComprovantes}" value="#{msg.comprovantes}"/>
 			   -   
 			<h:commandLink id="extrato" action="#{transacaoManagedBean.listarExtrato}" value="#{msg.extrato}"/>
 		</p>

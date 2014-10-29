@@ -22,60 +22,91 @@
 	<ui:include src="/layout/Header.xhtml" />
 </h:head>
 
-<h:body>
+<h:body><br/>
 	<center>
-	<table width="60%">	
+	<h3>#{msg.comprovanteTransacao}</h3>
+	<hr width="65%" />
+	<table width="65%">		
 	<tr>
-		<th align="center" width="25%">
-			#{msg.nome}:  #{cliente.nome}
+		<th align="center" >
+			#{cliente.nome}
 		</th>
-		&nbsp;
-		<th align="center" width="25%">
-			#{msg.conta}: #{cliente.contaCorrente.conta}
-		</th>
-		&nbsp;
-		<th align="center" width="25%">
+		
+		<th align="center" >
 			#{msg.ag}: #{cliente.agencia}
+		</th>
+		
+		<th align="center" >
+			#{msg.conta}: #{cliente.contaCorrente.conta}
 		</th>	
 	</tr>
 	</table>
-	<table>	
-	<tr>
-		<td>
-			#{msg.barcode}: 
-		</td>
-		<td>
-			#{transacaoManagedBean.comprovante.codBarras}
-		</td>
-		<td>R$ <h:outputText value="#{cliente.contaCorrente.saldo}" >
-					<f:convertNumber minFractionDigits="2" />
-				</h:outputText>
-		</td>
+	
+	<hr width="65%" />
+	
+	<table width="65%">	
+	<tr>					
+			<td align="center" width="65%" >
+				<h:outputText value="#{msg.barcode}: " 
+							  rendered="#{transacaoManagedBean.comprovante.tipoTransacao eq 'Pagamento' or transacaoManagedBean.comprovante.tipoTransacao eq 'Payment'}" />
+			
+				<h:outputText value="#{transacaoManagedBean.comprovante.codBarras}" 
+							  />
+			</td>
+			<td align="center" width="37%">
+				#{transacaoManagedBean.comprovante.tipoTransacao}
+			</td>
 	</tr>
-	<tr>
-		<td>
-			#{cliente.contaPoupanca.conta} 
-		</td>
-		<td>
-			#{msg.CP}
-		</td>
-		<td>R$ <h:outputText value="#{cliente.contaPoupanca.saldo}" >
-					<f:convertNumber minFractionDigits="2" />
-				</h:outputText> 
-		</td>
-	</tr>
-	<tr>
-		<td></td>
-		<td>
-			#{msg.Total}
-		</td>
-
-		<td> R$ <h:outputText value="#{saldototal}" >
-					<f:convertNumber minFractionDigits="2" />
-				</h:outputText> 
-		</td>
-	</tr>	
 	</table>
+	
+	<hr width="65%" />
+	
+	<table width="65%">	
+	<tr>		
+		<td align="center"  >
+			#{msg.remetente}: #{transacaoManagedBean.comprovante.nomeR}
+		</td>
+		<td align="center" >
+			#{msg.ag}: #{transacaoManagedBean.comprovante.agenciaR}
+		</td>		
+		<td align="center" >
+			#{msg.conta}: #{transacaoManagedBean.comprovante.contaR}
+		</td>		
+	</tr>
+	<tr>		
+		<td align="center"  >
+			#{msg.favorecido}: #{transacaoManagedBean.comprovante.nomeD}
+		</td>
+		<td align="center" >
+			#{msg.ag}: #{transacaoManagedBean.comprovante.agenciaD}
+		</td>		
+		<td align="center" >
+			#{msg.conta}: #{transacaoManagedBean.comprovante.contaD}
+		</td>		
+	</tr>
+	</table>
+	
+		<hr width="65%" />
+	
+	<table width="65%">	
+	<tr>		
+		<td align="center"  >
+			
+		</td>
+		<td align="center" >
+			#{msg.data}: #{transacaoManagedBean.comprovante.data}
+		</td>		
+		<td align="center" >
+			#{msg.valorTransacao}: R$ 
+			<h:outputText value="#{transacaoManagedBean.comprovante.valor}" >
+				<f:convertNumber minFractionDigits="2" />
+			</h:outputText>
+		</td>		
+	</tr>
+	</table>
+	
+		<hr width="65%" />
+		#{msg.autenticacao}: A2C6678B628CA9555365D19
 	</center>
 </h:body>
 </f:view>
