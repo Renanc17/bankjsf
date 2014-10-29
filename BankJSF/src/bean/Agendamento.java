@@ -11,8 +11,8 @@ public class Agendamento {
 	private String descricao;
 	private Double valor;
 	private int idD;	
-	private int contaD; //Numero da conta do destinatario
-	private int agenciaD; //Agencia do destinatario
+	private Integer contaD; //Numero da conta do destinatario
+	private Integer agenciaD; //Agencia do destinatario
 	private String codBarras;
 	
 	
@@ -52,16 +52,16 @@ public class Agendamento {
 	public void setIdD(int idD) {
 		this.idD = idD;
 	}
-	public int getContaD() {
+	public Integer getContaD() {
 		return contaD;
 	}
-	public void setContaD(int contaD) {
+	public void setContaD(Integer contaD) {
 		this.contaD = contaD;
 	}
-	public int getAgenciaD() {
+	public Integer getAgenciaD() {
 		return agenciaD;
 	}
-	public void setAgenciaD(int agenciaD) {
+	public void setAgenciaD(Integer agenciaD) {
 		this.agenciaD = agenciaD;
 	}
 	public int getIdUsuario() {
