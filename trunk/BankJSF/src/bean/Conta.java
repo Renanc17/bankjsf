@@ -1,10 +1,16 @@
 package bean;
 
-public class ContaCorrente {
+import enums.TipoConta;
+
+public class Conta {
+	
+	public Conta(TipoConta tipo){
+		this.tipo = tipo;
+	}
 	
 	private Integer conta;
 	private Double saldo;
-	
+	private TipoConta tipo;
 	
 	public Integer getConta() {
 		return conta;
@@ -17,6 +23,9 @@ public class ContaCorrente {
 	}
 	public void setSaldo(Double saldo) {
 		this.saldo = saldo;
+	}
+	public TipoConta getTipo() {
+		return tipo;
 	}
 	
 	

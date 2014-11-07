@@ -2,6 +2,8 @@ package bean;
 
 import java.sql.Date;
 
+import enums.TipoConta;
+
 
 public class Cliente {
 	
@@ -11,28 +13,26 @@ public class Cliente {
 	private Integer agencia;
 	private String senha;
 	private String tipoCliente;
-	private ContaCorrente ContaCorrente = new ContaCorrente(); 
-	private ContaPoupanca ContaPoupanca = new ContaPoupanca();	
+	private Conta contaCorrente = new Conta(TipoConta.CONTA_CORRENTE); 
+	private Conta contaPoupanca = new Conta(TipoConta.CONTA_POUPANCA); 
 	private Date data;
 	private String senhaCartao;
 	
 	
-	public ContaCorrente getContaCorrente() {
-		return ContaCorrente;
-	}
 
-	public void setContaCorrente(ContaCorrente contaCorrente) {
-		ContaCorrente = contaCorrente;
+	public Conta getContaCorrente() {
+		return contaCorrente;
 	}
-
-	public ContaPoupanca getContaPoupanca() {
-		return ContaPoupanca;
+	public Conta getContaPoupanca() {
+		return contaPoupanca;
 	}
-
-	public void setContaPoupanca(ContaPoupanca contaPoupanca) {
-		ContaPoupanca = contaPoupanca;
+	public void setContaCorrente(Conta contaCorrente) {
+		this.contaCorrente = contaCorrente;
 	}
-
+	public void setContaPoupanca(Conta contaPoupanca) {
+		this.contaPoupanca = contaPoupanca;
+	}
+	
 	public String getTipoCliente() {
 		return tipoCliente;
 	}

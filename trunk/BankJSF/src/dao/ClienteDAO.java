@@ -6,8 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import bean.Cliente;
-import bean.ContaCorrente;
-import bean.ContaPoupanca;
+import bean.Conta;
+import enums.TipoConta;
 import factory.ConnectionFactory;
 
 public class ClienteDAO {
@@ -52,21 +52,7 @@ public class ClienteDAO {
 			ResultSet rs = stmt.executeQuery();
 
 			while (rs.next()) {
-				cl = new Cliente();
-				ContaCorrente cc = new ContaCorrente();
-				ContaPoupanca cp = new ContaPoupanca();				
-				cl.setId(rs.getInt("id"));
-				cl.setNome(rs.getString("nome"));
-				cl.setCpf(rs.getLong("cpf"));
-				cl.setAgencia(rs.getInt("agencia"));
-				cl.setSenha(rs.getString("senha"));
-				cc.setConta(rs.getInt("contac"));
-				cc.setSaldo(rs.getDouble("saldoc"));
-				cl.setContaCorrente(cc);
-				cp.setConta(rs.getInt("contap"));
-				cp.setSaldo(rs.getDouble("saldop"));
-				cl.setContaPoupanca(cp);
-				cl.setSenhaCartao(rs.getString("senhaCartao"));
+				cl = createCliente(rs);
 		}
 		
 		conn.close();
@@ -89,21 +75,7 @@ public class ClienteDAO {
 		ResultSet rs = stmt.executeQuery();
 
 		while (rs.next()) {
-			cl = new Cliente();
-			ContaCorrente cc = new ContaCorrente();
-			ContaPoupanca cp = new ContaPoupanca();
-			cl.setId(rs.getInt("id"));
-			cl.setNome(rs.getString("nome"));
-			cl.setCpf(rs.getLong("cpf"));
-			cl.setAgencia(rs.getInt("agencia"));
-			cl.setSenha(rs.getString("senha"));
-			cc.setConta(rs.getInt("contac"));
-			cc.setSaldo(rs.getDouble("saldoc"));
-			cl.setContaCorrente(cc);
-			cp.setConta(rs.getInt("contap"));
-			cp.setSaldo(rs.getDouble("saldop"));
-			cl.setContaPoupanca(cp);
-			cl.setSenhaCartao(rs.getString("senhaCartao"));
+			cl = createCliente(rs);
 		}
 		
 		conn.close();
@@ -126,26 +98,31 @@ public class ClienteDAO {
 		ResultSet rs = stmt.executeQuery();
 
 		while (rs.next()) {
-			cl = new Cliente();
-			ContaCorrente cc = new ContaCorrente();
-			ContaPoupanca cp = new ContaPoupanca();
-			cl.setId(rs.getInt("id"));
-			cl.setNome(rs.getString("nome"));
-			cl.setCpf(rs.getLong("cpf"));
-			cl.setAgencia(rs.getInt("agencia"));
-			cl.setSenha(rs.getString("senha"));
-			cc.setConta(rs.getInt("contac"));
-			cc.setSaldo(rs.getDouble("saldoc"));
-			cl.setContaCorrente(cc);
-			cp.setConta(rs.getInt("contap"));
-			cp.setSaldo(rs.getDouble("saldop"));
-			cl.setContaPoupanca(cp);
-			cl.setSenhaCartao(rs.getString("senhaCartao"));
+			cl = createCliente(rs);
 		}
 		
 		conn.close();
 		return cl;
 
+	}
+
+	private Cliente createCliente(ResultSet rs) throws SQLException {
+		Cliente cl = new Cliente();
+		Conta cc = new Conta(TipoConta.CONTA_CORRENTE);
+		Conta cp = new Conta(TipoConta.CONTA_POUPANCA);				
+		cl.setId(rs.getInt("id"));
+		cl.setNome(rs.getString("nome"));
+		cl.setCpf(rs.getLong("cpf"));
+		cl.setAgencia(rs.getInt("agencia"));
+		cl.setSenha(rs.getString("senha"));
+		cc.setConta(rs.getInt("contac"));
+		cc.setSaldo(rs.getDouble("saldoc"));
+		cl.setContaCorrente(cc);
+		cp.setConta(rs.getInt("contap"));
+		cp.setSaldo(rs.getDouble("saldop"));
+		cl.setContaPoupanca(cp);
+		cl.setSenhaCartao(rs.getString("senhaCartao"));
+		return cl;
 	}
 	
 
