@@ -114,6 +114,7 @@ public class TransacaoManagedBean {
 		this.codBarras4 = codBarras4;
 	}
 	
+		
 	public String transacao(){
 		String pagina = "";
 		
@@ -123,172 +124,177 @@ public class TransacaoManagedBean {
 		
 		if(remetente == null)
 			return "Login" + ".faces?faces-redirect=true";
-			
 		
-		if(tipoTransacao.equals("transfToPoupanca")){
-			
-			if(remetente.getSenhaCartao().equals(senhaCartao)){	
-				remetente.getContaCorrente().setSaldo(remetente.getContaCorrente().getSaldo() - transacao.getValor());
-				remetente.getContaPoupanca().setSaldo(remetente.getContaPoupanca().getSaldo() + transacao.getValor());
-				
-				//Setar tudo pro proprio cliente - Preparar gravação de Historico
-				transacao.setIdD(remetente.getId());
-				transacao.setAgenciaD(remetente.getAgencia());
-				transacao.setContaD(remetente.getContaPoupanca().getConta());
-				transacao.setIdR(remetente.getId());
-				transacao.setAgenciaR(remetente.getAgencia());
-				transacao.setContaR(remetente.getContaCorrente().getConta());
-				transacao.setData(new java.util.Date());
-				transacao.setTipoTransacao(tipoTransacao);
-				transacao.setSaldoR(remetente.getContaCorrente().getSaldo());
-				transacao.setSaldoD(remetente.getContaPoupanca().getSaldo());
-				transacao.setNomeR(remetente.getNome());
-				transacao.setNomeD(remetente.getNome());
-				
-				if(transacao.getDescricao().equals(""))
-					transacao.setDescricao("Transf. de Conta Corrente p/ Conta Poup.");
-				
-				TransacaoDAO dao = new TransacaoDAO();
-				try {					
-					remetente = dao.transfToPoupanca(remetente, transacao);
-					//setListaUltimosLanc(dao.ultimosLanc(remetente.getId()));
-					//setComprovantes(dao.comprovantes(remetente.getId()));
-					session.setAttribute("listaUltimosLanc", dao.ultimosLanc(remetente.getId()));
-					session.setAttribute("comprovantes", dao.comprovantes(remetente.getId()));
-					pagina = "sucesso";			
-				} catch (SQLException e) {
-					pagina = "erro";
-				}
-			}else{
-				pagina = "erro";
-				setMsg(senhaErrada);
-			}			
-				session.setAttribute("cliente", remetente);	
-		}		
-		else 
-		if(tipoTransacao.equals("transfToCc")){
-			
-			if(remetente.getSenhaCartao().equals(senhaCartao)){	
-				
-				remetente.getContaCorrente().setSaldo(remetente.getContaCorrente().getSaldo() + transacao.getValor());
-				remetente.getContaPoupanca().setSaldo(remetente.getContaPoupanca().getSaldo() - transacao.getValor());
-				
-				//Setar tudo pro proprio cliente - Preparar gravação de Historico
-				transacao.setIdD(remetente.getId());
-				transacao.setAgenciaD(remetente.getAgencia());
-				transacao.setContaD(remetente.getContaCorrente().getConta());
-				transacao.setIdR(remetente.getId());
-				transacao.setAgenciaR(remetente.getAgencia());
-				transacao.setContaR(remetente.getContaPoupanca().getConta());
-				transacao.setData(new java.util.Date());
-				transacao.setTipoTransacao(tipoTransacao);
-				transacao.setSaldoR(remetente.getContaPoupanca().getSaldo());
-				transacao.setSaldoD(remetente.getContaCorrente().getSaldo());
-				transacao.setNomeR(remetente.getNome());
-				transacao.setNomeD(remetente.getNome());
-				
-				if(transacao.getDescricao().equals(""))
-					transacao.setDescricao("Transf. de Conta Poup. p/ Conta Corrente");
-				
-				TransacaoDAO dao = new TransacaoDAO();
-				try {	
-						remetente = dao.transfToCc(remetente, transacao);
-						//setListaUltimosLanc(dao.ultimosLanc(remetente.getId()));
-						//setComprovantes(dao.comprovantes(remetente.getId()));
-						session.setAttribute("listaUltimosLanc", dao.ultimosLanc(remetente.getId()));
-						session.setAttribute("comprovantes", dao.comprovantes(remetente.getId()));
-						pagina = "sucesso";
-				}catch (SQLException e) {
-					pagina = "erro";
-					setMsg("Erro de comunicação com o banco de dados!");
-				}
-			}else{
-					pagina = "erro";
-					setMsg(senhaErrada);
-			}					
-			session.setAttribute("cliente", remetente);			
-		}		
-		else
-		if(tipoTransacao.equals("transfToTerc")){
-
-			if(remetente.getSenhaCartao().equals(senhaCartao)){	
-								
-				transacao.setData(new java.util.Date());
-				transacao.setTipoTransacao(tipoTransacao);
-				
-				TransacaoDAO dao = new TransacaoDAO();
-				try {
-					remetente = dao.transferencia(remetente, transacao);
-					//setListaUltimosLanc(dao.ultimosLanc(remetente.getId()));
-					//setComprovantes(dao.comprovantes(remetente.getId()));
-					session.setAttribute("listaUltimosLanc", dao.ultimosLanc(remetente.getId()));
-					session.setAttribute("comprovantes", dao.comprovantes(remetente.getId()));
-					pagina = "sucesso";
-				} catch (SQLException e) {
-					pagina = "erro";
-					setMsg("SQLException!");
-				} catch (NullPointerException e) {
-					pagina = "erro";
-					setMsg("Destinatário inexistente!");
-				} catch(IllegalArgumentException e){
-					pagina = "erro";
-					setMsg("Não foi possível realizar esta transação!");
-				}
-				
-				session.setAttribute("cliente", remetente);
-				session.setAttribute("saldototal", remetente.getContaCorrente().getSaldo() + remetente.getContaPoupanca().getSaldo());
-			
-			}else{
-				pagina = "erro";
-				setMsg(senhaErrada);
-			}	
-			
-		}else
-		if (tipoTransacao.equals("Payment")){
-			
-			if(remetente.getSenhaCartao().equals(senhaCartao)){	
-				
-				remetente.getContaCorrente().setSaldo(remetente.getContaCorrente().getSaldo() - transacao.getValor());
-				
-				transacao.setData(new java.util.Date());
-				transacao.setTipoTransacao(tipoTransacao);
-				transacao.setIdR(remetente.getId());
-				transacao.setNomeR(remetente.getNome());
-				transacao.setAgenciaR(remetente.getAgencia());
-				transacao.setContaR(remetente.getContaCorrente().getConta());
-				transacao.setSaldoR(remetente.getContaCorrente().getSaldo());	
-				transacao.setCodBarras(codBarras1+codBarras2+codBarras3+codBarras4);
-				if(transacao.getDescricao().equals(""))
-					transacao.setDescricao("Pagamento de Conta (Final " + codBarras4 + ")");
-				
-				TransacaoDAO dao = new TransacaoDAO();
-				try {
-					remetente = dao.pagamento(remetente, transacao);
-					//setListaUltimosLanc(dao.ultimosLanc(remetente.getId()));
-					//setComprovantes(dao.comprovantes(remetente.getId()));
-					session.setAttribute("listaUltimosLanc", dao.ultimosLanc(remetente.getId()));
-					session.setAttribute("comprovantes", dao.comprovantes(remetente.getId()));
-					pagina = "sucesso";
-				} catch (SQLException e) {
-					pagina = "erro";
-					setMsg("Erro de comunicação com o banco de dados!");
-				} catch (NullPointerException e) {
-					pagina = "erro";
-					setMsg("Null Pointer!");
-				}
-				
-				session.setAttribute("cliente", remetente);
-				session.setAttribute("saldototal", remetente.getContaCorrente().getSaldo() + remetente.getContaPoupanca().getSaldo());
-				
-			}else{
-				pagina = "erro";
-				setMsg(senhaErrada);
-			}			
+		if(!remetente.getSenhaCartao().equals(senhaCartao)){
+			setMsg(senhaErrada);
+			return "erro" + ".faces?faces-redirect=true";			
 		}
+		
+		if(tipoTransacao.equals("transfToPoupanca"))
+			pagina = transfToPoupanca(pagina, session);				
+		else 
+		if(tipoTransacao.equals("transfToCc"))
+			pagina = transfToCc(pagina, session);		
+		else
+		if(tipoTransacao.equals("transfToTerc"))
+			pagina = transfToTerc(pagina, session);
+		else
+		if (tipoTransacao.equals("Payment"))
+			pagina = Payment(pagina, session);
 		
 		transacao = new Transacao();
 		return pagina + ".faces?faces-redirect=true";	
 	}
+	
+	
+	
+	public String transfToPoupanca(String pagina, HttpSession session){
+		
+		remetente.getContaCorrente().setSaldo(remetente.getContaCorrente().getSaldo() - transacao.getValor());
+		remetente.getContaPoupanca().setSaldo(remetente.getContaPoupanca().getSaldo() + transacao.getValor());
+		
+		//Setar tudo pro proprio cliente - Preparar gravação de Historico
+		transacao.setIdD(remetente.getId());
+		transacao.setAgenciaD(remetente.getAgencia());
+		transacao.setContaD(remetente.getContaPoupanca().getConta());
+		transacao.setIdR(remetente.getId());
+		transacao.setAgenciaR(remetente.getAgencia());
+		transacao.setContaR(remetente.getContaCorrente().getConta());
+		transacao.setData(new java.util.Date());
+		transacao.setTipoTransacao(tipoTransacao);
+		transacao.setSaldoR(remetente.getContaCorrente().getSaldo());
+		transacao.setSaldoD(remetente.getContaPoupanca().getSaldo());
+		transacao.setNomeR(remetente.getNome());
+		transacao.setNomeD(remetente.getNome());
+		
+		if(transacao.getDescricao().equals(""))
+			transacao.setDescricao("Transf. de Conta Corrente p/ Conta Poup.");
+		
+		TransacaoDAO dao = new TransacaoDAO();
+		try {					
+			remetente = dao.transfToPoupanca(remetente, transacao);
+			//setListaUltimosLanc(dao.ultimosLanc(remetente.getId()));
+			//setComprovantes(dao.comprovantes(remetente.getId()));
+			session.setAttribute("listaUltimosLanc", dao.ultimosLanc(remetente.getId()));
+			session.setAttribute("comprovantes", dao.comprovantes(remetente.getId()));
+			pagina = "sucesso";			
+		} catch (SQLException e) {
+			pagina = "erro";
+		}
+		
+		session.setAttribute("cliente", remetente);	
+		
+		return pagina;
+	}			
+		
+	public String transfToCc(String pagina, HttpSession session){
+		
+		remetente.getContaCorrente().setSaldo(remetente.getContaCorrente().getSaldo() + transacao.getValor());
+		remetente.getContaPoupanca().setSaldo(remetente.getContaPoupanca().getSaldo() - transacao.getValor());
+		
+		//Setar tudo pro proprio cliente - Preparar gravação de Historico
+		transacao.setIdD(remetente.getId());
+		transacao.setAgenciaD(remetente.getAgencia());
+		transacao.setContaD(remetente.getContaCorrente().getConta());
+		transacao.setIdR(remetente.getId());
+		transacao.setAgenciaR(remetente.getAgencia());
+		transacao.setContaR(remetente.getContaPoupanca().getConta());
+		transacao.setData(new java.util.Date());
+		transacao.setTipoTransacao(tipoTransacao);
+		transacao.setSaldoR(remetente.getContaPoupanca().getSaldo());
+		transacao.setSaldoD(remetente.getContaCorrente().getSaldo());
+		transacao.setNomeR(remetente.getNome());
+		transacao.setNomeD(remetente.getNome());
+		
+		if(transacao.getDescricao().equals(""))
+			transacao.setDescricao("Transf. de Conta Poup. p/ Conta Corrente");
+		
+		TransacaoDAO dao = new TransacaoDAO();
+		try {	
+				remetente = dao.transfToCc(remetente, transacao);
+				//setListaUltimosLanc(dao.ultimosLanc(remetente.getId()));
+				//setComprovantes(dao.comprovantes(remetente.getId()));
+				session.setAttribute("listaUltimosLanc", dao.ultimosLanc(remetente.getId()));
+				session.setAttribute("comprovantes", dao.comprovantes(remetente.getId()));
+				pagina = "sucesso";
+		}catch (SQLException e) {
+			pagina = "erro";
+			setMsg("Erro de comunicação com o banco de dados!");
+		}
+		
+		session.setAttribute("cliente", remetente);
+		
+		return pagina;	
+	}					
+	
+	public String transfToTerc(String pagina, HttpSession session){
+				
+		transacao.setData(new java.util.Date());
+		transacao.setTipoTransacao(tipoTransacao);
+		
+		TransacaoDAO dao = new TransacaoDAO();
+		try {
+			remetente = dao.transferencia(remetente, transacao);
+			//setListaUltimosLanc(dao.ultimosLanc(remetente.getId()));
+			//setComprovantes(dao.comprovantes(remetente.getId()));
+			session.setAttribute("listaUltimosLanc", dao.ultimosLanc(remetente.getId()));
+			session.setAttribute("comprovantes", dao.comprovantes(remetente.getId()));
+			pagina = "sucesso";
+		} catch (SQLException e) {
+			pagina = "erro";
+			setMsg("SQLException!");
+		} catch (NullPointerException e) {
+			pagina = "erro";
+			setMsg("Destinatário inexistente!");
+		} catch(IllegalArgumentException e){
+			pagina = "erro";
+			setMsg("Não foi possível realizar esta transação!");
+		}
+		
+		session.setAttribute("cliente", remetente);
+		session.setAttribute("saldototal", remetente.getContaCorrente().getSaldo() + remetente.getContaPoupanca().getSaldo());
+		
+		return pagina;		
+	}
+	
+	public String Payment(String pagina, HttpSession session){
+		
+		remetente.getContaCorrente().setSaldo(remetente.getContaCorrente().getSaldo() - transacao.getValor());
+		
+		transacao.setData(new java.util.Date());
+		transacao.setTipoTransacao(tipoTransacao);
+		transacao.setIdR(remetente.getId());
+		transacao.setNomeR(remetente.getNome());
+		transacao.setAgenciaR(remetente.getAgencia());
+		transacao.setContaR(remetente.getContaCorrente().getConta());
+		transacao.setSaldoR(remetente.getContaCorrente().getSaldo());	
+		transacao.setCodBarras(codBarras1+codBarras2+codBarras3+codBarras4);
+		if(transacao.getDescricao().equals(""))
+			transacao.setDescricao("Pagamento de Conta (Final " + codBarras4 + ")");
+		
+		TransacaoDAO dao = new TransacaoDAO();
+		try {
+			remetente = dao.pagamento(remetente, transacao);
+			//setListaUltimosLanc(dao.ultimosLanc(remetente.getId()));
+			//setComprovantes(dao.comprovantes(remetente.getId()));
+			session.setAttribute("listaUltimosLanc", dao.ultimosLanc(remetente.getId()));
+			session.setAttribute("comprovantes", dao.comprovantes(remetente.getId()));
+			pagina = "sucesso";
+		} catch (SQLException e) {
+			pagina = "erro";
+			setMsg("Erro de comunicação com o banco de dados!");
+		} catch (NullPointerException e) {
+			pagina = "erro";
+			setMsg("Null Pointer!");
+		}
+		
+		session.setAttribute("cliente", remetente);
+		session.setAttribute("saldototal", remetente.getContaCorrente().getSaldo() + remetente.getContaPoupanca().getSaldo());
+		
+		return pagina;
+	}
+	
+	
 	
 	
 	public String selecionarFavorito(){
@@ -300,8 +306,7 @@ public class TransacaoManagedBean {
 		return pagina + ".faces?faces-redirect=true";
 		
 	}
-	
-	
+
 	public String listarExtrato(){
 		String pagina = "";
 		
